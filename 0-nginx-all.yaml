@@ -1,0 +1,87 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        #changed https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#example-1
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx
+  sessionAffinity: None
+  type: LoadBalancer 
+---
+# Ingress resource example changed
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx-example
+  rules:
+  - http:
+      paths:
+      - path: /testpath
+        pathType: Prefix
+        backend:
+          service:
+            name: test
+            port:
+              number: 80
+
+#older example
+
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: nginx
+#   annotations:
+#     ingress.kubernetes.io/ssl-redirect: "false"
+# spec:
+#   rules:
+#   - http:
+#       paths:
+#       - path: /
+#         backend:
+#           serviceName: nginx
+#           servicePort: 80
+
+# https://kubernetes.io/docs/reference/using-api/deprecation-guide/#ingress-v122
+# Ingress resource example is replaced with this: https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource

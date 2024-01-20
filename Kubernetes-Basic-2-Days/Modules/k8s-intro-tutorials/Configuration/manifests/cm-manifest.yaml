@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: manifest-example
+data:
+  city: Ann Arbor
+  state: Michigan

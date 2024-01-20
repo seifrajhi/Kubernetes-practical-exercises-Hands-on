@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # changed
+  # annotations:
+  #   deployment.kubernetes.io/revision: "1"
+  labels:
+    run: ghost
+  name: ghost
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      run: ghost
+  template:
+    metadata:
+      labels:
+        run: ghost
+    spec:
+      containers:
+      - image: kubernautslabs/ghost:latest
+        imagePullPolicy: IfNotPresent
+        name: ghost
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: 500m
+          requests:
+            memory: 256Mi      

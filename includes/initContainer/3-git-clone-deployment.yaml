@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: git-clone-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: git-clone-deployment
+  template:
+    metadata:
+      labels:
+        app: git-clone-deployment
+    spec:
+      initContainers:
+      - name: clone-git
+        image: alpine/git:latest
+        command: ['sh', '-c',
+          'cd /srv && git clone https://github.com/alpine-docker/git.git']
+        volumeMounts:
+        - name: shared-folder
+          mountPath: /srv
+      containers:
+      - image: bash
+        name: bash-pod
+        args:
+        - bash
+        - -c
+        - 'ls -la "/srv/git" && sleep 3600'
+        volumeMounts:
+        - name: shared-folder
+          mountPath: /srv
+        resources:
+          limits:
+            cpu: 200m
+            memory: 200Mi
+        volumes:
+        - name: shared-folder
+          emptyDir: {}

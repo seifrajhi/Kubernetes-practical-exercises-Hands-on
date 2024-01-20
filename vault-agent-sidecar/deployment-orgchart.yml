@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orgchart
+  labels:
+    app: orgchart
+spec:
+  selector:
+    matchLabels:
+      app: orgchart
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: orgchart
+    spec:
+      serviceAccountName: internal-app
+      containers:
+        - name: orgchart
+          image: jweissig/app:0.0.1

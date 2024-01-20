@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  labels:
+    type: hostpath
+  name: elasticsearch-data-quickstart-es-default-0  
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 2Gi
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: elasticsearch-data-quickstart-es-default-0
+    namespace: elasticsearch
+  hostPath:
+    path: /tmp/mypvsc
+    type: DirectoryOrCreate
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: mypvsc
+  volumeMode: Filesystem

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: kubia
+  name: kubia
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: kubia
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: kubia
+    spec:
+      containers:
+      - image: kubernautslabs/kubia
+        name: kubia
+        env:
+          - name: nodename
+            valueFrom:
+              fieldRef:
+                fieldPath: spec.nodeName
+        ports:
+        - containerPort: 8080
+        resources: {}
+status: {}

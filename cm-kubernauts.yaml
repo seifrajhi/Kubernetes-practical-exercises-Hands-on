@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  #creationTimestamp: null #changed
+  name: kubernauts
+data:
+  dev: ops

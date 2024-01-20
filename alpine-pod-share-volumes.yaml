@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: alpine-2-containers
+  name: alpine-2-containers-share-volume
+spec:
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - echo hello;sleep 10000
+    image: alpine
+    name: alpine1
+    volumeMounts:
+      - name: share
+        mountPath: "/tmp/share1"
+  - args:
+    - /bin/sh
+    - -c
+    - echo hello;sleep 10000
+    image: alpine
+    name: alpine2
+    volumeMounts:
+      - name: share
+        mountPath: "/tmp/share2"
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+  volumes:
+    - name: share
+      emptyDir: {}
+#status: {}

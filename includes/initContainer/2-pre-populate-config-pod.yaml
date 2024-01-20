@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pre-populate-config-pod
+spec:
+  initContainers:
+  - name: config-data
+    image: bash
+    command: ["echo","-n","{'address':'10.0.1.192:5432/db'}", ">","/data/config"]
+    volumeMounts:
+    - name: config-data
+      mountPath: /data
+    resources:
+        limits:
+          cpu: 200m
+          memory: 200Mi
+  containers:
+  - image: bash
+    name: bash-pod
+    args:
+    - bash
+    - -c
+    - 'cat "/data/config" && sleep 3600'
+    volumeMounts:
+    - name: config-data
+      mountPath: /data
+    resources:
+        limits:
+          cpu: 200m
+          memory: 200Mi
+  volumes:
+  - name: config-data
+    emptyDir: {}

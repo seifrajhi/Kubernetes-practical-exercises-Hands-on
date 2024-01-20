@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reader
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: reader
+  template:
+    metadata:
+      labels:
+        app: reader
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:stable-alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: html
+          mountPath: /usr/share/nginx/html
+          readOnly: true
+      volumes:
+      - name: html
+        persistentVolumeClaim:
+          claimName: html
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: reader
+spec:
+  selector:
+    app: reader
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80

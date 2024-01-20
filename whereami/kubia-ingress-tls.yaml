@@ -1,0 +1,23 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: whereami
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/frontend-entry-points: http,https
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+    traefik.ingress.kubernetes.io/redirect-permanent: "true"
+spec:
+  tls:
+  - hosts:
+    - my.whereami.svc
+    secretName: whereami-secret
+  rules:
+  - host: my.whereami.svc
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: kubia-headless 
+          servicePort: 8080

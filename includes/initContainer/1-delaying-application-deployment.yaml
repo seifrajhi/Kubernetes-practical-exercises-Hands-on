@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: application-deployment
+  template:
+    metadata:
+      labels:
+        app: application-deployment
+    spec:
+      volumes:
+        - name: config-volume
+          configMap:
+            name: app-config
+      initContainers:
+      - name: check-postres-ready
+        image: postgres:12.2-alpine
+        command: ['sh', '-c',
+          'until pg_isready -h postgres -p 5432;
+          do echo waiting for database; sleep 2; done;']
+      containers:
+      - image: xcoulon/go-url-shortener:0.2.0
+        name: go-url-shortener
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/config
+        ports:
+        - containerPort: 8080
+        env:
+        - name: CONFIG_FILE
+          value: /etc/config/config.yaml
+        - name: POSTGRES_HOST
+          value: postgres
+        - name: POSTGRES_PORT
+          value: "5432"
+        - name: POSTGRES_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: database-secret-config
+              key: dbname
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: database-secret-config
+              key: username
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: database-secret-config
+              key: password
+        resources:
+            limits:
+              cpu: 200m
+              memory: 400Mi

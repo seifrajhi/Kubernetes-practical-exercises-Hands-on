@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: writer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: writer
+  template:
+    metadata:
+      labels:
+        app: writer
+    spec:
+      containers:
+      - name: content
+        image: alpine:latest
+        volumeMounts:
+        - name: html
+          mountPath: /html
+        command: ["/bin/sh", "-c"]
+        args:
+        - while true; do
+          date >> /html/index.html;
+          sleep 5;
+          done
+      volumes:
+      - name: html
+        persistentVolumeClaim:
+          claimName: html

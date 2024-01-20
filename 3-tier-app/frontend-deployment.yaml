@@ -1,0 +1,46 @@
+# Define 'Service' to expose FrontEnd Application
+apiVersion: v1
+kind: Service
+metadata:
+  name: to-do-app-frontend
+spec:
+  selector: # pod labels should match these
+    app: to-do-app
+    tier: frontend
+  ports:
+  - protocol: "TCP"
+    port: 80
+    targetPort: 8080
+  type: LoadBalancer # use NodePort if you are not running Kubernetes on Cloud
+---
+# 'Deployment' to manage of configuration of frontEnd Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: to-do-app-frontend
+  labels: # pod labels should match these
+    app: to-do-app
+    tier: frontend
+spec:
+  replicas: 2  # number of replicas of frontEnd application
+  selector:
+    matchLabels: 
+      app: to-do-app
+      tier: frontend
+  template:
+    metadata:
+      labels: # Must match 'Service' and 'Deployment' labels
+        app: to-do-app
+        tier: frontend  
+    spec:                 
+      containers: 
+      - name: to-do-app-frontend 
+        image: kubernautslabs/to-do-app-frontend # docker image of frontend application
+        env: # Setting Environmental Variables
+          -  name: SERVER_URI # Setting Backend URI from configMap
+             valueFrom:
+               configMapKeyRef:
+                 name: backend-conf # Name of configMap
+                 key: server-uri
+        ports:
+        - containerPort: 8080

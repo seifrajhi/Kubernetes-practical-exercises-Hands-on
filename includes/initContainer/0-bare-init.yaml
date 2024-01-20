@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bare-inicontainer-pod
+spec:
+  initContainers:
+  - name: first-inicontainer
+    image: bash
+    command: ['sh', '-c', 'echo first-inicontainer: waiting 200 sec && sleep 200']
+    volumeMounts:
+    - name: mypvc
+      mountPath: /workdir
+  - name: second-inicontainer
+    image: bash
+    command: ['sh', '-c', 'echo second-inicontainer: waiting 200 sec && sleep 200']
+    volumeMounts:
+    - name: mypvc
+      mountPath: /workdir
+  containers:
+  - name: application-container
+    image: bash
+    command: ['sh', '-c', 'echo application-container: waiting 200 sec && sleep 200']
+    volumeMounts:
+    - name: mypvc
+      mountPath: /workdir
+    resources:
+          limits:
+            cpu: 200m
+            memory: 200Mi
+  volumes:
+    - name: mypvc
+      emptyDir: {}

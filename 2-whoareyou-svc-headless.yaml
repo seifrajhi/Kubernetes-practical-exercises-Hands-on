@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  #creationTimestamp: "2020-02-15T12:30:22Z" #changed
+  name: whoareyou-service
+  namespace:  default
+  # changed
+  #resourceVersion: "1343711"
+  #changed https://www.weave.works/blog/what-you-should-know-about-kubernetes-1-20#:~:text=The%20SelfLink%20field%20in%20every,beginning%20of%20the%20deprecation%20process.
+  #selfLink: /api/v1/namespaces/default/services/whoareyou-service
+  #uid: f8221615-bb4f-4b11-9f07-733eb53a155c
+spec:
+  clusterIP: None
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: whoareyou
+  sessionAffinity: None
+  type: ClusterIP
+# changed
+# status:
+#   loadBalancer: {}

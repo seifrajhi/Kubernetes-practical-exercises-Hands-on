@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-toolkit
+  labels:
+    app: devops-toolkit
+spec:
+  selector:
+    matchLabels:
+      app: devops-toolkit
+  template:
+    metadata:
+      labels:
+        app: devops-toolkit
+    spec:
+      containers:
+      - name: devops-toolkit
+        image: vfarcic/devops-toolkit-series
+        ports:
+        - containerPort: 80
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+          requests:
+            cpu: 80m
+            memory: 128Mi
+

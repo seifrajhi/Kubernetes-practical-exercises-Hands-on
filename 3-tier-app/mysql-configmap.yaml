@@ -1,0 +1,8 @@
+# Define 'Configmap' to store non-sensitive database configuration 
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-conf  # name of ConfigMap, referenced in other files
+data:
+  host: mysql   # host address of mysql server, we are using DNS of Service
+  name: to-do-app-db # name of the database for application

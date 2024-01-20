@@ -1,0 +1,68 @@
+---
+#apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ghost
+  annotations:
+    # kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    # ingress.kubernetes.io/ssl-redirect: "true"
+    # kubernetes.io/ingress.class: kong
+    # traefik.ingress.kubernetes.io/frontend-entry-points: http,https
+    # traefik.ingress.kubernetes.io/redirect-entry-point: https
+    # traefik.ingress.kubernetes.io/redirect-permanent: "true"
+spec:
+  # tls:
+  # - hosts:
+  #   - my.ghost.svc
+  #   - admin.ghost.svc
+  #   secretName: ghost-secret
+  tls:
+  - secretName: ghost-secret
+  rules:
+  - host: my.ghost.svc
+    http:
+      paths:
+      - path: /
+        pathType: Prefix #changed
+        backend:
+          #serviceName: ghost
+          service:
+            name: ghost
+          #servicePort: 2368
+            port:
+              number: 2368
+  - host: admin.ghost.svc
+    http:
+      paths:
+      - path: /ghost
+        pathType: Prefix #changed
+        backend:
+          # serviceName: ghost
+          # servicePort: 2368
+          service:
+            name: ghost
+            port:
+              number: 2368 
+
+# kind: Ingress
+# apiVersion: networking.k8s.io/v1beta1
+# metadata:
+#   name: foo
+#   namespace: production
+
+# spec:
+#   rules:
+#   - host: example.net
+#     http:
+#       paths:
+#       - path: /bar
+#         backend:
+#           serviceName: service1
+#           servicePort: 80
+#   # Only selects which certificate(s) should be loaded from the secret, in order to terminate TLS.
+#   # Doesn't enable TLS for that ingress (hence for the underlying router).
+#   # Please see the TLS annotations on ingress made for that purpose.
+#   tls:
+#   - secretName: supersecret

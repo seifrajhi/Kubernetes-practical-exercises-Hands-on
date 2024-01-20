@@ -1,0 +1,25 @@
+#apiVersion: extensions/v1beta1 #changed
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: graf-ingress
+  namespace: monitoring
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+  labels:
+    app: prometheus
+spec:
+  rules:
+    - host: graf.kubernauts.local
+      http:
+        paths:
+        - path: /
+          pathType: Prefix #changed
+          backend:
+            #serviceName: promo-grafana #changed
+            service:
+              name: promo-grafana
+            #servicePort: 80 #changed
+              port:
+                number: 80
+

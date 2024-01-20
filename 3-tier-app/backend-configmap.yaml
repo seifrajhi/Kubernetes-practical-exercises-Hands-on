@@ -1,0 +1,9 @@
+# ConfigMap to expose configuration related to backend application
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-conf # name of configMap
+data:
+  server-uri: 192.168.64.24 
+  # enternal ip of backend application 'Service'
+  # server-uri: to-do-app-backend.todoapp.svc.cluster.local # doesn't work, why?

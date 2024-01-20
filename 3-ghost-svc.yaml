@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ghost
+spec:
+  ports:
+  - name: http
+    targetPort: 2368
+    port: 2368
+  selector:
+    run: ghost
+  type: ClusterIP

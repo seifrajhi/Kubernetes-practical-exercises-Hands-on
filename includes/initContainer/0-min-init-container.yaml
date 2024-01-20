@@ -1,0 +1,7 @@
+initContainers:
+- name: init-firstinicontainer
+  image: bash 
+  command: ['sh', '-c', 'sleep 200']
+  volumeMounts:
+  - name: mypvc
+    mountPath: /workdir 

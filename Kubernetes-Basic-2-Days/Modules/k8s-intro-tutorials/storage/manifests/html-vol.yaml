@@ -1,0 +1,30 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: html
+  labels:
+    type: hostpath
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  storageClassName: html
+  persistentVolumeReclaimPolicy: Delete
+  hostPath:
+    type: DirectoryOrCreate
+    path: "/tmp/html"
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: html
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: html
+  resources:
+    requests:
+      storage: 1Gi

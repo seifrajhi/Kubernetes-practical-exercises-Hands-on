@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: utils
+  name: utils
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: utils
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: utils
+    spec:
+      containers:
+      - image: kubernautslabs/utils
+        command:
+          - /bin/sh
+          - "-c"
+          - "sleep 60m"
+        imagePullPolicy: IfNotPresent
+        name: utils
