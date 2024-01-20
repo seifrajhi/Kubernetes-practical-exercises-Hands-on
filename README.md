@@ -26,7 +26,7 @@ To get prepared please install at least kubectx and kns with krew from this list
     brew install watch
 - [oh-my-zsh](https://github.com/ohmyzsh/ohmyzsh)
   - activate autocompletion
-    - [mac setup](https://docs.brew.sh/Shell-Completion)
+    - [Mac setup](https://docs.brew.sh/Shell-Completion)
     - [kubectl plugin](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/kubectl)
 - [git](https://git-scm.com/)
 - [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)  
@@ -80,10 +80,12 @@ The key concepts of Kubernetes storage, including PVs, PVCs, and StorageClass.
 
 ### Misc
 
-Kelsey Hightower's open-source guide, [Kubernetes the Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way), goes through how to bootstrap a Kubernetes cluster without the use of installers or scripts. 
+- Kelsey Hightower's open-source guide, [Kubernetes the Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way), goes through how to bootstrap a Kubernetes cluster without the use of installers or scripts. 
 
 
-Learnk8s(https://learnk8s.io/): Develop the knowledge and skills to get the most out of Kubernetes with hands-on online courses and instructor-led classes.
+- Learnk8s(https://learnk8s.io/): Develop the knowledge and skills to get the most out of Kubernetes with hands-on online courses and instructor-led classes.
+
+- [Introduction to Kubernetes Lecture Notes](https://github.com/kaan-keskin/introduction-to-kubernetes/tree/main): Notes about Kubernetes resources  
 
 
 
