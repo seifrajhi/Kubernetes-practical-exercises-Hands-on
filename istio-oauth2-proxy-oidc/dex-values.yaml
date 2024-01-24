@@ -1,0 +1,60 @@
+https:
+  # -- Enable the HTTPS endpoint.
+  enabled: false
+
+# -- Application configuration.
+# See the [official documentation](https://dexidp.io/docs/).
+config:
+  storage:
+    type: memory
+  issuer: https:/dex.example.com
+  staticClients:
+    - id: oauth2-proxy
+      name: oauth2-proxy
+      redirectURIs:
+        - 'https://httpbin.example.com/oauth2/callback'
+        - 'http://httpbin.example.com/oauth2/callback'
+      secret: proxy
+  enablePasswordDB: true
+  staticPasswords:
+    - email: "admin@example.com"
+      # bcrypt hash of the string "password"
+      hash: $2a$10$2b2cU8CPhOTaGrs1HRQuAueS7JTT5ZHsHSzYiFPm1leZck7Mc8T4W
+      username: "admin"
+      userID: "08a8684b-db88-4b73-90a9-3cd1661f5466"
+      
+service:
+  # -- Annotations to be added to the service.
+  annotations: {}
+
+  # -- Kubernetes [service type](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types).
+  type: ClusterIP
+
+  # -- Internal cluster service IP (when applicable)
+  clusterIP: ""
+
+  ports:
+    http:
+      # -- HTTP service port
+      port: 5556
+
+      # -- (int) HTTP node port (when applicable)
+      nodePort:
+
+    https:
+      # -- HTTPS service port
+      port: 5554
+
+      # -- (int) HTTPS node port (when applicable)
+      nodePort:
+
+    grpc:
+      # -- gRPC service port
+      port: 5557
+
+      # -- (int) gRPC node port (when applicable)
+      nodePort:
+
+ingress:
+  # -- Enable [ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/).
+  enabled: false

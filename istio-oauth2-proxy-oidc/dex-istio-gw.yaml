@@ -1,0 +1,46 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: dex-gateway
+  namespace: demo
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    # tls:
+    #   httpsRedirect: true
+    hosts:
+    - "dex.example.com"
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    hosts:
+    - "dex.example.com"
+    tls:
+      mode: SIMPLE
+      credentialName: dex-tls-cert
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  namespace: demo
+  name: dex-vsvc
+spec:
+  hosts:
+  - "dex.example.com"
+  gateways:
+  - dex-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 5556
+        host: dex.demo.svc.cluster.local

@@ -1,3 +1,4 @@
+# PSP PodSecurityPolicy are removed as of kubernetes v1.25
 apiVersion: policy/v1
 kind: PodSecurityPolicy
 metadata:

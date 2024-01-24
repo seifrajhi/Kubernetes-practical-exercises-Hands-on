@@ -1,0 +1,36 @@
+# Oauth client configuration specifics
+config:
+  # OAuth client ID
+
+  clientID: "oauth2-proxy"
+  # OAuth client secret
+  clientSecret: "proxy"
+
+  cookieSecure: true
+  cookieSecret: "b311562c684c75e497b4fb3f08c3deea"
+  # The name of the cookie that oauth2-proxy will create
+  # If left empty, it will default to the release name
+  cookieName: "_oauth2_proxy"
+
+  configFile: |-
+    email_domains = [ "*" ]
+    upstreams = [ "static://200" ]
+    provider = "oidc"
+    cookie_refresh = "5m"
+    cookie_expire = "4h"
+    cookie_domains = [ "*.example.com" ]
+    cookie_samesite = "lax"
+    set_xauthrequest = true
+    set_authorization_header = true
+    pass_authorization_header = true 
+    pass_host_header = true
+    pass_access_token = true
+    skip_jwt_bearer_tokens = true
+    reverse_proxy = true
+    skip_provider_button = true
+    http_address = "0.0.0.0:4180"
+    silence_ping_logging = true
+    oidc_issuer_url = "https://dex.example.com"
+    scope = "openid"
+    oidc_email_claim = "sub"
+    real_client_ip_header = "X-Forwarded-For"

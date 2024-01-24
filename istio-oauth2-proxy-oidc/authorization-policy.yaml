@@ -1,0 +1,18 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: oauth-policy
+  namespace: istio-system
+spec:
+  selector:
+    matchLabels:
+      istio: ingressgateway
+  action: CUSTOM
+  provider:
+    name: "oauth2-proxy"
+  rules:
+  # The rules specify when to trigger the external authorizer.
+  - to:
+    - operation:
+        hosts:
+        - "httpbin.example.com"

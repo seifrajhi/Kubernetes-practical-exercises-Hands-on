@@ -1,0 +1,21 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: httpbin-tls-cert
+  namespace: istio-system
+spec:
+  # Secret names are always required.
+  secretName: httpbin-tls-cert
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 4096
+  # At least one of a DNS Name, URI, or IP address is required.
+  dnsNames:
+    - httpbin.example.com
+  # Issuer references are always required.
+  issuerRef:
+    name: letsencrypt
+    # We can reference ClusterIssuers by changing the kind here.
+    # The default value is Issuer (i.e. a locally namespaced Issuer)
+    kind: ClusterIssuer

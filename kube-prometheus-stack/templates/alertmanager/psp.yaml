@@ -1,5 +1,6 @@
 {{- if and .Values.alertmanager.enabled .Values.global.rbac.create .Values.global.rbac.pspEnabled }}
-apiVersion: policy/v1beta1
+# PSP PodSecurityPolicy are removed as of kubernetes v1.25
+apiVersion: policy/v1
 kind: PodSecurityPolicy
 metadata:
   name: {{ template "kube-prometheus-stack.fullname" . }}-alertmanager
