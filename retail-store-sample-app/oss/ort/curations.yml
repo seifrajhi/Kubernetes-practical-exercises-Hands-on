@@ -1,0 +1,20 @@
+- id: "NPM::type-fest"
+  curations:
+    comment: "Dual-licensed, using MIT"
+    concluded_license: "MIT"
+- id: "NPM::json-schema"
+  curations:
+    comment: "Dual-licensed, using BSD-3-Clause"
+    concluded_license: "BSD-3-Clause"
+- id: "Maven:com.h2database:h2"
+  curations:
+    comment: "Licensed under MPL2.0, must provide link to source"
+    homepage_url: "https://github.com/h2database/h2database"
+- id: "Maven:com.rabbitmq:amqp-client"
+  curations:
+    comment: "Tri-licensed, using Apache-2.0"
+    concluded_license: "Apache-2.0"
+- id: "Maven:org.hdrhistogram:HdrHistogram"
+  curations:
+    comment: "Dual-licensed, using BSD-2-Clause"
+    concluded_license: "BSD-2-Clause"
