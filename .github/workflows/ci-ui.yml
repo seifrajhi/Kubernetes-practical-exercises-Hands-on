@@ -1,17 +1,17 @@
-name: Orders CI
+name: UI CI
 
 on:
   push:
     branches:
     - main
     paths:
-    - 'src/orders/**'
+    - 'retail-store-sample-app/src/ui/**'
   pull_request:
     branches:
     - main
     paths:
-    - 'src/orders/**'
-    - 'images/**'
+    - 'retail-store-sample-app/src/ui/**'
+    - 'retail-store-sample-app/images/**'
   workflow_dispatch:
 
 jobs:
@@ -32,7 +32,7 @@ jobs:
       env:
         MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
       run: |
-        src/orders/scripts/ci.sh
+        src/ui/retail-store-sample-app/scripts/ci.sh
 
     - name: Set up QEMU
       id: qemu
@@ -50,4 +50,4 @@ jobs:
         
     - name: Build container image
       run: |
-        scripts/build-image.sh -s orders -t ci --actions-cache
+        retail-store-sample-app/scripts/build-image.sh -s ui -t ci --actions-cache

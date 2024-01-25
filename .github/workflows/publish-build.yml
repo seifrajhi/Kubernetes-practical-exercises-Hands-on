@@ -34,7 +34,7 @@ jobs:
       run: |
         sudo apt-get install -y gettext
         
-        bash scripts/patch-image-tag.sh
+        bash retail-store-sample-app/scripts/patch-image-tag.sh
         
     - uses: stefanzweifel/git-auto-commit-action@v4
       with:
@@ -69,7 +69,7 @@ jobs:
         TAG: "${{ github.event.inputs.tag }}"
       run: |
         # Build first to ensure all images create successfully
-        scripts/build-image.sh -r 'public.ecr.aws/aws-containers' -t $TAG --multi-arch --actions-cache
+        retail-store-sample-app/scripts/build-image.sh -r 'public.ecr.aws/aws-containers' -t $TAG --multi-arch --actions-cache
 
     - name: Get AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -89,7 +89,7 @@ jobs:
         TAG: "${{ github.event.inputs.tag }}"
       run: |
         # Push all images
-        scripts/build-image.sh -r 'public.ecr.aws/aws-containers' -t $TAG --multi-arch --actions-cache -p
+        retail-store-sample-app/scripts/build-image.sh -r 'public.ecr.aws/aws-containers' -t $TAG --multi-arch --actions-cache -p
 
   release:
     name: Release

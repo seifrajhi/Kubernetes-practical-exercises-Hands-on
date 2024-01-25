@@ -1,17 +1,17 @@
-name: Assets CI
+name: Checkout CI
 
 on:
   push:
     branches:
     - main
     paths:
-    - 'src/assets/**'
+    - 'retail-store-sample-app/src/checkout/**'
   pull_request:
     branches:
     - main
     paths:
-    - 'src/assets/**'
-    - 'images/**'
+    - 'retail-store-sample-app/src/checkout/**'
+    - 'retail-store-sample-app/images/**'
   workflow_dispatch:
 
 jobs:
@@ -21,6 +21,15 @@ jobs:
     steps:
     - name: Check out code
       uses: actions/checkout@v3
+
+    - name: Set up Nodejs
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Run CI script
+      run: |
+        bash src/checkout/retail-store-sample-app/scripts/ci.sh
 
     - name: Set up QEMU
       id: qemu
@@ -38,4 +47,4 @@ jobs:
         
     - name: Build container image
       run: |
-        scripts/build-image.sh -s assets -t ci --actions-cache
+        retail-store-sample-app/scripts/build-image.sh -s checkout -t ci --actions-cache

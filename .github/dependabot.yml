@@ -1,49 +1,49 @@
 version: 2
 updates:
   - package-ecosystem: "maven"
-    directory: "/src/cart"
+    directory: "retail-store-sample-app/src/cart"
     schedule:
       interval: "monthly"
     commit-message:
       prefix: "chore"
       include: "scope"
   - package-ecosystem: "maven"
-    directory: "/src/orders"
+    directory: "retail-store-sample-app/src/orders"
     schedule:
       interval: "monthly"
     commit-message:
       prefix: "chore"
       include: "scope"
   - package-ecosystem: "maven"
-    directory: "/src/ui"
+    directory: "retail-store-sample-app/src/ui"
     schedule:
       interval: "monthly"
     commit-message:
       prefix: "chore"
       include: "scope"
   - package-ecosystem: "npm"
-    directory: "/src/checkout"
+    directory: "retail-store-sample-app/src/checkout"
     schedule:
       interval: "monthly"
     commit-message:
       prefix: "chore"
       include: "scope"
   - package-ecosystem: "gomod"
-    directory: "/src/catalog"
+    directory: "retail-store-sample-app/src/catalog"
     schedule:
       interval: "monthly"
     commit-message:
       prefix: "chore"
       include: "scope"
   - package-ecosystem: "npm"
-    directory: "/src/e2e"
+    directory: "retail-store-sample-app/src/e2e"
     schedule:
       interval: "monthly"
     commit-message:
       prefix: "chore"
       include: "scope"
   - package-ecosystem: "npm"
-    directory: "/src/load-generator"
+    directory: "retail-store-sample-app/src/load-generator"
     schedule:
       interval: "monthly"
     commit-message:

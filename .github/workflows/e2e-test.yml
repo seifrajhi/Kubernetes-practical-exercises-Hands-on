@@ -33,13 +33,13 @@ jobs:
 
     - name: Build Images
       run: |
-        scripts/build-image.sh -t e2e
+        retail-store-sample-app/scripts/build-image.sh -t e2e
         
     - name: Run Tests
       run: |
-        (cd deploy/docker-compose && TAG=e2e MYSQL_PASSWORD='test123' docker-compose up -d)
-        (bash scripts/e2e-compose.sh)
-        (cd deploy/docker-compose && docker-compose down)
+        (cd retail-store-sample-app/deploy/docker-compose && TAG=e2e MYSQL_PASSWORD='test123' docker-compose up -d)
+        (bash retail-store-sample-app/scripts/e2e-compose.sh)
+        (cd retail-store-sample-app/deploy/docker-compose && docker-compose down)
 
   kubernetes:
     name: Kubernetes E2E Tests
@@ -61,7 +61,7 @@ jobs:
 
     - name: Build Images
       run: |
-        scripts/build-image.sh -r 'public.ecr.aws/aws-containers' -t e2e
+        retail-store-sample-app/scripts/build-image.sh -r 'public.ecr.aws/aws-containers' -t e2e
 
     - name: Setup helmfile
       uses: mamezou-tech/setup-helmfile@v1.2.0
@@ -83,7 +83,7 @@ jobs:
         kind load docker-image public.ecr.aws/aws-containers/retail-store-sample-orders:$IMAGE_TAG
         kind load docker-image public.ecr.aws/aws-containers/retail-store-sample-ui:$IMAGE_TAG
 
-        (cd deploy/kubernetes/charts && helmfile apply --wait)
+        (cd retail-store-sample-app/deploy/kubernetes/charts && helmfile apply --wait)
         
         sleep 60
 
@@ -106,4 +106,4 @@ jobs:
 
     - name: Test
       run: |
-        bash scripts/e2e-kind.sh
+        bash retail-store-sample-app/scripts/e2e-kind.sh
