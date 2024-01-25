@@ -30,11 +30,11 @@ jobs:
 
           go install github.com/google/go-licenses@v1.5.0
           
-          (cd oss/attribution && pip3 install -r requirements.txt)
+          (cd retail-store-sample-app/oss/attribution && pip3 install -r requirements.txt)
 
       - name: Run
         run: |
-          bash oss/run.sh
+          bash retail-store-sample-app/oss/run.sh
           
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
