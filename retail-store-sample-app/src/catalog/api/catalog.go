@@ -19,8 +19,8 @@ package api
 import (
 	"context"
 
-	"github.com/aws-containers/retail-store-sample-app/catalog/model"
-	"github.com/aws-containers/retail-store-sample-app/catalog/repository"
+	"github.com/seifrajhi/Kubernetes-practical-exercises-Hands-on/retail-store-sample-app/catalog/model"
+	"github.com/seifrajhi/Kubernetes-practical-exercises-Hands-on/retail-store-sample-app/catalog/repository"
 )
 
 // CatalogAPI type

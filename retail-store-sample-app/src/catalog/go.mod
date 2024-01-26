@@ -1,4 +1,4 @@
-module github.com/aws-containers/retail-store-sample-app/catalog
+module github.com/seifrajhi/Kubernetes-practical-exercises-Hands-on/retail-store-sample-app/catalog
 
 go 1.18
 

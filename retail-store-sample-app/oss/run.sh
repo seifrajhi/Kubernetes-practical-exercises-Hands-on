@@ -101,7 +101,7 @@ function golicenses()
 
   mkdir -p $component_output_dir
 
-  (cd $component_dir && go-licenses report --template $script_dir/golicenses/template.tpl --ignore github.com/aws-containers/retail-store-sample-app . > $component_output_dir/licenses.csv)
+  (cd $component_dir && go-licenses report --template $script_dir/golicenses/template.tpl --ignore github.com/seifrajhi/Kubernetes-practical-exercises-Hands-on/retail-store-sample-app . > $component_output_dir/licenses.csv)
 }
 
 function run_ort()
