@@ -28,7 +28,7 @@ jobs:
 
     - name: Run CI script
       run: |
-        src/catalog/retail-store-sample-app/scripts/ci.sh
+        retail-store-sample-app/src/catalog/scripts/ci.sh
 
     - name: Set up QEMU
       id: qemu
