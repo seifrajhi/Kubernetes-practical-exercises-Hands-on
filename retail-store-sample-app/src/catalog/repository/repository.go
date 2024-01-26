@@ -20,8 +20,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/aws-containers/retail-store-sample-app/catalog/config"
-	"github.com/aws-containers/retail-store-sample-app/catalog/model"
+	"github.com/seifrajhi/Kubernetes-practical-exercises-Hands-on/retail-store-sample-app/catalog/config"
+	"github.com/seifrajhi/Kubernetes-practical-exercises-Hands-on/retail-store-sample-app/catalog/model"
 	"github.com/prometheus/client_golang/prometheus"
 )
 

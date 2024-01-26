@@ -23,8 +23,8 @@ import (
 	"log"
 	"strings"
 
-	"github.com/aws-containers/retail-store-sample-app/catalog/config"
-	"github.com/aws-containers/retail-store-sample-app/catalog/model"
+	"github.com/seifrajhi/Kubernetes-practical-exercises-Hands-on/retail-store-sample-app/catalog/config"
+	"github.com/seifrajhi/Kubernetes-practical-exercises-Hands-on/retail-store-sample-app/catalog/model"
 	"github.com/dlmiddlecote/sqlstats"
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/mysql"
