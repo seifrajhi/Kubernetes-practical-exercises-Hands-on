@@ -832,6 +832,22 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 
 - https://medium.com/@seifeddinerajhi/gitops-ci-cd-automation-workflow-using-github-actions-argocd-and-helm-charts-deployed-on-k8s-3811b253030b
 
+## TroubleShooting
+
+- [COMMON KUBERNETES ERRORS AND HOW THEY IMPACT CLOUD DEPLOYMENTS](https://cloudtweaks.com/2023/01/common-kubernetes-errors/)
+
+- [Exit Codes In Containers & Kubernetes – The Complete Guide](https://komodor.com/learn/exit-codes-in-containers-and-kubernetes-the-complete-guide/)
+
+- [How to identify and troubleshoot common Kubernetes errors](https://newrelic.com/blog/how-to-relic/monitoring-kubernetes-part-three)
+
+- [Kubernetes Troubleshooting: 5 Common Errors & How to Fix Them](https://lumigo.io/kubernetes-troubleshooting/)
+
+- [Kubernetes Troubleshooting – The Complete Guide](https://komodor.com/learn/kubernetes-troubleshooting-the-complete-guide/)
+
+
+- [A visual guide on troubleshooting Kubernetes deployments](https://learnk8s.io/troubleshooting-deployments)
+
+- [Kubernetes Troubleshooting: Effective Strategies for Unraveling the Puzzle](https://www.groundcover.com/kubernetes-troubleshooting)
 
 
 ### Coming next
@@ -841,8 +857,6 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 * Nodes AutoScaling and AutoSpotting (on AWS)
 
 * Logging and Monitoring with Operators
-
-* TroubleShooting
 
 * Cloud Native Storage for Statefulsets
 
