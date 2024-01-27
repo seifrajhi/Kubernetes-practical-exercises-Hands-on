@@ -74,9 +74,7 @@ The Security checklist aims at providing a basic list of guidance with links to 
 
 ### Storage
 
-The key concepts of Kubernetes storage, including PVs, PVCs, and StorageClass.
-
-- https://medium.com/@seifeddinerajhi/understanding-storage-in-kubernetes-ee2c19001aae
+- The key concepts of Kubernetes storage, including [PVs, PVCs, and StorageClass](https://medium.com/@seifeddinerajhi/understanding-storage-in-kubernetes-ee2c19001aae)
 
 ### Misc
 
@@ -87,6 +85,7 @@ The key concepts of Kubernetes storage, including PVs, PVCs, and StorageClass.
 
 - [Introduction to Kubernetes Lecture Notes](https://github.com/kaan-keskin/introduction-to-kubernetes/tree/main): Notes about Kubernetes resources  
 
+- [Kubernetes Handbook](https://github.com/rootsongjc/kubernetes-handbook)
 
 
 ### Useful aliases
@@ -848,6 +847,32 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 - [A visual guide on troubleshooting Kubernetes deployments](https://learnk8s.io/troubleshooting-deployments)
 
 - [Kubernetes Troubleshooting: Effective Strategies for Unraveling the Puzzle](https://www.groundcover.com/kubernetes-troubleshooting)
+
+##  Kubernetes in the cloud:
+
+### AWS EKS
+
+- [Terraform module to create AWS Elastic Kubernetes (EKS) resources](https://github.com/terraform-aws-modules/terraform-aws-eks)
+
+- [This project](https://github.com/aws-ia/terraform-aws-eks-blueprints) contains a collection of Amazon EKS cluster patterns implemented in Terraform that demonstrate how fast and easy it is for customers to adopt Amazon EKS. The patterns can be used by AWS customers, partners, and internal AWS teams to configure and manage complete EKS clusters that are fully bootstrapped with the operational software that is needed to deploy and operate workloads.
+
+- [EKS Workshop](http://amazon-eks-workshop.com/)
+
+- [ (Amazon EKS) Best Practices](https://aws.github.io/aws-eks-best-practices/): A best practices guide for day 2 operations, including operational excellence, security, reliability, performance efficiency, and cost optimization.
+
+- [AWS EKS Kubernetes - Masterclass | DevOps, Microservices](https://github.com/stacksimplify/aws-eks-kubernetes-masterclass)
+
+
+### Azure AKS
+
+- [Azure AKS Kubernetes Masterclass](https://github.com/stacksimplify/azure-aks-kubernetes-masterclass)
+
+
+### Google GKE
+
+- [Configures opinionated GKE clusters in terraform](https://github.com/terraform-google-modules/terraform-google-kubernetes-engine)
+
+- [Sample applications for Google Kubernetes Engine (GKE)](https://github.com/GoogleCloudPlatform/kubernetes-engine-samples)
 
 
 ### Coming next
