@@ -861,3 +861,5 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 * Cloud Native Storage for Statefulsets
 
 * Backup & Recovery
+
+* Service Mesh
