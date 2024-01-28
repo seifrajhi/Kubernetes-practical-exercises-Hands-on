@@ -87,6 +87,8 @@ The Security checklist aims at providing a basic list of guidance with links to 
 
 - [Kubernetes Handbook](https://github.com/rootsongjc/kubernetes-handbook)
 
+- [Kubeapps](https://github.com/vmware-tanzu/kubeapps): A web-based UI for deploying and managing applications in Kubernetes clusters
+
 
 ### Useful aliases
 
@@ -831,6 +833,9 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 
 - https://medium.com/@seifeddinerajhi/gitops-ci-cd-automation-workflow-using-github-actions-argocd-and-helm-charts-deployed-on-k8s-3811b253030b
 
+
+- [Provides our opinionated point of view on how GitOps can be used to manage the infrastructure, services and application layers of K8s based systems](https://github.com/cloud-native-toolkit/multi-tenancy-gitops): GitOps Production Deployment Guide
+
 ## TroubleShooting
 
 - [COMMON KUBERNETES ERRORS AND HOW THEY IMPACT CLOUD DEPLOYMENTS](https://cloudtweaks.com/2023/01/common-kubernetes-errors/)
@@ -847,6 +852,12 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 - [A visual guide on troubleshooting Kubernetes deployments](https://learnk8s.io/troubleshooting-deployments)
 
 - [Kubernetes Troubleshooting: Effective Strategies for Unraveling the Puzzle](https://www.groundcover.com/kubernetes-troubleshooting)
+
+
+- [node-problem-detector](https://github.com/kubernetes/node-problem-detector): This is a place for various problem detectors running on the Kubernetes nodes.
+
+
+- [Kubernetes Goat](https://github.com/madhuakula/kubernetes-goat): "Vulnerable by Design" cluster environment to learn and practice Kubernetes security using an interactive hands-on playground 🚀
 
 ##  Kubernetes in the cloud:
 
@@ -873,6 +884,13 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 - [Configures opinionated GKE clusters in terraform](https://github.com/terraform-google-modules/terraform-google-kubernetes-engine)
 
 - [Sample applications for Google Kubernetes Engine (GKE)](https://github.com/GoogleCloudPlatform/kubernetes-engine-samples)
+
+
+### Common
+
+- [Elastic Cloud on Kubernetes](https://github.com/elastic/cloud-on-k8s): Elastic Cloud on Kubernetes automates the deployment, provisioning, management, and orchestration of Elasticsearch, Kibana, APM Server, Enterprise Search, Beats, Elastic Agent, Elastic Maps Server, and Logstash on Kubernetes based on the operator pattern.
+
+
 
 
 ### Coming next
