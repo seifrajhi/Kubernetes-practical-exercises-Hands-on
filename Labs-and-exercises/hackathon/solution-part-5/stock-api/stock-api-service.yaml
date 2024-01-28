@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: stock-api
+  labels:
+    kubernetes.courselabs.co: hackathon
+    app: widgetario
+spec:
+  ports:
+    - port: 80
+      targetPort: http
+  selector:
+    app: widgetario
+    component: stock-api
+  type: ClusterIP

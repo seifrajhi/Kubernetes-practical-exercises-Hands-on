@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx
+  labels:
+    kubernetes.courselabs.co: daemonsets
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - image: nginx:1.18-alpine
+          name: nginx
+          volumeMounts:
+            - name: logs
+              mountPath: /var/log/nginx
+      volumes:
+        - name: logs
+          hostPath:
+            path: /volumes/nginx-logs
+            type: DirectoryOrCreate

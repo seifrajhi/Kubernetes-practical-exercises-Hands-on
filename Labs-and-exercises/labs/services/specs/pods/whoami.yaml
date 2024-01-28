@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: whoami
+  labels:
+    kubernetes.courselabs.co: services
+    app: whoami
+spec:
+  containers:
+    - name: app
+      image: sixeyed/whoami:21.04

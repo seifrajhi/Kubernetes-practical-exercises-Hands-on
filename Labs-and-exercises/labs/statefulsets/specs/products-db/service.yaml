@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-db
+  labels:
+    kubernetes.courselabs.co: statefulsets
+    app: products-db
+spec:
+  ports:
+    - port: 5432
+      targetPort: postgres
+  selector:
+    app: products-db
+  clusterIP: None

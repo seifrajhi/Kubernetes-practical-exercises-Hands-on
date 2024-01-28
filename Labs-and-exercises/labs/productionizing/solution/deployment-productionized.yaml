@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configurable
+  labels: 
+    kubernetes.courselabs.co: productionizing
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: configurable
+  template:
+    metadata:
+      labels:
+        app: configurable
+    spec:
+      containers:
+        - name: app
+          image: sixeyed/configurable:21.04
+          env:
+            - name: Configurable__FailAfterCallCount
+              value: "3"
+          resources:
+            limits:
+              cpu: 250m
+            requests:
+              cpu: 125m
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 1
+            failureThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 80
+            periodSeconds: 5
+            failureThreshold: 1

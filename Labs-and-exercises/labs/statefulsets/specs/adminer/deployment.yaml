@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adminer-web
+  labels:
+    kubernetes.courselabs.co: statefulsets
+spec:
+  selector:
+    matchLabels:
+      app: adminer-web
+  template:
+    metadata:
+      labels:
+        app: adminer-web
+    spec:
+      containers:
+        - name: web
+          image: adminer:4-standalone
+          args: ["php", "-S", "0.0.0.0:8080", "-t", "/var/www/html"]
+          env:
+          - name: ADMINER_DESIGN
+            value: price
+          - name: ADMINER_DEFAULT_SERVER
+            value: products-db-0.products-db.default.svc.cluster.local

@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: apod-web
+  namespace: apod
+spec:
+  ports:
+    - port: 8016
+      targetPort: web
+      nodePort: 30016
+  selector:
+    app: apod-web
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apod-web
+  namespace: apod
+spec:
+  selector:
+    matchLabels:
+      app-name: apod-web
+  template:
+    metadata:
+      labels:
+        app-name: apod-web
+        app: apod-web
+        version: v1
+    spec:
+      containers:
+        - name: web
+          image: kiamol/ch14-image-gallery
+          ports:
+            - containerPort: 80
+              name: web
+          resources:
+            limits:
+              cpu: 125m
+              memory: 200Mi

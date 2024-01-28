@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configurable
+  labels: 
+    kubernetes.courselabs.co: configmaps
+    app: configurable
+spec:
+  selector:
+    matchLabels:
+      app: configurable
+  template:
+    metadata:
+      labels:
+        app: configurable
+    spec:
+      containers:
+        - name: app
+          image: sixeyed/configurable:21.04
+          envFrom:
+            - configMapRef:
+                name: configurable-env-lab
+          volumeMounts:
+            - name: config-override
+              mountPath: "/app/config"
+              readOnly: true
+      volumes:
+        - name: config-override
+          configMap:
+            name: configurable-override-lab

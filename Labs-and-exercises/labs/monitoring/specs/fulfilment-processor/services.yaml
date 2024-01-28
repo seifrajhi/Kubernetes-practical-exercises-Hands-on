@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fulfilment-processor-lb
+  labels:
+    kubernetes.courselabs.co: monitoring
+spec:
+  selector:
+    app: fulfilment
+    component: processor
+  ports:
+    - name: http
+      port: 9110
+      targetPort: metrics
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fulfilment-processor-np
+  labels:
+    kubernetes.courselabs.co: monitoring
+spec:
+  selector:
+    app: fulfilment
+    component: processor
+  ports:
+    - name: http
+      port: 9110
+      targetPort: metrics
+      nodePort: 30011
+  type: NodePort

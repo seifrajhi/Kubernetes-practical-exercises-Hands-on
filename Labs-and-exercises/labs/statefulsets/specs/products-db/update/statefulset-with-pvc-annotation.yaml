@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: products-db
+  labels:
+    kubernetes.courselabs.co: statefulsets
+    app: products-db
+spec:
+  selector:
+    matchLabels:
+      app: products-db
+  serviceName: products-db
+  replicas: 2
+  template:
+    metadata:
+      annotations:
+        remarks.kubernetes.courselabs.co: "this is a new annotation"
+      labels:
+        app: products-db
+    spec:
+      containers:
+        - name: app
+          image: widgetario/products-db:postgres-replicated
+          envFrom:
+            - secretRef:
+                name: products-db-password
+          ports:
+            - containerPort: 5432
+              name: postgres
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data  
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+      labels:
+        app: products-db
+    spec:
+      accessModes: 
+       - ReadWriteOnce
+      resources:
+        requests:
+          storage: 50Mi

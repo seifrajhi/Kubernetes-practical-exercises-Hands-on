@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pi-secure-np
+  labels:
+    kubernetes.courselabs.co: productionizing
+spec:
+  selector:
+    app: pi-secure-web
+  ports:
+    - name: http
+      port: 8030
+      targetPort: 80
+      nodePort: 30030
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pi-secure-lb
+  labels:
+    kubernetes.courselabs.co: productionizing
+spec:
+  selector:
+    app: pi-secure-web
+  ports:
+    - name: http
+      port: 8030
+      targetPort: 80
+  type: LoadBalancer

@@ -1,0 +1,41 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: apod-api
+  labels:
+    kubernetes.courselabs.co: networkpolicy
+spec:
+  podSelector:
+    matchLabels:
+      app: apod-api
+
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: apod-web
+    ports:
+    - port: api
+
+  egress:   
+  - to: # DNS
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+    - protocol: TCP
+      port: 53
+    - protocol: UDP
+      port: 53
+
+  - to: # NASA APIs - api.nasa.gov
+    - ipBlock:
+        cidr: 15.200.69.242/24
+    - ipBlock:
+        cidr: 3.30.35.101/24
+    ports:
+    - protocol: TCP
+      port: 443

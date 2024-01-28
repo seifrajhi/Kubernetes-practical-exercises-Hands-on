@@ -1,0 +1,8 @@
+version: '3.7'
+
+services:
+
+  bad-sleep:
+    image: courselabs/bad-sleep
+    build:
+      context: ./bad-sleep

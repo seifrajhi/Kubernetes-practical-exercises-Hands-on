@@ -1,0 +1,91 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-db
+  labels:
+    kubernetes.courselabs.co: hackathon
+    app: widgetario
+spec:
+  ports:
+    - port: 5432
+      targetPort: postgres
+  selector:
+    app: widgetario
+    component: products-db
+  type: ClusterIP
+  clusterIP: None
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: products-db-password
+  labels:
+    kubernetes.courselabs.co: hackathon
+type: Opaque
+stringData:
+  POSTGRES_PASSWORD: h4ckkath0n
+  PGPASSWORD: h4ckkath0n
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: products-db
+  labels:
+    kubernetes.courselabs.co: hackathon
+    app: widgetario
+spec:
+  selector:
+    matchLabels:
+      app: widgetario
+      component: products-db
+  serviceName: products-db
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: widgetario
+        component: products-db
+      annotations:
+        prometheus.io/scrape: "false"
+    spec:
+      automountServiceAccountToken: false      
+      containers:
+        - name: app
+          image: widgetario/products-db-replicated:21.03          
+          envFrom:
+            - secretRef:
+                name: products-db-password
+          ports:
+            - containerPort: 5432
+              name: postgres
+          readinessProbe:
+            tcpSocket:
+              port: postgres
+            periodSeconds: 10
+            initialDelaySeconds: 10
+            failureThreshold: 1
+          livenessProbe:
+            exec:
+              command: ["pg_isready", "-h", "localhost"]
+            periodSeconds: 60
+            initialDelaySeconds: 20
+            failureThreshold: 2
+          resources:
+            limits:
+              cpu: 200m
+              memory: 150Mi 
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data  
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+      labels:
+        kubernetes.courselabs.co: hackathon
+        app: widgetario
+    spec:
+      accessModes: 
+       - ReadWriteOnce
+      resources:
+        requests:
+          storage: 50Mi

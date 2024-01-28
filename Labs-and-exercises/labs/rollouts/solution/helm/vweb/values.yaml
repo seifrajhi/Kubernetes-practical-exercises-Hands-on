@@ -1,0 +1,10 @@
+# shared config
+replicaCount: 2
+servicePort: 8099
+serviceType: NodePort
+serviceNodePort: 30019
+
+# deployment - blue/green
+blueImage: kiamol/ch09-vweb:v1
+greenImage: kiamol/ch09-vweb:v2
+activeSlot: blue

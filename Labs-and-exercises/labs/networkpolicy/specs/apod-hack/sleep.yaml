@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sleep
+  labels:
+    app: apod-web
+    kubernetes.courselabs.co: networkpolicy
+spec:
+  containers:
+    - name: sleep
+      image: kiamol/ch03-sleep

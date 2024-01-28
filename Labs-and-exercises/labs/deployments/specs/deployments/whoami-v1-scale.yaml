@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whoami
+  labels:
+    kubernetes.courselabs.co: deployments
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: whoami
+  template:
+    metadata:
+      labels:
+        app: whoami
+        version: v1
+    spec:
+      containers:
+        - name: app
+          image: sixeyed/whoami:21.04

@@ -1,0 +1,195 @@
+{{- $appVersion := .Chart.AppVersion -}}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "mysql-operator.fullname" . }}
+  labels:
+    {{- include "mysql-operator.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  serviceName: {{ include "orchestrator.fullname" . }}
+  podManagementPolicy: Parallel
+  selector:
+    matchLabels:
+      {{- include "mysql-operator.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+        checksum/orchestrator-config: {{ include (print $.Template.BasePath "/orchestrator-config.yaml") . | sha256sum }}
+        checksum/orchestrator-secret: {{ include (print $.Template.BasePath "/orchestrator-secret.yaml") . | sha256sum }}
+      labels:
+        {{- include "mysql-operator.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "mysql-operator.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: operator
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default $appVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8080
+              name: prometheus
+              protocol: TCP
+          env:
+            - name: ORC_TOPOLOGY_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "orchestrator.secretName" . }}
+                  key: TOPOLOGY_USER
+            - name: ORC_TOPOLOGY_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "orchestrator.secretName" . }}
+                  key: TOPOLOGY_PASSWORD
+          {{- if .Values.extraEnv }}
+            {{- toYaml .Values.extraEnv | nindent 12 }}
+          {{- end }}
+          args:
+            - --leader-election-namespace={{ .Release.Namespace }}
+            - --orchestrator-uri={{ include "orchestrator.apiURL" . }}
+            {{- with .Values.sidecar57 }}
+            - --sidecar-image={{ .image.repository }}:{{ .image.tag | default $appVersion }}
+            {{- end -}}
+            {{- with .Values.sidecar80 }}
+            - --sidecar-mysql8-image={{ .image.repository }}:{{ .image.tag | default $appVersion }}
+            {{- end -}}
+            {{- with .Values.metricsExporter }}
+            - --metrics-exporter-image={{ .image.repository }}:{{ .image.tag }}
+            {{- end -}}
+            {{- if .Values.watchNamespace }}
+            - --namespace={{ .Values.watchNamespace }}
+            {{- end }}
+            {{- if .Values.gracefulShutdown.enabled }}
+            - --failover-before-shutdown=true
+            {{- else }}
+            - --failover-before-shutdown=false
+            {{- end }}
+            {{- range $arg := .Values.extraArgs }}
+            - {{ $arg }}
+            {{- end }}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8081
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 8081
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+        - name: orchestrator
+          securityContext:
+            {{- toYaml .Values.orchestrator.securityContext | nindent 12 }}
+          image: {{ .Values.orchestrator.image.repository }}:{{ .Values.orchestrator.image.tag | default .Chart.AppVersion }}
+          imagePullPolicy: {{ .Values.orchestrator.image.pullPolicy }}
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+            - containerPort: 10008
+              name: raft
+              protocol: TCP
+          env:
+            - name: POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          {{- if .Values.orchestrator.extraEnv }}
+            {{- toYaml .Values.orchestrator.extraEnv | nindent 12 }}
+          {{- end }}
+          envFrom:
+            - prefix: ORC_
+              secretRef:
+                name: {{ include "orchestrator.secretName" . }}
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/orchestrator
+            - name: config
+              mountPath: /usr/local/share/orchestrator/templates
+          livenessProbe:
+            timeoutSeconds: 10
+            initialDelaySeconds: 200
+            httpGet:
+              path: /api/lb-check
+              port: 3000
+          # https://github.com/github/orchestrator/blob/master/docs/raft.md#proxy-healthy-raft-nodes
+          readinessProbe:
+            timeoutSeconds: 10
+            httpGet:
+              path: /api/raft-health
+              port: 3000
+          resources:
+            {{- toYaml .Values.orchestrator.resources | nindent 12 }}
+
+      volumes:
+        - name: config
+          configMap:
+            name: {{ template "orchestrator.fullname" . }}
+        {{- if not .Values.orchestrator.persistence.enabled }}
+        - name: data
+          emptyDir: {}
+        {{- end }}
+
+      {{- if .Values.orchestrator.persistence.fsGroupWorkaroundEnabled }}
+      initContainers:
+        - name: init-mount
+          securityContext:
+            runAsUser: 0
+          image: busybox:1.34.0
+          command: ['sh', '-c', "chown -R {{ .Values.podSecurityContext.fsGroup | default "0" }}:{{ .Values.podSecurityContext.fsGroup | default "0" }} /var/lib/orchestrator"]
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/orchestrator
+      {{- end }}
+
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+  {{- if .Values.orchestrator.persistence.enabled }}
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        {{- with .Values.orchestrator.persistence.annotations }}
+        annotations:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+      spec:
+        accessModes: [ {{ .Values.orchestrator.persistence.accessMode }} ]
+        resources:
+          requests:
+            storage: {{ .Values.orchestrator.persistence.size }}
+        {{- if .Values.orchestrator.persistence.selector }}
+        {{- with .Values.orchestrator.persistence.selector.matchLabels }}
+        selector:
+          matchLabels:
+            {{- toYaml . | nindent 12 }}
+        {{- end }}
+        {{- end }}
+      {{- if .Values.orchestrator.persistence.storageClass }}
+      {{- if (eq "-" .Values.orchestrator.persistence.storageClass) }}
+        storageClassName: ""
+      {{- else }}
+        storageClassName: "{{ .Values.orchestrator.persistence.storageClass }}"
+      {{- end }}
+      {{- end }}
+  {{- end }}

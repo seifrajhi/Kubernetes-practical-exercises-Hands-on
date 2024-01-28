@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: simple-statefulset-scripts
+  labels:
+    kubernetes.courselabs.co: statefulsets
+data:
+  wait-service.sh: |-
+    #!/bin/sh
+    if [ "$HOSTNAME" == "$PRIMARY_NAME" ]; then
+      echo '** I am the primary **'
+    else
+      echo '** I am a secondary - waiting for primary **'
+      until nslookup ${PRIMARY_FQDN}; do echo Waiting for ${PRIMARY_FQDN}; sleep 1; done
+    fi
+  create-html.sh: |-
+    #!/bin/sh
+    echo "<!DOCTYPE html><html><body><h1>I am $HOSTNAME</h1></body></html>" > /html/index.html

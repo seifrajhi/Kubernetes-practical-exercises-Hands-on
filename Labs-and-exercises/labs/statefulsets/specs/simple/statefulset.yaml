@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: simple-statefulset
+  labels:
+    kubernetes.courselabs.co: statefulsets
+    app: simple-statefulset
+spec:
+  selector:
+    matchLabels:
+      app: simple-statefulset
+  serviceName: simple-statefulset
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: simple-statefulset
+    spec: 
+      initContainers:
+        - name: wait-service
+          image: kiamol/ch03-sleep
+          env:
+            - name: PRIMARY_NAME
+              value: simple-statefulset-0
+            - name: PRIMARY_FQDN
+              value: simple-statefulset-0.simple-statefulset.default.svc.cluster.local
+          command: ['/scripts/wait-service.sh']
+          volumeMounts:
+            - name: scripts
+              mountPath: "/scripts"
+        - name: create-html
+          image: kiamol/ch03-sleep
+          command: ['/scripts/create-html.sh']
+          volumeMounts:
+            - name: scripts
+              mountPath: "/scripts"
+            - name: html
+              mountPath: /html
+      containers:
+        - name: app
+          image: nginx:1.18-alpine          
+          volumeMounts:
+            - name: html
+              mountPath: /usr/share/nginx/html
+      volumes:
+        - name: scripts
+          configMap:
+            name: simple-statefulset-scripts
+            defaultMode: 0500
+        - name: html
+          emptyDir: {}

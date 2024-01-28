@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    kubernetes.courselabs.co: hackathon
+    app: widgetario
+spec:
+  selector:
+    matchLabels:
+        app: widgetario
+        component: web
+  template:
+    metadata:
+      labels: 
+        app: widgetario
+        component: web
+        hackathon: part-1
+    spec:
+      containers:
+        - name: app
+          image: widgetario/web:21.03
+          ports:
+            - containerPort: 80
+              name: http
+          envFrom:
+            - configMapRef:
+                name: web-features
+          volumeMounts:
+            - name: api-config
+              mountPath: "/app/secrets"
+              readOnly: true
+      volumes:
+        - name: api-config
+          secret:
+            secretName: web-api

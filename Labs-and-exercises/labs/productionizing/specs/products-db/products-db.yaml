@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-db
+  labels:
+    kubernetes.courselabs.co: productionizing
+spec:
+  selector:
+    matchLabels:
+      app: products-db
+  template:
+    metadata:
+      labels:
+        app: products-db
+    spec:
+      containers:
+        - name: db
+          image: widgetario/products-db:postgres
+          readinessProbe:
+            tcpSocket:
+              port: 5432
+            periodSeconds: 5
+            initialDelaySeconds: 10
+          livenessProbe:
+            exec:
+              command: ["pg_isready", "-h", "localhost"]
+            periodSeconds: 30
+            initialDelaySeconds: 20
+            failureThreshold: 5

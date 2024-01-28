@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configurable-env
+  labels: 
+    kubernetes.courselabs.co: configmaps
+    app: configurable
+data:
+  Configurable__Release: 24.01.2
+  Configurable__Environment: uat

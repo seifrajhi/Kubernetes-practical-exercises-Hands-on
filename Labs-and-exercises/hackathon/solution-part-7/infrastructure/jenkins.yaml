@@ -1,0 +1,183 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins
+  namespace: infra
+  labels:
+    team: infrastructure
+spec:
+  ports:
+    - port: 8080
+      nodePort: 30007
+      targetPort: jenkins
+  selector:
+    app: jenkins
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  jenkins
+  namespace: infra
+  labels:
+    team: infrastructure
+spec:
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      serviceAccountName: jenkins
+      containers:
+        - name: jenkins
+          image: kiamol/ch11-jenkins:2.319.1
+          envFrom:
+            - configMapRef:
+                name: build-config
+          ports:
+            - name: jenkins
+              containerPort: 8080
+          volumeMounts:
+            - name: scripts
+              mountPath: /data/init.groovy.d
+            - name: registry-creds
+              mountPath: /root/.docker
+              readOnly: true
+      volumes:
+        - name: scripts
+          configMap:
+            name: jenkins-setup
+        - name: registry-creds
+          secret:
+            secretName: registry-creds
+            defaultMode: 0400
+            items:
+            - key: .dockerconfigjson
+              path: config.json
+---
+# RBAC configuration
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: jenkins
+  namespace: infra
+  labels:
+    team: infrastructure
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: jenkins
+  labels:
+    team: infrastructure
+rules:
+- apiGroups: [""]
+  resources: [pods"]
+  verbs: ["create","delete","get","list","patch","update","watch"]
+- apiGroups: [""]
+  resources: [pods/exec"]
+  verbs: ["create","delete","get","list","patch","update","watch"]
+- apiGroups: [""]
+  resources: [pods/log"]
+  verbs: [get","list","watch"]
+- apiGroups: [""]
+  resources: ["services","secrets","configmaps","namespaces"]
+  verbs: ["get","list","create","delete","patch","update"]
+- apiGroups: ["apps"]
+  resources: ["deployments","statefulsets","replicasets"]
+  verbs: ["get","list","create","delete","patch","update"]
+- apiGroups: ["networking.k8s.io"]
+  resources: ["ingresses"]
+  verbs: ["get","list","create","delete","patch","update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: jenkins
+  labels:
+    team: infrastructure
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: jenkins
+subjects:
+- kind: ServiceAccount
+  name: jenkins
+  namespace: infra
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jenkins-setup
+  namespace: infra
+data:
+  admin.groovy: |-
+    #!groovy
+
+    import jenkins.install.*;
+    import jenkins.model.*
+    import jenkins.security.s2m.AdminWhitelistRule
+    import hudson.security.*
+    import hudson.util.*;
+
+    def instance = Jenkins.getInstance()
+
+    def username = "kiamol"
+    def password = "kiamol"
+
+    def hudsonRealm = new HudsonPrivateSecurityRealm(false)
+    hudsonRealm.createAccount(username, password)
+    instance.setSecurityRealm(hudsonRealm)
+
+    def strategy = new FullControlOnceLoggedInAuthorizationStrategy()
+    instance.setAuthorizationStrategy(strategy)
+    instance.setInstallState(InstallState.INITIAL_SETUP_COMPLETED)
+    instance.save()
+
+    Jenkins.instance.getInjector().getInstance(AdminWhitelistRule.class).setMasterKillSwitch(false)
+  install-plugins.groovy: |-
+    #!groovy
+
+    import jenkins.model.Jenkins;
+
+    pm = Jenkins.instance.pluginManager
+    uc = Jenkins.instance.updateCenter
+
+    pm.doCheckUpdatesServer()
+
+    ["git", "workflow-aggregator"].each {
+        if (! pm.getPlugin(it)) {
+        deployment = uc.getPlugin(it).deploy(true)
+        deployment.get()
+        }
+    }
+  pipelines.groovy: |-
+    import jenkins.*
+    import jenkins.model.*
+    import hudson.*
+    import hudson.model.*
+
+    import hudson.plugins.git.*;
+    import hudson.triggers.SCMTrigger;
+    import org.jenkinsci.plugins.workflow.job.WorkflowJob;
+    import org.jenkinsci.plugins.workflow.cps.CpsScmFlowDefinition;
+
+    def gitUser = "kiamol"
+    def gitRepo = "kiamol"
+    def gitUrl = "http://gogs:3000/kiamol/kiamol.git"
+
+    def jenkins = Jenkins.instance;
+
+    def scm = new GitSCM(gitUrl)
+    scm.branches = [new BranchSpec("*/main")];
+    def workflowJob = new WorkflowJob(jenkins, "widgetario");
+    workflowJob.definition = new CpsScmFlowDefinition(scm, "hackathon/project/Jenkinsfile");
+    def gitTrigger = new SCMTrigger("* * * * *");
+    workflowJob.addTrigger(gitTrigger);
+    workflowJob.disabled = true;
+    workflowJob.save();
+
+    jenkins.reload()

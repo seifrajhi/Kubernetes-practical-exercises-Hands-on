@@ -1,0 +1,37 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pi-proxy
+  labels: 
+    kubernetes.courselabs.co: persistentvolumes
+    app: pi-proxy
+spec:
+  selector:
+    matchLabels:
+      app: pi-proxy
+  template:
+    metadata:
+      labels:
+        app: pi-proxy
+        storage: pvc
+    spec:
+      containers:
+        - image: nginx:1.18-alpine
+          name: nginx
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - name: config
+              mountPath: "/etc/nginx/"
+              readOnly: true
+            - name: cache-volume
+              mountPath: /tmp
+      volumes:
+        - name: config
+          configMap:
+            name: nginx-configmap
+        - name: cache-volume
+          persistentVolumeClaim:
+            claimName: pi-proxy-pvc

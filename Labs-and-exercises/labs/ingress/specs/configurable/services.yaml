@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: configurable-web
+  namespace: configurable
+spec:
+  selector:
+    app: configurable
+  ports:
+    - name: config-app
+      port: 8020
+      targetPort: 80
+  type: ClusterIP

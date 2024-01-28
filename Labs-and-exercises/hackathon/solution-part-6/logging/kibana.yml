@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana-lb
+  namespace: logging
+  labels:  
+    kubernetes.courselabs.co: hackathon
+spec:
+  selector:    
+    app: kibana
+  ports:
+  - name: kibana
+    port: 5601
+    targetPort: 5601
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana-np
+  namespace: logging
+  labels:  
+    kubernetes.courselabs.co: hackathon
+spec:
+  selector:    
+    app: kibana
+  ports:
+  - name: kibana
+    port: 5601
+    targetPort: 5601
+    nodePort: 30005
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kibana
+  namespace: logging
+spec:
+  selector:
+    matchLabels:
+      app: kibana
+  template:
+    metadata:
+      labels:
+        app: kibana
+    spec:
+      containers:
+      - image: courselabs/kibana:7.10
+        name: kibana
+        ports:
+        - containerPort: 5601
+          name: kibana

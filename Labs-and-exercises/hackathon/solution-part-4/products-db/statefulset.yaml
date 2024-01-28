@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: products-db
+  labels:
+    kubernetes.courselabs.co: hackathon
+    app: widgetario
+spec:
+  selector:
+    matchLabels:
+      app: widgetario
+      component: products-db
+  serviceName: products-db
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: widgetario
+        component: products-db
+    spec:      
+      containers:
+        - name: app
+          image: widgetario/products-db-replicated:21.03          
+          envFrom:
+            - secretRef:
+                name: products-db-password
+          ports:
+            - containerPort: 5432
+              name: postgres
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data  
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+      labels:
+        kubernetes.courselabs.co: hackathon
+        app: widgetario
+    spec:
+      accessModes: 
+       - ReadWriteOnce
+      resources:
+        requests:
+          storage: 50Mi

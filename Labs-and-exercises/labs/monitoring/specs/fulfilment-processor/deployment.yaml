@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fulfilment-processor
+  labels: 
+    kubernetes.courselabs.co: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: fulfilment
+      component: processor
+  template:
+    metadata:
+      labels:
+        app: fulfilment
+        component: processor
+      annotations:        
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '9110'
+    spec:
+      containers:
+        - name: app
+          image: courselabs/fulfilment-processor
+          env:
+            - name: Observability__Metrics__IncludeRuntime
+              value: 'true'
+          ports:
+            - containerPort: 9110
+              name: metrics

@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoami-lab-np
+  labels:
+    kubernetes.courselabs.co: deployments
+spec:
+  selector:
+    app: whoami-lab
+    version: v2
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      nodePort: 30020
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoami-lab-lb
+  labels:
+    kubernetes.courselabs.co: deployments
+spec:
+  selector:
+    app: whoami-lab
+    version: v2
+  ports:
+    - name: http
+      port: 8020
+      targetPort: 80
+  type: LoadBalancer

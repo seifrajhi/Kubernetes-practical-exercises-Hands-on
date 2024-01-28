@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-sapi
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  ports:
+    - port: 80
+      targetPort: http
+  selector:
+    app: {{ .Release.Name }}
+    component: stock-api
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-sapi-dbenv
+type: Opaque
+stringData:
+  POSTGRES_CONNECTION_STRING: "host={{ .Release.Name }}-pdb-0.{{ .Release.Name }}-pdb.{{ .Release.Namespace }}.svc.cluster.local port=5432 user={{ .Values.pdbUsername }} password={{ .Values.pdbPassword }} dbname=postgres sslmode=disable"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-sapi
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.sapiReplicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+      component: stock-api
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+        component: stock-api
+      annotations:
+        prometheus.io/scrape: "true"
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: app
+          image: {{ .Values.sapiImage }}
+          envFrom:
+            - secretRef:
+                name: {{ .Release.Name }}-sapi-dbenv
+          ports:
+            - containerPort: 8080
+              name: http
+          {{- if eq .Values.includeReadiness true }}
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 30
+            failureThreshold: 1
+          {{- end }}
+          {{- if eq .Values.includeLiveness true }}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 60
+            initialDelaySeconds: 10
+          {{- end }}
+          {{- if eq .Values.includeResources true }}
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi   
+          {{- end }}   
+          securityContext:
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - name: cache
+              mountPath: "/cache"
+      volumes:
+        - name: cache
+          emptyDir:
+            medium: Memory

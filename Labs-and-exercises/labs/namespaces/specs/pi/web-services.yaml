@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pi-web-lb
+  namespace: pi
+  labels:
+    kubernetes.courselabs.co: namespaces
+spec:
+  ports:
+    - port: 8030
+      targetPort: http
+      name: http
+  selector:
+    app: pi-web
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pi-web-np
+  namespace: pi
+  labels:
+    kubernetes.courselabs.co: namespaces
+spec:
+  ports:
+    - port: 8030   
+      targetPort: http 
+      name: http
+      nodePort: 30030
+  selector:
+    app: pi-web
+  type: NodePort

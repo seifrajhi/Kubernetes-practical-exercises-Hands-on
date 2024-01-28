@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pi-secure-web
+  labels:
+    kubernetes.courselabs.co: productionizing
+spec:
+  selector:
+    matchLabels:
+      app: pi-secure-web
+  template:
+    metadata:
+      labels:
+        app: pi-secure-web
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 65534
+        runAsGroup: 3000
+      containers:
+        - image: kiamol/ch05-pi
+          command: ["dotnet", "Pi.Web.dll", "-m", "web"]
+          name: web
+          ports:
+            - containerPort: 80
+              name: http
+          resources:
+            limits:
+              cpu: 250m
+            requests:
+              cpu: 125m
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all

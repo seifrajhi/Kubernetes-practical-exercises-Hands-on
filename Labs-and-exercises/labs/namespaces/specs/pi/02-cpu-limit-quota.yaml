@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: cpu-limit
+  namespace: pi
+spec:
+  hard:
+    requests.cpu: 3500m
+    limits.cpu: 4000m

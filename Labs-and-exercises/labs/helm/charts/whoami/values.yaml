@@ -1,0 +1,9 @@
+# service
+servicePort: 8020
+serviceType: NodePort
+serviceNodePort: 30028
+
+# deployment
+replicaCount: 2
+imageTag: sixeyed/whoami:21.04
+serverMode: q

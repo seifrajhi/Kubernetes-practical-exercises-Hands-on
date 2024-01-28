@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vweb
+  labels: 
+    kubernetes.courselabs.co: rollouts
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: vweb
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0 
+      maxSurge: 100%
+  template:
+    metadata:
+      labels:
+        app: vweb
+    spec:
+      initContainers:
+        - name: wait
+          image: kiamol/ch03-sleep
+          command: ['sh', '-c', 'sleep 3s']
+      containers:
+        - name: web
+          image: kiamol/ch09-vweb:v2
+          ports:
+            - name: http
+              containerPort: 80
+

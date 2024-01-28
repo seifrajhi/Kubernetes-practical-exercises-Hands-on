@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi-job-one-failing
+  labels:
+    kubernetes.courselabs.co: jobs
+spec:
+  template:
+    spec:
+      containers:
+        - name: pi
+          image: kiamol/ch05-pi
+          command: ["donet", "Pi.Web.dll", "-m", "console", "-dp", "50"]
+      restartPolicy: OnFailure

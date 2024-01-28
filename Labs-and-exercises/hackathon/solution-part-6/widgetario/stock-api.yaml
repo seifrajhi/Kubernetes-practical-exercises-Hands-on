@@ -1,0 +1,83 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: stock-api
+  labels:
+    kubernetes.courselabs.co: hackathon
+    app: widgetario
+spec:
+  ports:
+    - port: 80
+      targetPort: http
+  selector:
+    app: widgetario
+    component: stock-api
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: stock-api-connection
+  labels:
+    kubernetes.courselabs.co: hackathon
+type: Opaque
+stringData:
+  POSTGRES_CONNECTION_STRING: "host=products-db-0.products-db.default.svc.cluster.local port=5432 user=postgres password=h4ckkath0n dbname=postgres sslmode=disable"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stock-api
+  labels:
+    kubernetes.courselabs.co: hackathon
+    app: widgetario
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+        app: widgetario
+        component: stock-api
+  template:
+    metadata:
+      labels: 
+        app: widgetario
+        component: stock-api
+        hackathon: part-7
+      annotations:
+        prometheus.io/scrape: "true"
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: app
+          image: widgetario/stock-api:21.03
+          ports:
+            - containerPort: 8080
+              name: http
+          envFrom:
+            - secretRef:
+                name: stock-api-connection
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 30
+            failureThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 60
+            initialDelaySeconds: 10
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi 
+          securityContext:
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - name: cache
+              mountPath: "/cache"
+      volumes:
+        - name: cache
+          emptyDir:
+            medium: Memory

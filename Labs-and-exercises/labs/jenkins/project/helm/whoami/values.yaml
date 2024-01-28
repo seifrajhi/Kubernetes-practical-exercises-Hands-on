@@ -1,0 +1,13 @@
+# service
+servicePort: 8020
+serviceType: NodePort
+serviceNodePort: 30028
+
+# deployment
+replicaCount: 1
+serverImage: docker.io/sixeyed/whoami-lab:21.09-1
+serverMode: q
+
+# registry
+privateImageRegistry: false
+registrySecretName: none

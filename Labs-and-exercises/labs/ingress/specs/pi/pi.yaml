@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pi-internal
+  labels:
+    kubernetes.courselabs.co: ingress
+spec:
+  ports:
+    - port: 80
+      targetPort: http
+      name: http
+  selector:
+    app: pi-web
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pi-web
+  labels:
+    kubernetes.courselabs.co: ingress
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pi-web
+  template:
+    metadata:
+      labels:
+        app: pi-web
+    spec:
+      containers:
+        - image: kiamol/ch05-pi
+          command: ["dotnet", "Pi.Web.dll", "-m", "web"]
+          name: pi-web
+          ports:
+            - name: http
+              containerPort: 80

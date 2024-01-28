@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: numbers-api
+  namespace: rng
+spec:
+  ports:
+    - port: 80
+      targetPort: http
+  selector:
+    app: numbers-api
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: numbers-api-rng-key
+  namespace: rng
+stringData:
+  rng-key.json: |-
+    {
+      "hw-key": "163b92dcb950a449e13e7674af872b9e"
+    }  
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: numbers-api
+  namespace: rng
+spec:
+  selector:
+    matchLabels:
+      app: numbers-api
+  template:
+    metadata:
+      labels:
+        app: numbers-api
+    spec:
+      containers:
+        - name: api
+          image: kiamol/ch03-numbers-api
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - name: rng-key
+              mountPath: "/app/config-override/"
+              readOnly: true
+      volumes:
+        - name: rng-key
+          secret:
+            secretName: numbers-api-rng-key
+

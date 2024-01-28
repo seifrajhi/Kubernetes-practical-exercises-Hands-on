@@ -1,0 +1,9 @@
+apiVersion: mysql.presslabs.org/v1alpha1
+kind: MysqlCluster
+metadata:
+  name: db
+spec:
+  replicas: 2
+  secretName: db-password
+  # specify MySql version
+  image: percona:5.7.35

@@ -1,0 +1,16 @@
+{
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.File" ],
+    "MinimumLevel": "Information",
+    "WriteTo": [
+      {
+        "Name": "File",
+        "Args": { "path": "/logs/app.log" }
+      }
+    ],
+    "Enrich": [ "FromLogContext", "WithMachineName" ],
+    "Properties": {
+      "Application": "Widgetario.Web"
+    }
+  }
+}

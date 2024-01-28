@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vweb-lb
+  labels:
+    kubernetes.courselabs.co: rollouts
+spec:
+  ports:
+    - port: 8090
+      targetPort: http
+  selector:
+    app: vweb
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vweb-np
+  labels:
+    kubernetes.courselabs.co: rollouts
+spec:
+  ports:
+    - port: 8090
+      targetPort: http
+      nodePort: 30018
+  selector:
+    app: vweb
+  type: NodePort

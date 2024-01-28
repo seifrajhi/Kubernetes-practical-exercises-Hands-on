@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: rng
+  labels: 
+    kubernetes.courselabs.co: tools

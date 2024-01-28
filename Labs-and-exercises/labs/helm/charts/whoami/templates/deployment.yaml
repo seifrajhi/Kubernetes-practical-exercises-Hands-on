@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-server
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+      component: server
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+        component: server
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: app
+          image:  {{ .Values.imageTag }}
+          env:
+            - name: WHOAMI_MODE
+              value: {{ .Values.serverMode }} 
+          ports:
+            - containerPort: 80
+              name: http      

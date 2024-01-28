@@ -1,0 +1,140 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-web
+spec:
+  rules:
+  - host: {{ .Values.domainName }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Release.Name }}-web
+            port: 
+              name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-web
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+  selector:
+    app: {{ .Release.Name }}
+    component: web
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-web-apiconfig
+type: Opaque
+stringData:
+  api.json: |-
+    {
+      "Widgetario": {
+        "ProductsApi": {
+          "Url": "http://{{ .Release.Name }}-papi.{{ .Release.Namespace }}.svc.cluster.local/products"
+        },
+        "StockApi": {
+          "Url": "http://{{ .Release.Name }}-sapi.{{ .Release.Namespace }}.svc.cluster.local/stock"
+        }
+      }
+    }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-web-features
+data:
+  Widgetario__Theme: {{ .Values.webTheme }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-web
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.webReplicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+      component: web
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+        component: web
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: '5001'
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 65534
+        runAsGroup: 3000
+      containers:
+        - name: logger
+          image: {{ .Values.webLoggerImage }}
+          command: ['sh', '-c', 'tail -f /logs-ro/app.log'] 
+          volumeMounts:
+            - name: logs
+              mountPath: /logs-ro
+              readOnly: true
+        - name: app
+          image: {{ .Values.webImage }}
+          ports:
+            - containerPort: 5001
+              name: http
+          env:
+            - name: ASPNETCORE_URLS
+              value: http://+:5001
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-web-features
+          volumeMounts:
+            - name: api-config
+              mountPath: "/app/secrets"
+              readOnly: true
+            - name: logs
+              mountPath: "/logs"
+          {{- if eq .Values.includeReadiness true }}
+          readinessProbe:
+            httpGet:
+              path: /up
+              port: http
+            periodSeconds: 5
+          {{- end }}
+          {{- if eq .Values.includeLiveness true }}
+          livenessProbe:
+            httpGet:
+              path: /up
+              port: http
+            periodSeconds: 20
+            initialDelaySeconds: 20
+          {{- end }}
+          {{- if eq .Values.includeResources true }}
+          resources:
+            limits:
+              cpu: 200m
+              memory: 150Mi   
+          {{- end }}       
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
+      volumes:
+        - name: api-config
+          secret:
+            secretName: {{ .Release.Name }}-web-apiconfig
+        - name: logs
+          emptyDir: {}

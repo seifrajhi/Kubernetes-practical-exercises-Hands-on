@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fulfilment-api
+  labels: 
+    kubernetes.courselabs.co: logging
+spec:
+  selector:
+    matchLabels:
+      app: fulfilment
+      component: api
+  template:
+    metadata:
+      labels:
+        app: fulfilment
+        component: api
+    spec:
+      containers:
+        - name: app
+          image: courselabs/fulfilment-api
+          ports:
+            - containerPort: 80
+              name: http

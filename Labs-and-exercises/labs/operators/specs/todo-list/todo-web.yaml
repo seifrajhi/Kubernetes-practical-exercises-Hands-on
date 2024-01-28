@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: todo-web
+  labels:
+    kubernetes.courselabs.co: operators
+spec:
+  ports:
+    - port: 8020
+      targetPort: 80
+      nodePort: 30028
+  selector:    
+    app: todo-list
+    component: web
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-web
+  labels:
+    kubernetes.courselabs.co: operators
+spec:
+  selector:
+    matchLabels:
+      app: todo-list
+      component: web
+  template:
+    metadata:
+      labels:
+        app: todo-list
+        component: web
+    spec:
+      containers:
+        - name: web
+          image: kiamol/ch20-todo-list
+          volumeMounts:
+            - name: config
+              mountPath: "/app/config"
+              readOnly: true
+            - name: secret
+              mountPath: "/app/secrets"
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: todo-list-config
+            items:
+            - key: config.json
+              path: config.json
+        - name: secret
+          secret:
+            secretName: todo-list-secret
+            defaultMode: 0400
+            items:
+            - key: secrets.json
+              path: secrets.json

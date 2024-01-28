@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: configurable
+  namespace: configurable
+spec:
+  rules:
+  - host: configurable.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: configurable-web
+            port: 
+              name: config-app

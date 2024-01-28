@@ -1,0 +1,40 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: job-cleanup
+  namespace: default
+  labels:
+    kubernetes.courselabs.co: jobs
+spec:
+  schedule: "*/1 * * * *"        # every minute - see https://crontab.guru
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    metadata:
+      labels:
+        app: job-cleanup
+    spec:
+      template:
+        metadata:
+          labels:
+            app: job-cleanup
+            status: all
+        spec:
+          serviceAccountName: job-cleanup
+          restartPolicy: Never
+          containers:
+          - name: app
+            image: sixeyed/kubectl:1.21.0
+            command: ['sh', '-c', '/scripts/run.sh']
+            env:
+            - name: CLEANUP_NAMESPACE
+              value: default
+            - name: CLEANUP_STATUS
+              value: ALL
+            volumeMounts:
+              - name: scripts
+                mountPath: "/scripts"
+          volumes:
+            - name: scripts
+              configMap:
+                defaultMode: 0500     # executable, e.g. chmod +x
+                name: job-cleanup-script
