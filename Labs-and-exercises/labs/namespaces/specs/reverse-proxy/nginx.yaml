@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-configmap
+data:
+  nginx.conf: |-
+    user  nginx;
+    worker_processes  1;
+
+    error_log  /var/log/nginx/error.log warn;
+    pid        /var/run/nginx.pid;
+
+    events {
+      worker_connections  1024;
+    }
+
+    http {
+      proxy_cache_path /tmp levels=1:2 keys_zone=STATIC:10m inactive=24h  max_size=1g;
+
+      gzip  on;    
+      gzip_proxied any;
+
+      map $sent_http_content_type $expires {
+        default                    off;
+        ~image/                    6M;
+      } 
+
+      server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+
+        location / {
+            
+            proxy_pass             http://pi-web-internal;
+            
+            proxy_set_header       Host $host;
+            proxy_cache            STATIC;
+            proxy_cache_valid      200  1d;
+            proxy_cache_use_stale  error timeout invalid_header updating
+                                   http_500 http_502 http_503 http_504;
+            add_header             X-Cache     $upstream_cache_status;
+            add_header             X-Host      $hostname;         
+        }
+      }
+    }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pi-proxy-np
+spec:
+  ports:
+    - port: 8040   
+      targetPort: http 
+      name: http
+      nodePort: 30040
+  selector:
+    app: pi-proxy
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pi-proxy
+spec:
+  selector:
+    matchLabels:
+      app: pi-proxy
+  template:
+    metadata:
+      labels:
+        app: pi-proxy
+        storage: container
+    spec:
+      containers:
+        - image: nginx:1.18-alpine
+          name: nginx
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - name: config
+              mountPath: "/etc/nginx/"
+              readOnly: true
+      volumes:
+        - name: config
+          configMap:
+            name: nginx-configmap

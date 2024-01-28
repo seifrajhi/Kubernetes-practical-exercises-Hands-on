@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tls-cert-generator
+  labels:
+    kubernetes.courselabs.co: ingress
+spec:
+  containers:
+    - name: app
+      image: kiamol/ch15-cert-generator
+      env:
+        - name: HOST_NAME
+          value: default.local
+        - name: SAN
+          value: DNS:pi.local,DNS:whoami.local,DNS:configurable.local

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nginx
+  labels:
+    kubernetes.courselabs.co: daemonsets
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      initContainers:
+        - name: init-html
+          image: kiamol/ch03-sleep
+          command: ['sh', '-c', "echo '<!DOCTYPE html><html><body><h1>I was written by an init container</h1></body></html>' > /html/index.html"]
+          volumeMounts:
+            - name: html
+              mountPath: /html
+      containers:
+        - image: nginx:1.18-alpine
+          name: nginx
+          volumeMounts:
+            - name: html
+              mountPath: /usr/share/nginx/html
+            - name: logs
+              mountPath: /var/log/nginx
+      volumes:
+        - name: html
+          emptyDir: {}
+        - name: logs
+          hostPath:
+            path: /volumes/nginx-logs
+            type: DirectoryOrCreate

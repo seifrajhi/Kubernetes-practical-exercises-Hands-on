@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-explorer-lb
+  labels:  
+    kubernetes.courselabs.co: rbac
+spec:
+  ports:
+    - port: 8010
+      targetPort: http
+  selector:
+    app: kube-explorer
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kube-explorer-np
+  labels:  
+    kubernetes.courselabs.co: rbac
+spec:
+  ports:
+    - port: 8010
+      targetPort: http
+      nodePort: 30010
+  selector:
+    app: kube-explorer
+  type: NodePort

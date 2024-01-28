@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-content
+  labels:
+    kubernetes.courselabs.co: ingress
+data:
+  index.html: |-
+    <!DOCTYPE html>
+    <html>
+      <body>
+        <h1>
+          Nothing to see here
+        </h1>
+      </body>
+    </html>

@@ -1,0 +1,101 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-pdb
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  ports:
+    - port: 5432
+      targetPort: postgres
+  selector:
+    app: {{ .Release.Name }}
+    component: products-db
+  clusterIP: None
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-pdb-env
+data:
+  POSTGRES_PRIMARY_NAME: {{ .Release.Name }}-pdb-0
+  POSTGRES_PRIMARY_FQDN: {{ .Release.Name }}-pdb-0.{{ .Release.Name }}-pdb.{{ .Release.Namespace }}.svc.cluster.local
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-pdb-password
+type: Opaque
+stringData:
+  POSTGRES_PASSWORD: {{ .Values.pdbPassword }}
+  PGPASSWORD: {{ .Values.pdbPassword }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Release.Name }}-pdb
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+      component: products-db
+  serviceName: {{ .Release.Name }}-pdb
+  replicas: {{ .Values.pdbReplicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+        component: products-db
+      annotations:
+        prometheus.io/scrape: "false"
+    spec:      
+      automountServiceAccountToken: false
+      containers:
+        - name: app
+          image: {{ .Values.pdbImage }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-pdb-env
+            - secretRef:
+                name: {{ .Release.Name }}-pdb-password
+          ports:
+            - containerPort: 5432
+              name: postgres
+          {{- if eq .Values.includeReadiness true }}
+          readinessProbe:
+            tcpSocket:
+              port: postgres
+            periodSeconds: 10
+            initialDelaySeconds: 10
+            failureThreshold: 1
+          {{- end }}
+          {{- if eq .Values.includeLiveness true }}
+          livenessProbe:
+            exec:
+              command: ["pg_isready", "-h", "localhost"]
+            periodSeconds: 60
+            initialDelaySeconds: 20
+            failureThreshold: 2
+          {{- end }}
+          {{- if eq .Values.includeResources true }}
+          resources:
+            limits:
+              cpu: 200m
+              memory: 150Mi
+          {{- end }} 
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+      labels:
+        app: widgetario
+    spec:
+      accessModes: 
+       - ReadWriteOnce
+      resources:
+        requests:
+          storage: {{ .Values.pdbStorageSize }}

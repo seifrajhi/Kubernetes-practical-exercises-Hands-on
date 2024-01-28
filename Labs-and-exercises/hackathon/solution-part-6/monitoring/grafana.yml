@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-lb
+  namespace: monitoring
+  labels:  
+    kubernetes.courselabs.co: hackathon
+spec:
+  selector:
+    app: grafana
+  ports:
+    - name: grafana
+      port: 3000
+      targetPort: grafana
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-np
+  namespace: monitoring
+  labels:  
+    kubernetes.courselabs.co: hackathon
+spec:
+  selector:
+    app: grafana
+  ports:
+    - name: grafana
+      port: 3000
+      targetPort: grafana
+      nodePort: 30003
+  type: NodePort
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-creds
+  namespace: monitoring
+stringData:
+  GF_SECURITY_ADMIN_USER: admin
+  GF_SECURITY_ADMIN_PASSWORD: labs
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+        - image: courselabs/grafana:8.0.5
+          name: grafana
+          ports:
+            - containerPort: 3000
+              name: grafana
+          envFrom:
+            - secretRef:
+                name: grafana-creds
+          env:
+            - name: GF_USERS_DEFAULT_THEME
+              value: "light"
+          volumeMounts:
+            - name: config-datasources
+              mountPath: "/etc/grafana/provisioning/datasources"
+              readOnly: true
+      volumes:
+        - name: config-datasources
+          configMap:
+            name: grafana-config
+            items:
+            - key: datasources.yaml
+              path: datasources.yaml

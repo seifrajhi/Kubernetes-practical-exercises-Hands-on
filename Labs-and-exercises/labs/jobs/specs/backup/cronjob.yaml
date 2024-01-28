@@ -1,0 +1,25 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: db-backup
+  namespace: default
+  labels:
+    kubernetes.courselabs.co: jobs
+spec:
+  schedule: "0 1 * * 0"        # 01:00 every Sunday
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    metadata:
+      labels:
+        app: db-backup
+    spec:
+      template:
+        metadata:
+          labels:
+            app: db-backup
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: app
+            image: alpine:3.13
+            command: ['sh', '-c', 'echo Done.']

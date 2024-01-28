@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-features
+  labels:
+    kubernetes.courselabs.co: hackathon
+data:
+  Widgetario__Theme: dark

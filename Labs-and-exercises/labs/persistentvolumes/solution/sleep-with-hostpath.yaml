@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sleep
+  labels: 
+    kubernetes.courselabs.co: persistentvolumes
+spec:
+  containers:
+    - name: sleep
+      image: kiamol/ch03-sleep
+      volumeMounts:
+        - name: node-root
+          mountPath: /node-root
+  volumes:
+    - name: node-root
+      hostPath:
+        path: /
+        type: Directory
+      

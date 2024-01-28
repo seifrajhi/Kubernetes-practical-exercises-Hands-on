@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: numbers-web
+  namespace: rng
+spec:
+  ports:
+    - port: 8080
+      targetPort: http
+      nodePort: 30008
+  selector:
+    app: numbers-web
+  type: NodePort
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: numbers-web-config
+  namespace: rng
+data:
+  fake.json: |-
+    {
+      "ignore": true
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: numbers-web
+  namespace: rng
+spec:
+  selector:
+    matchLabels:
+      app: numbers-web
+  template:
+    metadata:
+      labels:
+        app: numbers-web
+    spec:
+      containers:
+        - name: web
+          image: kiamol/ch03-numbers-web
+          env:
+          - name: RngApi__Url
+            value: http://numbers-api.rng.svc.cluster.local/rng
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - name: config
+              mountPath: "/app/new-config/"
+              readOnly: true
+            - name: cache-volume
+              mountPath: /cache
+      volumes:
+        - name: config
+          configMap:
+            name: numbers-web-config
+        - name: cache-volume
+          persistentVolumeClaim:
+            claimName: numbers-web-cache
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: numbers-web-cache
+  namespace: rng
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Mi

@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pi-np
+  labels:
+    kubernetes.courselabs.co: troubleshooting
+spec:
+  selector:
+    app: pi-web-pod
+  ports:
+    - name: http
+      port: 8020
+      targetPort: app
+      nodePort: 8020
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pi-lb
+  labels:
+    kubernetes.courselabs.co: troubleshooting
+spec:
+  selector:
+    app: pi-web-pod
+  ports:
+    - name: http
+      port: 8020
+      targetPort: app
+  type: LoadBalancer

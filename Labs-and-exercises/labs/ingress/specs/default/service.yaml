@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-internal
+  labels:
+    kubernetes.courselabs.co: ingress
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: nginx
+  type: ClusterIP

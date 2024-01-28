@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: no-token
+  labels:  
+    kubernetes.courselabs.co: rbac
+automountServiceAccountToken: false  
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sleep-v2
+  labels:  
+    kubernetes.courselabs.co: rbac
+spec:  
+  selector:
+    matchLabels:
+      app: sleep-v2
+  template:
+    metadata:
+      labels:
+        app: sleep-v2
+        sa-token: none
+    spec:
+      serviceAccountName: no-token
+      containers:
+        - name: sleep-v2
+          image: kiamol/ch03-sleep

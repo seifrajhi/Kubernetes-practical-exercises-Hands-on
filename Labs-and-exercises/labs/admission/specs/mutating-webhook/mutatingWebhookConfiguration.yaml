@@ -1,0 +1,23 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  name: nonrootpolicy
+  labels:
+    kubernetes.courselabs.co: admission
+  annotations:
+    cert-manager.io/inject-ca-from: default/admission-webhook-cert
+webhooks:
+  - name: nonrootpolicy.courselabs.co
+    admissionReviewVersions:
+      - v1      
+    sideEffects: None
+    rules:
+      - operations: [ "CREATE", "UPDATE" ]
+        apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["pods"]
+    clientConfig:
+      service:
+        name: admission-webhook
+        namespace: default
+        path: "/mutate"

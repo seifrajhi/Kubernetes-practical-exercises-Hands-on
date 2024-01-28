@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-web
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  ports:
+    - port: {{ .Values.servicePort }}
+      targetPort: http    
+      {{- if eq .Values.serviceType "NodePort" }}
+      nodePort: {{ .Values.serviceNodePort }}
+      {{- end }}
+  selector:
+    app: {{ .Release.Name }}
+    component: web
+  type: {{ .Values.serviceType }}

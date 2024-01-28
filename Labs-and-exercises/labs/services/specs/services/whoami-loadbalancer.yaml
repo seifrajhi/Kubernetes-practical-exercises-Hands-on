@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: whoami-lb
+  labels:
+    kubernetes.courselabs.co: services
+    app: whoami
+spec:
+  selector:
+    app: whoami
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 80
+  type: LoadBalancer

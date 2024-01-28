@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: apod-log
+  labels:
+    kubernetes.courselabs.co: networkpolicy
+spec:
+  podSelector:
+    matchLabels:
+      app: apod-log
+
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: apod-web
+    ports:
+    - port: api
+
+  egress: []  # deny all

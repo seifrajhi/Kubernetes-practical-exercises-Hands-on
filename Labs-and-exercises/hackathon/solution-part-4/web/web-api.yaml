@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: web-api
+  labels:
+    kubernetes.courselabs.co: hackathon
+type: Opaque
+stringData:
+  api.json: |-
+    {
+      "Widgetario": {
+        "ProductsApi": {
+          "Url": "http://products-api.default.svc.cluster.local/products"
+        },
+        "StockApi": {
+          "Url": "http://stock-api.default.svc.cluster.local/stock"
+        }
+      }
+    }

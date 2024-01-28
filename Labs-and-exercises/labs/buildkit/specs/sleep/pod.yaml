@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sleep
+  labels:
+    kubernetes.courselabs.co: buildkit
+spec:
+  containers:
+    - name: sleep
+      image: kiamol/ch03-sleep

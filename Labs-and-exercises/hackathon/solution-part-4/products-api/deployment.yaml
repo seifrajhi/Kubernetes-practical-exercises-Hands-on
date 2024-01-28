@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-api
+  labels:
+    kubernetes.courselabs.co: hackathon
+spec:
+  selector:
+    matchLabels:
+        app: widgetario
+        component: products-api
+  template:
+    metadata:
+      labels:
+        app: widgetario
+        component: products-api
+        hackathon: part-1
+    spec:
+      containers:
+        - name: app
+          image: widgetario/products-api:21.03
+          ports:
+            - containerPort: 80
+              name: http
+          volumeMounts:
+            - name: db-properties
+              mountPath: "/app/config"
+              readOnly: true
+      volumes:
+        - name: db-properties
+          secret:
+            secretName: products-api-db

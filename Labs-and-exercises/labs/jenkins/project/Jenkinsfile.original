@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+    environment {
+      WHOAMI_IMAGE = "${REGISTRY_DOMAIN}/${REGISTRY_REPOSITORY}/whoami-lab:${RELEASE_VERSION}-${BUILD_NUMBER}"
+    }
+    stages {
+        stage('Audit tools') {                        
+            steps {
+                sh '''
+                  git version
+                  buildctl --version
+                  kubectl version --short
+                  helm version --short
+                '''
+            }
+        }
+        stage('Build & push whoami image') {
+            steps {
+              echo "Building image tag: ${WHOAMI_IMAGE}"
+              sh '''
+                buildctl --addr tcp://buildkitd:1234 \
+                  build --frontend=dockerfile.v0 \
+                  --local context=./labs/jenkins/project/src/ \
+                  --local dockerfile=./labs/jenkins/project/src/ \
+                  --output type=image,name="${WHOAMI_IMAGE}",push=true
+              '''
+            }
+        }
+        /*
+        stage('Deploy to test namespace') {
+          steps {
+              dir ('labs/jenkins/project/helm') {
+                sh '''
+                  helm upgrade --install \
+                    --namespace integration-test \
+                    -f integration-test.yaml \
+                    --set serverImage=${WHOAMI_IMAGE} \
+                    whoami-int \
+                    whoami/
+        
+                  helm ls -n integration-test
+                '''
+              }
+            }
+        }
+        */
+    }
+}

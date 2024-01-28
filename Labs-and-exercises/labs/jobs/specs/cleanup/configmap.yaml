@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: job-cleanup-script
+  namespace: default
+  labels:
+    kubernetes.courselabs.co: jobs
+data:
+  run.sh: |-
+    #!/bin/sh
+    kubectl config set-credentials user --token=$(cat /var/run/secrets/kubernetes.io/serviceaccount/token) > /dev/null
+    
+    echo '** Deleting Completed Jobs **'
+    kubectl delete jobs -n $CLEANUP_NAMESPACE $(kubectl get jobs -n $CLEANUP_NAMESPACE -o=jsonpath='{.items[?(@.status.conditions[0].type=="Complete")].metadata.name}') || true
+      
+    if [ "$CLEANUP_STATUS" == "ALL" ]; then
+      echo '** Deleting Failed Jobs **'
+      kubectl delete jobs -n $CLEANUP_NAMESPACE $(kubectl get jobs -n $CLEANUP_NAMESPACE -o=jsonpath='{.items[?(@.status.conditions[0].type=="Failed")].metadata.name}') || true
+    fi
+
+    echo "** Done cleaning namespace: $CLEANUP_NAMESPACE **"

@@ -1,0 +1,7 @@
+apiVersion: kubernetes.courselabs.co/v1
+kind: Student
+metadata:
+  name: priti
+spec:
+  email: priti@google.com
+  company: Google

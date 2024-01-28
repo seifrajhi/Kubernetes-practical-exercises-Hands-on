@@ -1,0 +1,48 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Products";
+}
+
+@if (ViewData["Theme"] != null)
+{
+    var css = "/css/themes/" + ViewData["Theme"] + ".css";
+    <link rel="stylesheet" href="@css" />
+}
+
+@if (ViewData["Environment"] != null)
+{
+    <div class="clearfix" style="background-color: aquamarine">
+        <div class="float-right">
+            <h1>@ViewData["Environment"]</h1>
+        </div>
+    </div>
+}
+
+<img src="~/img/logo2-small.png" class="mx-auto my-5 d-block" />
+
+@if (@Model.Products == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Your widget</th>
+                <th>Just</th>
+                <th>Availability</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in @Model.Products)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.DisplayPrice</td>
+                    <td>@product.StockMessage</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

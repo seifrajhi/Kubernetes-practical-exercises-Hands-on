@@ -1,0 +1,15 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kube-explorer-pod-manager
+  namespace: default # needs to match the ns in the role
+  labels:  
+    kubernetes.courselabs.co: rbac
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: pod-manager
+subjects:
+- kind: ServiceAccount
+  name: kube-explorer
+  namespace: default # the subject can be in a different ns

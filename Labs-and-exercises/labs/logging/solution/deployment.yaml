@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fulfilment-processor
+  labels: 
+    kubernetes.courselabs.co: logging
+spec:
+  selector:
+    matchLabels:
+      app: fulfilment
+      component: processor
+  template:
+    metadata:
+      labels:
+        app: fulfilment
+        component: processor
+    spec:
+      containers:
+        - name: app
+          image: courselabs/fulfilment-processor
+          env:
+            - name: Observability__Logging__File
+              value: 'true'
+            - name: Observability__Logging__Console
+              value: 'false'
+            - name: Observability__Logging__LogFilePath
+              value: /app/logs/fulfilment-processor.log
+          volumeMounts:
+            - name: logs
+              mountPath: "/app/logs"
+        - name: logger
+          image: alpine:3.14
+          command: ['sh', '-c', 'tail -f /logs-ro/fulfilment-processor.log'] 
+          volumeMounts:
+            - name: logs
+              mountPath: /logs-ro
+              readOnly: true
+      volumes:
+        - name: logs
+          emptyDir: {}

@@ -1,0 +1,105 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-widgetario-local
+  labels:
+    kubernetes.courselabs.co: hackathon
+spec:
+  rules:
+  - host: api.widgetario.local 
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: products-api
+            port: 
+              name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-api
+  labels:
+    kubernetes.courselabs.co: hackathon
+    app: widgetario
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+  selector:
+    app: widgetario
+    component: products-api
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: products-api-db
+  labels:
+    kubernetes.courselabs.co: hackathon
+type: Opaque
+stringData:
+  application.properties: |-
+    spring.jpa.database=POSTGRESQL
+    spring.datasource.platform=postgres
+    spring.datasource.url=jdbc:postgresql://products-db-1.products-db.default.svc.cluster.local:5432/postgres
+    spring.datasource.username=postgres
+    spring.datasource.password=h4ckkath0n
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-api
+  labels:
+    kubernetes.courselabs.co: hackathon
+    app: widgetario
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+        app: widgetario
+        component: products-api
+  template:
+    metadata:
+      labels:
+        app: widgetario
+        component: products-api
+        hackathon: part-7
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/actuator/prometheus"
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: app
+          image: widgetario/products-api:21.03
+          ports:
+            - containerPort: 80
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 20
+            failureThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 30
+            initialDelaySeconds: 20
+          resources:
+            limits:
+              cpu: 300m
+              memory: 300Mi 
+          volumeMounts:
+            - name: db-properties
+              mountPath: "/app/config"
+              readOnly: true
+      volumes:
+        - name: db-properties
+          secret:
+            secretName: products-api-db

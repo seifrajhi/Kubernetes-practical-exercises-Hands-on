@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-statefulset
+  labels:
+    kubernetes.courselabs.co: statefulsets
+spec:
+  ports:
+    - port: 8010
+      targetPort: 80
+  selector:
+    app: simple-statefulset
+  clusterIP: None
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-statefulset-lb
+  labels:
+    kubernetes.courselabs.co: statefulsets
+spec:
+  ports:
+    - port: 8010
+      targetPort: 80
+  selector:
+    app: simple-statefulset
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-statefulset-np
+  labels:
+    kubernetes.courselabs.co: statefulsets
+spec:
+  ports:
+    - port: 8010
+      targetPort: 80
+      nodePort: 30010
+  selector:
+    app: simple-statefulset
+  type: NodePort

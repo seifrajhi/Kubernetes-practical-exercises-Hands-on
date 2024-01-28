@@ -1,0 +1,10 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: admission-webhook-cert
+spec:
+  secretName: admission-webhook-cert
+  dnsNames:
+  - admission-webhook.default.svc
+  issuerRef:
+    name: selfsigned

@@ -1,0 +1,26 @@
+# common config
+domainName: widgetario.smoke
+includeReadiness: true
+includeLiveness: true
+includeResources: false
+
+# Products API ("papi")
+papiImage: widgetario/products-api:21.03
+papiReplicaCount: 1
+
+# Products database ("pdb")
+pdbImage: widgetario/products-db-replicated:21.03
+pdbReplicaCount: 1
+pdbStorageSize: 50Mi
+pdbUsername: postgres
+pdbPassword: sm0kk3ts7
+
+# Stock API ("sapi")
+sapiImage: widgetario/stock-api:21.03
+sapiReplicaCount: 1
+
+# Website ("web")
+webLoggerImage: alpine:3.14
+webReplicaCount: 1
+webTheme: dark
+webImage: widgetario/web:21.03-v2

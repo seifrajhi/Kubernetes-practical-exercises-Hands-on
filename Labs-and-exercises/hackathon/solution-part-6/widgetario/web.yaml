@@ -1,0 +1,144 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: widgetario-local
+  labels:
+    kubernetes.courselabs.co: hackathon
+spec:
+  rules:
+  - host: widgetario.local 
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: widgetario-web-internal
+            port: 
+              name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: widgetario-web-internal
+  labels:
+    kubernetes.courselabs.co: hackathon
+    app: widgetario
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+  selector:  
+    app: widgetario
+    component: web
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: web-api
+  labels:
+    kubernetes.courselabs.co: hackathon
+type: Opaque
+stringData:
+  api.json: |-
+    {
+      "Widgetario": {
+        "ProductsApi": {
+          "Url": "http://products-api.default.svc.cluster.local/products"
+        },
+        "StockApi": {
+          "Url": "http://stock-api.default.svc.cluster.local/stock"
+        }
+      }
+    }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-features
+  labels:
+    kubernetes.courselabs.co: hackathon
+data:
+  Widgetario__Theme: dark
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    kubernetes.courselabs.co: hackathon
+    app: widgetario
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+        app: widgetario
+        component: web
+  template:
+    metadata:
+      labels: 
+        app: widgetario
+        component: web
+        hackathon: part-7
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: '5001'
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsUser: 65534
+        runAsGroup: 3000
+      containers:
+        - name: logger
+          image: alpine:3.14
+          command: ['sh', '-c', 'tail -f /logs-ro/app.log'] 
+          volumeMounts:
+            - name: logs
+              mountPath: /logs-ro
+              readOnly: true
+        - name: app
+          image: widgetario/web:21.03
+          ports:
+            - containerPort: 5001
+              name: http
+          env:
+            - name: ASPNETCORE_URLS
+              value: http://+:5001
+          envFrom:
+            - configMapRef:
+                name: web-features
+          volumeMounts:
+            - name: api-config
+              mountPath: "/app/secrets"
+              readOnly: true
+            - name: logs
+              mountPath: "/logs"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 5
+            failureThreshold: 1
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 20
+            initialDelaySeconds: 20
+          resources:
+            limits:
+              cpu: 200m
+              memory: 150Mi 
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - all
+      volumes:
+        - name: api-config
+          secret:
+            secretName: web-api
+        - name: logs
+          emptyDir: {}

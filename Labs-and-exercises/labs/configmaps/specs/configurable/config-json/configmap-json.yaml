@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configurable-override
+  labels: 
+    kubernetes.courselabs.co: configmaps
+data:
+  override.json: |-
+    {
+      "Configurable": {
+        "Release": "21.04.03"
+      },
+      "Features" : {
+        "Caching" : true
+      }
+    }

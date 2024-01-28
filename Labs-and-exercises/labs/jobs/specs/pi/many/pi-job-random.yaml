@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi-job-many
+  labels:
+    kubernetes.courselabs.co: jobs
+    app: pi-many
+spec:
+  completions: 3
+  parallelism: 3
+  template:
+    spec:
+      initContainers:
+        - name: init-dp
+          image: kiamol/ch03-sleep
+          command: ['sh', '-c', 'echo $RANDOM > /init/dp']
+          volumeMounts:
+            - name: init
+              mountPath: /init
+      containers:
+        - name: pi
+          image: kiamol/ch05-pi
+          command: ['sh', '-c', 'dotnet Pi.Web.dll -m console -dp $(cat /init/dp)']
+          volumeMounts:
+            - name: init
+              mountPath: /init
+              readOnly: true
+      restartPolicy: Never
+      volumes:
+        - name: init
+          emptyDir: {}

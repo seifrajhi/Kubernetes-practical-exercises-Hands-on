@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whoami
+  labels:
+    kubernetes.courselabs.co: affinity
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: whoami
+  template:
+    metadata:
+      labels:
+        app: whoami
+    spec:
+      containers:
+        - name: app
+          image: sixeyed/whoami:21.04
+      nodeSelector:
+        kubernetes.io/os: linux
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: node-role.kubernetes.io/control-plane
+                  operator: DoesNotExist
+                - key: cis-compliance
+                  operator: Exists
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - preference:
+                matchExpressions:
+                  - key: cis-compliance
+                    operator: In
+                    values: ['verified']
+              weight: 100
+            - preference:
+                matchExpressions:
+                  - key: cis-compliance
+                    operator: In
+                    values: ['in-progress']
+              weight: 1
+        

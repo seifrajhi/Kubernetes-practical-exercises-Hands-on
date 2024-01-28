@@ -823,6 +823,10 @@ while true; do wget -q -O- http://hpa-example.default.svc.cluster.local; done
 kubectl get hpa
 ```
 
+## Labs and exercises and hackaton:
+
+[Labs and exercises and hackaton repo](./Labs-and-exercises/)  to help you learn Kubernetes. 
+
 ## GitOps
 
 GitOps is an operating model for Kubernetes and other cloud native technologies. It provides a set of best practices that unifies deployment, management, and monitoring for clusters and applications. Another way to put it is: a path towards a developer experience for managing applications; where end-to-end CI and CD pipelines and Git workflows
@@ -856,7 +860,7 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 
 - [This project](https://github.com/aws-ia/terraform-aws-eks-blueprints) contains a collection of Amazon EKS cluster patterns implemented in Terraform that demonstrate how fast and easy it is for customers to adopt Amazon EKS. The patterns can be used by AWS customers, partners, and internal AWS teams to configure and manage complete EKS clusters that are fully bootstrapped with the operational software that is needed to deploy and operate workloads.
 
-- [EKS Workshop](http://amazon-eks-workshop.com/)
+- [EKS Workshop](https://www.eksworkshop.com/)
 
 - [ (Amazon EKS) Best Practices](https://aws.github.io/aws-eks-best-practices/): A best practices guide for day 2 operations, including operational excellence, security, reliability, performance efficiency, and cost optimization.
 

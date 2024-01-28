@@ -1,0 +1,108 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}-papi
+spec:
+  rules:
+  - host: api.{{ .Values.domainName }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ .Release.Name }}-papi
+            port: 
+              name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-papi
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  ports:
+    - port: 80
+      targetPort: http
+  selector:
+    app: {{ .Release.Name }}
+    component: products-api
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-papi-dbconfig
+type: Opaque
+stringData:
+  application.properties: |-
+    spring.jpa.database=POSTGRESQL
+    spring.jpa.generate-ddl=false
+    spring.datasource.platform=postgres           
+    {{- if gt .Values.pdbReplicaCount 1.0 }}
+    spring.datasource.url=jdbc:postgresql://{{ .Release.Name }}-pdb-1.{{ .Release.Name }}-pdb.{{ .Release.Namespace }}.svc.cluster.local:5432/postgres
+    {{- else }}
+    spring.datasource.url=jdbc:postgresql://{{ .Release.Name }}-pdb-0.{{ .Release.Name }}-pdb.{{ .Release.Namespace }}.svc.cluster.local:5432/postgres
+    {{- end }}
+    spring.datasource.username={{ .Values.pdbUsername }}
+    spring.datasource.password={{ .Values.pdbPassword }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-papi
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.papiReplicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+      component: products-api
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+        component: products-api
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/actuator/prometheus"
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: app
+          image: {{ .Values.papiImage }}
+          ports:
+            - containerPort: 80
+              name: http
+          {{- if eq .Values.includeReadiness true }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 20
+            failureThreshold: 1
+          {{- end }}
+          {{- if eq .Values.includeLiveness true }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 30
+            initialDelaySeconds: 20
+          {{- end }}
+          {{- if eq .Values.includeResources true }}
+          resources:
+            limits:
+              cpu: 300m
+              memory: 300Mi   
+          {{- end }}
+          volumeMounts:
+            - name: db-properties
+              mountPath: "/app/config"
+              readOnly: true
+      volumes:
+        - name: db-properties
+          secret:
+            secretName: {{ .Release.Name }}-papi-dbconfig

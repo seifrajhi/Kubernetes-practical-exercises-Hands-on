@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-proxy
+  labels:
+    kubernetes.courselabs.co: statefulsets
+    app: simple-proxy
+spec:
+  selector:
+    matchLabels:
+      app: simple-proxy
+  template:
+    metadata:
+      labels:
+        app: simple-proxy
+    spec: 
+      containers:
+        - name: app
+          image: nginx:1.18-alpine          
+          volumeMounts:
+            - name: config
+              mountPath: "/etc/nginx/"
+              readOnly: true
+            - name: cache
+              mountPath: /cache
+      volumes:
+        - name: config
+          configMap:
+            name: simple-proxy-configmap
+        - name: cache
+          emptyDir: {}

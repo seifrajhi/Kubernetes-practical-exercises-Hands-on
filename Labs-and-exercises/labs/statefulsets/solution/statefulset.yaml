@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: simple-proxy
+  labels:
+    kubernetes.courselabs.co: statefulsets
+    app: simple-proxy
+spec:
+  selector:
+    matchLabels:
+      app: simple-proxy
+  serviceName: simple-proxy-internal
+  replicas: 2
+  podManagementPolicy: Parallel
+  template:
+    metadata:
+      labels:
+        app: simple-proxy
+    spec: 
+      containers:
+        - name: app
+          image: nginx:1.18-alpine          
+          volumeMounts:
+            - name: config
+              mountPath: "/etc/nginx/"
+              readOnly: true
+            - name: cache
+              mountPath: /cache
+      volumes:
+        - name: config
+          configMap:
+            name: simple-proxy-configmap  
+  volumeClaimTemplates:
+  - metadata:
+      name: cache
+      labels:
+        app: simple-proxy
+    spec:
+      accessModes: 
+       - ReadWriteOnce
+      resources:
+        requests:
+          storage: 50Mi
