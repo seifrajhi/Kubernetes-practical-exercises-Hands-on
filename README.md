@@ -890,12 +890,24 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 - [Sample applications for Google Kubernetes Engine (GKE)](https://github.com/GoogleCloudPlatform/kubernetes-engine-samples)
 
 
+<<<<<<< Updated upstream
 ### Common
 
 - [Elastic Cloud on Kubernetes](https://github.com/elastic/cloud-on-k8s): Elastic Cloud on Kubernetes automates the deployment, provisioning, management, and orchestration of Elasticsearch, Kibana, APM Server, Enterprise Search, Beats, Elastic Agent, Elastic Maps Server, and Logstash on Kubernetes based on the operator pattern.
 
 
 
+=======
+## CNCF certifications:
+
+- [Kubernetes CKS Full Course](https://www.youtube.com/watch?v=d9xfB5qaOfg) Theory + Practice + Browser Scenarios by Kim Wuestkamp
+
+- [Kubernetes CKS Course Environment](https://github.com/killer-sh/cks-course-environment)
+
+- [Certified Kubernetes Security Specialist - CKS](https://github.com/walidshaari/Certified-Kubernetes-Security-Specialist): Curated resources help you prepare for the CNCF/Linux Foundation CKS 2021 "Kubernetes Certified Security Specialist" Certification exam.
+
+- [Kubernetes Certified Administration](https://github.com/walidshaari/Kubernetes-Certified-Administrator): Online resources that will help you prepare for taking the CNCF CKA 2020 "Kubernetes Certified Administrator" Certification exam.
+>>>>>>> Stashed changes
 
 ### Coming next
 
