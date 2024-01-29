@@ -895,7 +895,7 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 - [Elastic Cloud on Kubernetes](https://github.com/elastic/cloud-on-k8s): Elastic Cloud on Kubernetes automates the deployment, provisioning, management, and orchestration of Elasticsearch, Kibana, APM Server, Enterprise Search, Beats, Elastic Agent, Elastic Maps Server, and Logstash on Kubernetes based on the operator pattern.
 
 
-=======
+
 ## CNCF certifications:
 
 - [Kubernetes CKS Full Course](https://www.youtube.com/watch?v=d9xfB5qaOfg) Theory + Practice + Browser Scenarios by Kim Wuestkamp
@@ -909,6 +909,54 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 - [CKA preparation](https://github.com/alijahnas/CKA-practice-exercises): This is a guide for passing the CNCF Certified Kubernetes Administrator (CKA) with practice exercises.
 
 - [CKA Exercises](https://github.com/chadmcrowell/CKA-Exercises): Practice for the Certified Kubernetes Administrator (CKA) Exam.
+
+
+## Kubernetes IAC:
+
+Certainly! Here's a list of some popular tools for managing Kubernetes Infrastructure as Code (IAC):
+
+1. **Helm:**
+   - Overview: Helm is a package manager for Kubernetes that simplifies the deployment and management of applications.
+   - GitHub: [Helm GitHub Repository](https://github.com/helm/helm)
+
+2. **Kustomize:**
+   - Overview: Kustomize is a tool for customizing Kubernetes manifests, allowing you to manage configuration variations in a declarative way.
+   - GitHub: [Kustomize GitHub Repository](https://github.com/kubernetes-sigs/kustomize)
+
+3. **Kubeconfig Management:**
+   - Tools like `kubectx` and `kubens` help manage and switch between multiple Kubernetes contexts and namespaces.
+   - GitHub: [kubectx GitHub Repository](https://github.com/ahmetb/kubectx)
+
+4. **Kubeval:**
+   - Overview: Kubeval is a tool for validating Kubernetes manifests against the Kubernetes API schema.
+   - GitHub: [Kubeval GitHub Repository](https://github.com/instrumenta/kubeval)
+
+5. **Kops:**
+   - Overview: Kops helps you create, destroy, upgrade, and maintain Kubernetes clusters on AWS.
+   - GitHub: [Kops GitHub Repository](https://github.com/kubernetes/kops)
+
+6. **Terraform:**
+   - Overview: While not specific to Kubernetes, Terraform is widely used for IAC and can be used to provision and manage Kubernetes infrastructure.
+   - Website: [Terraform](https://www.terraform.io/)
+
+7. **Pulumi:**
+   - Overview: Pulumi allows you to define infrastructure as code using familiar programming languages, including TypeScript, Python, and Go.
+   - GitHub: [Pulumi GitHub Repository](https://github.com/pulumi/pulumi)
+
+8. **Helmfile:**
+   - Overview: Declaratively deploy your Kubernetes manifests, Kustomize configs, and Charts as Helm releases. Generate all-in-one manifests for use with ArgoCD.
+   - GitHub: [Kubeform GitHub Repository](https://github.com/helmfile/helmfile)
+
+9. **Jsonnet:**
+   - Overview: Jsonnet is a data templating language that can be used to generate Kubernetes manifests.
+   - GitHub: [Jsonnet GitHub Repository](https://github.com/google/jsonnet)
+
+10. **Skaffold:**
+    - Overview: Skaffold is a command-line tool that facilitates continuous development for Kubernetes applications.
+    - GitHub: [Skaffold GitHub Repository](https://github.com/GoogleContainerTools/skaffold)
+
+This is not an exhaustive list, and the choice of tools depends on your specific use case and preferences. Always check the official documentation and community support for each tool for the most accurate and up-to-date information.
+
 
 ### Coming next
 
