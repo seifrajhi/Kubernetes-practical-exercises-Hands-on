@@ -1,0 +1,8 @@
+kind: Service
+metadata:
+ name: web-app-01
+ labels:
+   app: web-app
+selector:
+   app: web-app
+   version: v1.0.0

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: metadata-demo
+  labels:
+    environment: demo #this are the provided labels for the pod nginx
+    app: nginx #another label we can give any number of labels it's easy to us to identify the pod
+spec:
+  containers: 
+    name: nginx
+    image: nginx:latest
+    ports:
+      - containerPort: 80

@@ -1,0 +1,28 @@
+apiVersion: v1
+clusters:
+- cluster:
+    server: https://my-first-cluster.example.com
+    certificate-authority-data: <base64-encoded-ca-cert>
+  name: my-first-cluster
+- cluster:
+    server: https://my-second-cluster.example.com
+    certificate-authority-data: <base64-encoded-ca-cert>
+    insecure-skip-tls-verify: true
+  name: my-second-cluster
+contexts:
+- context:
+    cluster: my-first-cluster
+    user: my-user
+  name: my-first-context
+- context:
+    cluster: my-second-cluster
+    user: my-user
+  name: my-second-context
+current-context: my-first-context
+kind: Config
+preferences: {}
+users:
+- name: my-user
+  user:
+    client-certificate-data: <base64-encoded-client-cert>
+    client-key-data: <base64-encoded-client-key>

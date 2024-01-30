@@ -1,0 +1,54 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-main
+  labels:
+    app: deploy-2
+    test: test
+spec:
+  selector:
+    matchLabels:
+      app: app-v2
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: app-v2
+    spec:
+      containers:
+      - name: example-app
+        image: mynameismohan/golang-app-conf-secrets
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+      tolerations:
+      - key: "cattle.io/os"
+        value: "linux"
+        effect: "NoSchedule"      
+# `volumeMounts` section for configmap and secret
+        volumeMounts:
+         - name: config-volume
+           mountPath: /configs/
+         - name: secret-volume
+           mountPath: /secrets/
+# `volumes` section for configmap and secret
+        volumes:
+        - name: secret-volume
+          secret:
+            secretName: app-v2-test-config #name of our secret object
+        - name: config-volume
+          configMap:
+            name: app-v2-test-config  

@@ -1,0 +1,17 @@
+# This file is only a demo purpose, 
+
+# it's only valid if your cloud provider actually connects this file
+
+apiVersion: v1
+kind: Service 
+metadata: 
+  name: Load-Balancer
+spec:
+  selector:
+    tier: front-end
+    type: Load-Balance
+  ports:
+  - port: 80
+    nodePort: 32008
+  clusterIP: 10.96.0.200
+

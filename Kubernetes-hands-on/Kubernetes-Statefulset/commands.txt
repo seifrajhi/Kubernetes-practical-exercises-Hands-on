@@ -1,0 +1,30 @@
+//Command to execute Service.yml
+kubectl apply -f mysql-secret.yml 
+
+//Get the list of secrets
+kubectl get secrets 
+
+//Get the pv list
+kubectl get pv
+
+//Command to get storage class list
+kubectl get storageclass
+
+//Command to execute StatefulSet.yaml
+kubectl apply -f StatefulSet.yaml
+
+//Command to get the pod list
+kubectl get pods
+
+//Command to execute Headless Service for mysql application
+kubectl apply -f SShs.yaml
+
+//list of running  services
+kubectl get svc
+
+//Command to execute client.yaml
+kubectl apply -f Client.yaml
+
+//Command to enter into mysql client
+kubectl exec --stdin --tty mysql-client -- sh
+

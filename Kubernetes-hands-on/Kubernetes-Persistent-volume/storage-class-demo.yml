@@ -1,0 +1,14 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+name: fast-local
+provisioner: ebs.csi.aws.com
+parameters:
+type: io1
+iopsPerGB: "10"
+encrypted: true
+allowedTopologies:
+- matchLabelExpressions:
+- key: topology.ebs.csi.aws.com/zone
+values:
+- eu-west-1a

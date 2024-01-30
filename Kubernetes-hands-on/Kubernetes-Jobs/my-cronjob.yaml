@@ -1,0 +1,16 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: my-cronjob
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: my-container
+            image: busybox
+            command: ["/bin/sh", "-c", "echo Hello, World! && sleep 60"]
+          restartPolicy: Never
+  concurrencyPolicy: Forbid
