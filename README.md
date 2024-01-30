@@ -89,6 +89,10 @@ The Security checklist aims at providing a basic list of guidance with links to 
 
 - [Kubeapps](https://github.com/vmware-tanzu/kubeapps): A web-based UI for deploying and managing applications in Kubernetes clusters
 
+- [Start learning Kubernetes today](https://kubebyexample.com/)
+
+- [Step by step guide to learning Kubernetes](https://roadmap.sh/kubernetes)
+
 
 ### Useful aliases
 
@@ -971,3 +975,8 @@ This is not an exhaustive list, and the choice of tools depends on your specific
 * Backup & Recovery
 
 * Service Mesh
+
+
+## ❤ Show your support
+
+Give a ⭐️ if this project helped you, Happy learning!

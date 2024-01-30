@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: my-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  externalIPs:
+  - <load-balancer-pod-1-ip>
+  - <load-balancer-pod-2-ip>
+  - <load-balancer-pod-3-ip>

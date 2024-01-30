@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busy-pod
+  labels:
+    owner: chrono
+    env: demo
+    region: north
+    tier: back
+spec:
+  containers:
+  - image: busybox:latest
+    name: busy
+    imagePullPolicy: IfNotPresent
+    env:
+      - name: os
+        value: "ubuntu"
+      - name: debug
+        value: "on"
+    command:
+      - /bin/echo
+    args:
+      - "$(os), $(debug)"

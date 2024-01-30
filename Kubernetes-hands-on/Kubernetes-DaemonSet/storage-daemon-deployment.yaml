@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: storage-daemon
+spec:
+  selector:
+    matchLabels:
+      app: storage-daemon
+  template:
+    metadata:
+      labels:
+        app: storage-daemon
+    spec:
+      containers:
+      - name: storage-daemon
+        image: registry.example.com/storage-daemon:latest
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        volumeMounts:
+        - name: storage-daemon-config
+          mountPath: /etc/storage-daemon
+          readOnly: true
+      volumes:
+      - name: storage-daemon-config
+        configMap:
+          name: storage-daemon-config
+          items:
+          - key: config.json
+            path: config.json

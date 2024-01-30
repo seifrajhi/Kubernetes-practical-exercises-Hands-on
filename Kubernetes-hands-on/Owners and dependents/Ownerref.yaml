@@ -1,0 +1,56 @@
+# Deployment object that creates ReplicaSet and Pod objects
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deployment
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-container
+        image: nginx:latest
+
+# ReplicaSet object created by the Deployment
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: my-replicaset
+  # Specify the Deployment as the owner of the ReplicaSet
+  ownerReferences:
+  - apiVersion: apps/v1
+    kind: Deployment
+    name: my-deployment
+    uid: a1b2c3d4-e5f6-7890-1234-567890abcdef
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-container
+        image: nginx:latest
+
+# Pod object created by the ReplicaSet
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod-1
+  # Specify the ReplicaSet as the owner of the Pod
+  ownerReferences:
+  - apiVersion: apps/v1
+    kind: ReplicaSet
+    name: my-replicaset
+    uid: a1b2c3d4-e5f6-7890-1234-567890abcdef
+spec:
+  containers:
+  - name: my-container
+    image: nginx:latest

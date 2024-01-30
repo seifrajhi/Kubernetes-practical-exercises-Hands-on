@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: prod
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testing
+  labels:
+    app: testing
+  namespace: dev
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: testing
+  template:
+    metadata:
+      labels:
+        app: testing
+    spec:
+      containers:
+      - name: testing-ctr
+        image: nginx
+        ports:
+        - containerPort: 8080
+ 
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testing
+  labels:
+    app: testing
+  namespace: prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: testing
+  template:
+    metadata:
+      labels:
+        app: testing
+    spec:
+      containers:
+      - name: testing-ctr
+        image: nginx
+        ports:
+        - containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: testing
+  namespace: dev
+spec:
+  selector:
+    app: testing
+  ports:
+  - port: 8080
+  type: ClusterIP
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: testing
+  namespace: prod
+spec:
+  selector:
+    app: testing
+  ports:
+  - port: 8080
+  type: ClusterIP
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jump
+  namespace: dev
+    
+spec:
+  terminationGracePeriodSeconds: 5
+  containers:
+  - name: jump
+    image: ubuntu:latest
+    # below two are same as saying that "exec -it"
+    tty: true
+    stdin: true

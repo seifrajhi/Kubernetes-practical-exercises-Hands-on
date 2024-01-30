@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service 
+metadata:
+  name: node-port-example
+spec:
+  type: NodePort
+  selector:
+    tier: front-end
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 32008
+    

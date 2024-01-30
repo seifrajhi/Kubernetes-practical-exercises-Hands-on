@@ -1,0 +1,12 @@
+#MySQL client 
+
+apiVersion: v1
+kind: Pod #Type of object
+metadata:
+  name: mysql-client #pod name
+spec:
+  containers:
+  - name: mysql-container #To identify
+    image: alpine #Image will be uploaded
+    command: ['sh','-c', "sleep 1800m"] #Command executed
+    imagePullPolicy: IfNotPresent

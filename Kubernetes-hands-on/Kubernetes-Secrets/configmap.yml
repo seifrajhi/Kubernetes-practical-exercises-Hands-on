@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-v2-test-config
+data:
+  config.json: |
+    {
+      "environment" : "test"
+    }
+    

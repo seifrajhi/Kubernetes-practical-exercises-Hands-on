@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: my-container
+        image: busybox
+        command: ["/bin/sh", "-c", "echo Hello, World! && sleep 60"]
+      restartPolicy: Never
+  backoffLimit: 5

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Deployment
+metadata: 
+  name: my-deploy
+  labels:
+    app: my-app
+spec:
+  selector: 
+    matchLabels: # equality based selectores
+      app: my-app
+    matchExpressions:
+    - {key: my-app, operator: In, version: ["v1","v2"]}  # set based selectors

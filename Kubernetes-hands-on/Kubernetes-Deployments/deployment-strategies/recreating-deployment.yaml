@@ -1,0 +1,4 @@
+spec:
+  replicas: 10
+  strategy:
+    type: Recreate
