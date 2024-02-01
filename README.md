@@ -94,6 +94,8 @@ The Security checklist aims at providing a basic list of guidance with links to 
 - [Step by step guide to learning Kubernetes](https://roadmap.sh/kubernetes)
 
 
+- [Kubernetes mind map](https://betterprogramming.pub/6-important-things-you-need-to-run-kubernetes-in-production-d573d61258c5): 6 Important Things You Need to Run Kubernetes in Production.
+
 ### Useful aliases
 
 <details><summary>Expand here to see the solution</summary>
@@ -828,6 +830,8 @@ while true; do wget -q -O- http://hpa-example.default.svc.cluster.local; done
 # Check HPA Status
 kubectl get hpa
 ```
+
+- [Simplify Kubernetes day 2 ops with Palette Cluster Profiles](https://www.spectrocloud.com/blog/kubernetes-day-2-operations-with-cluster-profiles)
 
 ## Labs and exercises and hackaton:
 
