@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: back-off-limit
+  namespace: jobs
+spec:
+  backoffLimit: 5
+  template:
+    spec:
+      containers:
+        - name: job
+          image: busybox
+          args:
+            - /bin/sh
+            - -c
+            - date; echo "hello"; sleep 5; exit 1;
+      restartPolicy: OnFailure

@@ -1,0 +1,38 @@
+apiVersion: v1
+data:
+  script.sh: |-
+    echo "Hello world!"
+    echo "Goodbye world!"
+    myname=$(hostname)
+    echo $myname
+kind: ConfigMap
+metadata:
+  name: script-configmap
+  namespace: jobs
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    app: script-job
+  name: script-job
+  namespace: jobs
+spec:
+  backoffLimit: 2
+  template:
+    spec:
+      containers:
+        - command:
+            - /bin/sh
+            - /opt/script/script.sh
+          image: 'busybox'
+          name: script
+          volumeMounts:
+            - mountPath: /opt/script
+              name: script-configmap
+              readOnly: false
+      restartPolicy: Never
+      volumes:
+        - configMap:
+            name: script-configmap
+          name: script-configmap

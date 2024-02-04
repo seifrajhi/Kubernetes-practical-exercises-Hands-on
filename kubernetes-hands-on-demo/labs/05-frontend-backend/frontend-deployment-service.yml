@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  ports:
+  - port: 80
+    targetPort: 4567
+  selector:
+    app: frontend
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: ruanbekker/awselcpt-frontend:v1
+        ports:
+        - name: http
+          containerPort: 4567
+        env:
+        - name: backend_service_host
+          value: "backend"
+        - name: backend_service_port
+          value: "5000"

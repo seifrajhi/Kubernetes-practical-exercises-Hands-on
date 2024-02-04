@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: basic
+  namespace: jobs
+spec:
+  template:
+    spec:
+      containers:
+        - name: job
+          image: busybox
+          args: 
+            - /bin/sh
+            - -c
+            - echo "=> Start of Job"; echo "hello, world"; sleep 5; echo "goodbye, world"; echo "=> Finish of Job" 
+      restartPolicy: Never

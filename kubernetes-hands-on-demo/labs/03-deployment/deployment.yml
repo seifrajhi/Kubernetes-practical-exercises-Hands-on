@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-hostname-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hostname
+  template:
+    metadata:
+      labels:
+        app: hostname
+    spec:
+      containers:
+        - name: hostname
+          image: ruanbekker/hostname:latest

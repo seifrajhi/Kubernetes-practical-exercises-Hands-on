@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: completion-number
+  namespace: jobs
+spec:
+  completions: 6
+  template:
+    spec:
+      containers:
+        - name: job
+          image: busybox
+          args:
+            - /bin/sh
+            - -c
+            - echo "start"; date; sleep 10s; date; echo "finish"; date
+      restartPolicy: Never
