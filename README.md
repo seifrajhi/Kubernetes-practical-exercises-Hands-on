@@ -72,6 +72,8 @@ The Security checklist aims at providing a basic list of guidance with links to 
 
 5- https://medium.com/@seifeddinerajhi/owasp-kubernetes-top-10-a-comprehensive-guide-f03af6fd66ed
 
+5- https://eksclustergames.com:  Kubernetes CTF (Capture The Flag) challenges for EKS 
+
 ### Storage
 
 - The key concepts of Kubernetes storage, including [PVs, PVCs, and StorageClass](https://medium.com/@seifeddinerajhi/understanding-storage-in-kubernetes-ee2c19001aae)

@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hello-goodbye-with-timeout
+  namespace: jobs
+spec:
+  activeDeadlineSeconds: 2
+  template:
+    spec:
+      containers:
+        - name: job
+          image: busybox
+          args: 
+            - /bin/sh
+            - -c
+            - echo "=> Start of Job"; echo "hello, world"; sleep 5; echo "goodbye, world"; echo "=> Finish of Job" 
+      restartPolicy: Never

@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: every-minute
+  namespace: jobs
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: cronjob
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - date; echo "hello"; sleep 5; echo "bye";
+          restartPolicy: Never

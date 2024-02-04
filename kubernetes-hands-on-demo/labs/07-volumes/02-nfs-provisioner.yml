@@ -1,0 +1,45 @@
+# setup nfs provisioner:
+# https://blog.pistack.co.za/kubernetes-nfs-client-provisioner-on-arm/
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim
+  annotations:
+    volume.beta.kubernetes.io/storage-class: "managed-nfs-storage"
+  labels:
+    app: echo-nfs
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Mi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-nfs
+  labels:
+    app: echo-nfs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echo-nfs
+  template:
+    metadata:
+      labels:
+        app: echo-nfs
+    spec:
+      containers:
+      - image: busybox
+        name: echo-container
+        volumeMounts:
+          - mountPath: "/data"
+            name: task-pv-storage
+        command: ["ping", "127.0.0.1"]
+      volumes:
+        - name: task-pv-storage
+          persistentVolumeClaim:
+            claimName: task-pv-claim
