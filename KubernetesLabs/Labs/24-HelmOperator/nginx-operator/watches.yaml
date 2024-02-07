@@ -1,0 +1,6 @@
+# Use the 'create api' subcommand to add watches to this file.
+- group: demo.codewizard.co.il
+  version: v1alpha1
+  kind: Nginx
+  chart: helm-charts/nginx
+#+kubebuilder:scaffold:watch

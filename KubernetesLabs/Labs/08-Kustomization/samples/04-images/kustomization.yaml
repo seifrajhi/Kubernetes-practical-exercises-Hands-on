@@ -1,0 +1,14 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - ../_base
+
+images:
+  # The image as its defined in the Deployment file
+  - name: __image__
+    # The new name to set
+    newName: my-registry/my-image
+    # optional: image tag
+    newTag: v3

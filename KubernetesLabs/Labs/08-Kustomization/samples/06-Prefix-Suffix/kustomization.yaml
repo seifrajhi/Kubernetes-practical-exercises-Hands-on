@@ -1,0 +1,10 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Add the desired Prefix to all resources
+namePrefix: prefix-codeWizard-
+nameSuffix: -suffix-codeWizard
+
+bases:
+  - ../_base

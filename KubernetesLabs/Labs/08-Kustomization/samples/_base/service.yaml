@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  selector:
+    app: postgres
+  # Service of type NodePort
+  type: NodePort
+  # The default port for postgres
+  ports:
+    - port: 5432

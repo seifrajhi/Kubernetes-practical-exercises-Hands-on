@@ -1,0 +1,19 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+ name: authorization-policy
+spec:
+ selector:
+   matchLabels:
+     app: webserver
+ rules:
+ - from:
+   - source:
+       principals: ["cluster.local/ns/default/sa/sleep"]
+   to:
+   - operation:
+       methods: ["GET"]
+   when:
+   - key: request.headers[version]
+     values: ["v1", "v2"]
+

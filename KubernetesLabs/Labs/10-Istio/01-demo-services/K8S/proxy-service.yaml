@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: proxy-service
+spec:
+  ports:
+    # We use the <protocol>-<suffix> as istion require
+    - name: http-web
+      port: 80
+      protocol: TCP
+      targetPort: 5050
+  selector:
+    app: proxy-server
+  type: LoadBalancer

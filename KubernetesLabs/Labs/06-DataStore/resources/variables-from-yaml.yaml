@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: codewizard-secrets
+  namespace: codewizard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: codewizard-secrets
+  template:
+    metadata:
+      labels:
+        name: codewizard-secrets
+    spec:
+      containers:
+        # This contaner will use plain ENV parametrs
+        - name: secrets
+          image: nirgeier/k8s-secrets-sample
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          env:
+            - name: LANGUAGE
+              value: Hebrew
+            - name: TOKEN
+              value: Hard-To-Guess2
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: codewizard-secrets
+  namespace: codewizard
+spec:
+  selector:
+    app: codewizard-secrets
+  ports:
+    - protocol: TCP
+      port: 5000 
+        

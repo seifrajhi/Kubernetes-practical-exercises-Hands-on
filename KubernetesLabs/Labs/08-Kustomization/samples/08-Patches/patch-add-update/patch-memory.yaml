@@ -1,0 +1,16 @@
+# File: patch-memory.yaml
+# Patch limits.memory
+apiVersion: apps/v1
+kind: Deployment
+# Set the desired deployment to patch
+metadata:
+  name: myapp
+spec:
+  # pathc the memory limit
+  template:
+    spec:
+      containers:
+        - name: patch-name
+          resources:
+            limits:
+              memory: 512Mi

@@ -1,0 +1,9 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Add the desired namespace to all resources
+namespace: kustomize-namespace
+
+bases:
+  - ../_base

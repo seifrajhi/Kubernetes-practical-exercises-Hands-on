@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "webserver.fullname" . }}-config
+  namespace: codewizard
+data:
+  nginx.conf: |-
+    server {
+        listen 80;
+        server_name localhost;
+
+        location / {
+            return 200 '{{ .Values.nginx.conf.message }}\n';
+            add_header Content-Type text/plain;
+        }
+
+        location /release/name {
+            return 200 '{{ .Release.Name }}\n';
+            add_header Content-Type text/plain;
+        }
+
+        location /release/revision {
+            return 200 '{{ .Release.Revision }}\n';
+            add_header Content-Type text/plain;
+        }
+    }

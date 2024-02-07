@@ -1,0 +1,9 @@
+minikube.exe
+kustomize.exe
+
+**/.history/**
+**/istio-*/**
+**/node_modules/**
+**/logs
+Labs/22-Rancher/install.txt
+.DS_Store

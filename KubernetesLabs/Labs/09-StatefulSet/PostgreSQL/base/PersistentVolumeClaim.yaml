@@ -1,0 +1,21 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: postgres-pv-claim
+  labels:
+    app: postgres
+spec:
+  # in this demo we use GCP so we are using the 'standard' StorageClass
+  # We can of course define our own StorageClass resource
+  storageClassName: standard
+
+  ### Access Modes
+  #   The access modes are:
+  #     ReadWriteOnce (RWO) - The volume can be mounted as read-write by a single   node
+  #     ReadWriteMany (RWX) - The volume can be mounted as read-write by a multiple nodes
+  #     ReadOnlyMany  (ROX) - The volume can be mounted as read-only  by a multiple nodes
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi

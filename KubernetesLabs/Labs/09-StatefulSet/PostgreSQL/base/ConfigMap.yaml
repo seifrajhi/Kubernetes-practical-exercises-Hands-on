@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  labels:
+    app: postgres
+data:
+  # The following names are the one defined in the official postgres docs
+
+  # The name of the database we will use in this demo
+  POSTGRES_DB: codewizard
+  # the user name for this demo
+  POSTGRES_USER: codewizard
+  # The password for this demo
+  POSTGRES_PASSWORD: admin123

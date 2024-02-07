@@ -890,7 +890,11 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 
 ### Azure AKS
 
-- [Azure AKS Kubernetes Masterclass](https://github.com/stacksimplify/azure-aks-kubernetes-masterclass)
+- [Azure AKS Kubernetes Masterclass](https://github.com/stacksimplify/azure-aks-kubernetes-masterclass).
+
+- [Official repository for the AKS Landing Zone Accelerator program](https://github.com/Azure/AKS-Landing-Zone-Accelerator): Azure Landing Zone Accelerators are architectural guidance, reference architecture, reference implementations and automation packaged to deploy workload platforms on Azure at Scale and aligned with industry proven practices.
+
+- [Azure Kubernetes Service Checklist](https://www.the-aks-checklist.com/): This checklist contains a large set of best practices and some of them may not be relevant to your context and thus the rating may be incorrect in your case. Please choose and apply them wisely.
 
 
 ### Google GKE

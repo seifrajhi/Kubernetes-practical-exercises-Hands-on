@@ -1,0 +1,20 @@
+# permissions for end users to view nginxes.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: nginx-viewer-role
+rules:
+- apiGroups:
+  - demo.codewizard.co.il
+  resources:
+  - nginxes
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - demo.codewizard.co.il
+  resources:
+  - nginxes/status
+  verbs:
+  - get

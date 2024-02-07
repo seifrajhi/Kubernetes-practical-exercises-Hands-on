@@ -1,0 +1,15 @@
+# patch-delete.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  template:
+    spec:
+      containers:
+        # Remove this section, in this demo it will remove the 
+        # image with the `name: myapp` 
+        - $patch: delete
+          name: myapp
+          image: __image__
+        

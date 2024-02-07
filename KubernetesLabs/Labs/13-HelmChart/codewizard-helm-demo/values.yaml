@@ -1,0 +1,17 @@
+replicaCount: 2
+
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  tag: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+autoscaling:
+  enabled: false
+
+nginx:
+  conf:
+    message: "CodeWizard Helm Demo"

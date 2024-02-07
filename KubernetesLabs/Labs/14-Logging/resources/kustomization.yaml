@@ -1,0 +1,7 @@
+namespace: kube-system
+
+resources:
+  - ServiceAccount.yaml
+  - ClusterRole.yaml
+  - ClusterRoleBinding.yaml
+  - DaemonSet.yaml

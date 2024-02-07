@@ -1,0 +1,19 @@
+#
+# Add network fault to 50% of the traffic
+# We should get error like this one:
+#   >>  Proxying reply: fault filter abort - Took 3 milliseconds
+#
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: webserver
+  namespace: codewizard
+spec:
+  # hostname of a request that this VirtualService resource will match
+  hosts:
+  - webserver
+  # rules to direct any HTTP traffic that matches the above hostname
+  http:
+  - route:
+    - destination:
+        host: webserverv1

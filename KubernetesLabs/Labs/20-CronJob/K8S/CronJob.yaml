@@ -1,0 +1,26 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cron-test
+  namespace: test
+spec:
+  schedule: '*/1 * * * *'
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - command:
+                - /bin/sh
+                - '-c'
+                - >-
+                  apk update \
+                  && apk add curl \
+                  && curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
+                  && chmod +x ./kubectl \
+                  && ./kubectl get pods -A 
+              image: alpine
+              imagePullPolicy: IfNotPresent
+              name: alpine-cronjob
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure

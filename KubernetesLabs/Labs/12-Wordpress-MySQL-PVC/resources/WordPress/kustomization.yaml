@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# The files to be processed
+# Kustomization will re-order the kinds if required
+resources:
+   - 01-wordpress-service.yaml
+   - 02-wordpress-pvc.yaml
+   - 03-wordpress-deployment.yaml
+   
+

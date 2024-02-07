@@ -1,0 +1,9 @@
+# File: patch-replicas.yaml
+apiVersion: apps/v1
+kind: Deployment
+# Set the desired deployment to patch
+metadata:
+  name: myapp
+spec:
+  # This is the patch for this demo
+  replicas: 3

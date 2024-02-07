@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment # We use a deployment and not pod !!!!
+metadata:
+  name: nginx # Deployment name
+  namespace: codewizard
+  labels:
+    app: nginx # Deployment label
+spec:
+  replicas: 1
+  selector:
+    matchLabels: # Labels for the replica selector
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx # Labels for the replica selector
+        version: "1.17" # Specify specific verion if required
+    spec:
+      containers:
+        - name: nginx # The name of the pod
+          image: nginx:1.17 # The image which we will deploy
+          ports:
+            - containerPort: 80

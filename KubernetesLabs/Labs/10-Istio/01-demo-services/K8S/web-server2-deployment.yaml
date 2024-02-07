@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: webserver
+    version: v2
+  name: webserverv2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webserver
+      version: v2
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: webserver
+        version: v2
+    spec:
+      affinity: {}
+      containers:
+        - env:
+            - name: SERVER_NAME
+              value: WebServerV2
+          image: docker.io/nirgeier/istio-web-server-sample
+          imagePullPolicy: Always
+          name: simpleserver
+          ports:
+            - name: web
+              protocol: TCP
+              containerPort: 5050
+          resources:
+            limits:
+              cpu: 100m
+            requests:
+              cpu: 100m
