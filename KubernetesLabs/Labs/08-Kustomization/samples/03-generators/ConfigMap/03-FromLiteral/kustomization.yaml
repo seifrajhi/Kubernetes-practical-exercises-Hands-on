@@ -1,0 +1,16 @@
+# kustomization.yaml for ConfigMap
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+configMapGenerator:
+  # Generate config file from key value pairs file
+  # Generate configMap from direct input
+  - name: configFromLiterals
+    literals:
+      - Key1=value1
+      - Key2=value2
+#
+# Optional flag to mark if we want hashed suffix or not
+#
+#generatorOptions:
+#  disableNameSuffixHash: true 

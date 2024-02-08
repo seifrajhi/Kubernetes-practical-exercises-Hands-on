@@ -1,0 +1,17 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  # This name will be used in `subjects.name`
+  name: cronjob-rbac
+  # This name will be used in `subjects.namespace`
+  namespace: test
+subjects:
+  - kind: ServiceAccount
+    # Same value as upper's `metadata.name`
+    name: default
+    # Same value as upper's `metadata.namespace`
+    namespace: test
+roleRef:
+  kind: ClusterRole
+  name: cluster-admin
+  apiGroup: rbac.authorization.k8s.io

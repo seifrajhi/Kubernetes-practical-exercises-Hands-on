@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  # StatefulSet must contain a serviceName
+  serviceName: postgres
+  selector:
+    matchLabels:
+      app: postgres # has to match .spec.template.metadata.labels
+  template:
+    metadata:
+      labels:
+        app: postgres # has to match .spec.selector.matchLabels
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:10.4
+          imagePullPolicy: "IfNotPresent"
+          # The default DB port
+          ports:
+            - containerPort: 5432
+          # Load the required configuration env values form the configMap
+          envFrom:
+            - configMapRef:
+                name: postgres-config
+          # Use volume for storage
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgredb
+      # We can use PersistentVolume or PersistentVolumeClaim.
+      # In this sample we are useing PersistentVolumeClaim
+      volumes:
+        - name: postgredb
+          persistentVolumeClaim:
+            # reference to Pre-Define PVC
+            claimName: postgres-pv-claim

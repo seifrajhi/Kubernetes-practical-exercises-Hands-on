@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: kiali-server
+    meta.helm.sh/release-namespace: istio-system
+  labels:
+    app: kiali
+    app.kubernetes.io/instance: kiali
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kiali
+    app.kubernetes.io/part-of: kiali
+  name: kiali
+  namespace: istio-system
+spec:
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 20001
+    protocol: TCP
+    targetPort: 20001
+  - name: http-metrics
+    port: 9090
+    protocol: TCP
+    targetPort: 9090
+  selector:
+    app.kubernetes.io/instance: kiali
+    app.kubernetes.io/name: kiali
+  sessionAffinity: None
+  type: ClusterIP

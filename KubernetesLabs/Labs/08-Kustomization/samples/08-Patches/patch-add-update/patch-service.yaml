@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  # The default port for postgres
+  ports:
+    # Add additional port to the ports list
+    - port: 15432

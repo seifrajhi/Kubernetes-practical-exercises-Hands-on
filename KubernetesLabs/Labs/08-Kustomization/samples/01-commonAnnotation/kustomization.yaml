@@ -1,0 +1,11 @@
+### FileName: kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# This will add annotation under every metadata entry
+# ex: main metadata, spec.metadata etc
+commonAnnotations:
+  author: nirgeier@gmail.com
+  version: v1
+bases:
+  - ../_base

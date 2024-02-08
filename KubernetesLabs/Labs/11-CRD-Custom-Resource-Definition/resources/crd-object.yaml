@@ -1,0 +1,10 @@
+# The apiVerison is taken from the crd defintion
+# <spec.names.plural>.<spec.group>/<spec.versions>
+apiVersion: "codewizard.co.il/v1"
+kind: "CodeWizardCRD"
+metadata:
+  name: "codewizard-object"
+spec:
+  crdSpec: "--" # String
+  image: "--" # String
+  replicas: 3 # Integer

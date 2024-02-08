@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    author: nirgeier@gmail.com
+    version: v1
+  labels:
+    app: postgres
+  name: postgres
+  namespace: codewizard
+spec:
+  ports:
+  - port: 5432
+  selector:
+    app: postgres
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    author: nirgeier@gmail.com
+    version: v1
+  name: myapp
+  namespace: codewizard
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      annotations:
+        author: nirgeier@gmail.com
+        version: v1
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - image: __image__
+        name: myapp
+      - image: nginx
+        name: nginx

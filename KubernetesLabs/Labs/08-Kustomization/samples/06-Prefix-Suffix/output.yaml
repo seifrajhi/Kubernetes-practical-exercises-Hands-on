@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: postgres
+  name: prefix-codeWizard-postgres-suffix-codeWizard
+  namespace: codewizard
+spec:
+  ports:
+  - port: 5432
+  selector:
+    app: postgres
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prefix-codeWizard-myapp-suffix-codeWizard
+  namespace: codewizard
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - image: __image__
+        name: myapp
+      - image: nginx
+        name: nginx

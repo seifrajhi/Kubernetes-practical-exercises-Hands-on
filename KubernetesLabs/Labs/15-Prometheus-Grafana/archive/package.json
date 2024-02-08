@@ -1,0 +1,12 @@
+{
+  "name": "prometheus-grafana",
+  "version": "0.0.1",
+  "description": "15-Prometheus-grafana K8S demo app",
+  "main": "server.js",
+  "author": "Nir Geier nirgeier@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "prom-client": "^13.1.0"
+  }
+}

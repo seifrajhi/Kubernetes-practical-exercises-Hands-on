@@ -1,0 +1,16 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: codewizard
+
+resources:
+  #- AuthorizationPolicy.yaml
+  - kiali-service.yaml
+  - Namespace.yaml
+  - proxy-deployment.yaml
+  - proxy-service.yaml
+  - web-server1-deployment.yaml
+  - web-server1-service.yaml
+  - web-server2-deployment.yaml
+  - web-server2-service.yaml
+  - web-server2-v2-service.yaml

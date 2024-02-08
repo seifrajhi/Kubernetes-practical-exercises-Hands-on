@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proxy-server
+spec:
+  progressDeadlineSeconds: 60
+  replicas: 1
+  selector:
+    matchLabels:
+      app: proxy-server
+  template:
+    metadata:
+      labels:
+        app: proxy-server
+        version: v1
+    spec:
+      containers:
+        - name: proxy-server
+          image: docker.io/nirgeier/istio-proxy-sample
+          imagePullPolicy: Always
+          ports:
+            - name: web
+              protocol: TCP
+              containerPort: 5050
+          env:
+            - name: PROXY_URL_TO_SERVE
+              value: http://webserver
+          resources:
+            limits:
+              cpu: 100m
+            requests:
+              cpu: 100m

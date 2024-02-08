@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+# Set the default namespace for all the resources
+namespace: codewizard
+
+# The files to be processed
+# Kustomization will re-order the kinds if required
+resources:
+  - ConfigMap.yaml
+  - Service.yaml
+  - PersistentVolumeClaim.yaml
+  - StatefulSet.yaml

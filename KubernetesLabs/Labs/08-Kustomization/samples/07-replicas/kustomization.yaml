@@ -1,0 +1,10 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+replicas:
+  - name: deployment
+    count: 10
+
+resources:
+  - deployment.yaml

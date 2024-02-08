@@ -1,0 +1,25 @@
+###
+# Sample KubeSchedulerConfiguration
+###
+#
+# You can configure `kube-scheduler` to run more than one profile. 
+# Each profile has an associated scheduler name and can have a different 
+#    set of plugins configured in its extension points.
+
+# With the following sample configuration, 
+# the scheduler will run with two profiles: 
+# - default plugins 
+# - all scoring plugins disabled.
+
+apiVersion: kubescheduler.config.k8s.io/v1beta1
+kind: KubeSchedulerConfiguration
+profiles:
+  - schedulerName: default-scheduler
+  - schedulerName: no-scoring-scheduler
+    plugins:
+      preScore:
+        disabled:
+        - name: '*'
+      score:
+        disabled:
+        - name: '*'

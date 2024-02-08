@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: codewizard
+
+commonLabels:
+  app: monitor-app
+
+resources:
+  - Namespace.yaml
+  - Deployment.yaml

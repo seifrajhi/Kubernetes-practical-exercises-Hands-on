@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Generate the DB password from the given file
+secretGenerator:
+  - name: mysql-pass
+    behavior: create
+    files:
+      - mysql-password.txt
+
+# The files to be processed
+# Kustomization will re-order the kinds if required
+resources:
+  - 01-mysql-service.yaml
+  - 02-mysql-pvc.yaml
+  - 03-mysql-deployment.yaml

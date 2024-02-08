@@ -1,0 +1,20 @@
+# This is the base file for all the demos in this folder
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: __image__
+        - name: nginx
+          image: nginx
+  

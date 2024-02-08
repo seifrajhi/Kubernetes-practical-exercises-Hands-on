@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  env: qa
+  key1: value1
+kind: ConfigMap
+metadata:
+  name: configMapFromEnv-c9655hf97k
