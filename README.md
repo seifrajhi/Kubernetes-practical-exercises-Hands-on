@@ -909,7 +909,7 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 - [Elastic Cloud on Kubernetes](https://github.com/elastic/cloud-on-k8s): Elastic Cloud on Kubernetes automates the deployment, provisioning, management, and orchestration of Elasticsearch, Kibana, APM Server, Enterprise Search, Beats, Elastic Agent, Elastic Maps Server, and Logstash on Kubernetes based on the operator pattern.
 
 
-
+=======
 ## CNCF certifications:
 
 - [Kubernetes CKS Full Course](https://www.youtube.com/watch?v=d9xfB5qaOfg) Theory + Practice + Browser Scenarios by Kim Wuestkamp
@@ -923,7 +923,6 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 - [CKA preparation](https://github.com/alijahnas/CKA-practice-exercises): This is a guide for passing the CNCF Certified Kubernetes Administrator (CKA) with practice exercises.
 
 - [CKA Exercises](https://github.com/chadmcrowell/CKA-Exercises): Practice for the Certified Kubernetes Administrator (CKA) Exam.
-
 
 ## Kubernetes IAC:
 
@@ -970,7 +969,6 @@ Certainly! Here's a list of some popular tools for managing Kubernetes Infrastru
     - GitHub: [Skaffold GitHub Repository](https://github.com/GoogleContainerTools/skaffold)
 
 This is not an exhaustive list, and the choice of tools depends on your specific use case and preferences. Always check the official documentation and community support for each tool for the most accurate and up-to-date information.
-
 
 ### Coming next
 

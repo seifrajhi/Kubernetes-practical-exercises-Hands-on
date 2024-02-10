@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.mysql.name }}-{{ .Values.mysql.postInstall.name }}
+  namespace: {{ .Values.mysql.namespace }}
+  labels:
+    app: {{ .Values.mysql.label }}
+  annotations:
+    "helm.sh/hook": post-install
+    "helm.sh/hook-delete-policy": hook-succeeded  
+spec:
+  template:
+    metadata:
+      name: {{ .Values.mysql.name }}-{{ .Values.mysql.postInstall.name }}
+      labels:
+        app: {{ .Values.mysql.label }}
+    spec:
+      containers:
+      - name: {{ .Values.mysql.name }}-{{ .Values.mysql.postInstall.name }}
+        imagePullPolicy: {{ .Values.mysql.postInstall.image.pullPolicy }}
+        env:
+        - name: MYSQL_HOST
+          value: {{ .Values.mysql.name }}
+        - name: MYSQL_USER
+          value: {{ .Values.mysql.user }} 
+        - name: MYSQL_PASSWORD
+          value: {{ .Values.mysql.password }}    
+        image: {{ .Values.mysql.postInstall.image.name }}:{{ .Values.mysql.postInstall.image.tag }}
+      restartPolicy: Never

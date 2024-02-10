@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.mysql.name }}-{{ .Values.mysql.postDelete.cleanHostPath.name }}
+  namespace: {{ .Values.mysql.postDelete.cleanHostPath.namespace }}
+  labels:
+    app: {{ .Values.mysql.label }}
+  annotations:
+    "helm.sh/hook": post-delete
+    "helm.sh/hook-delete-policy": hook-succeeded  
+spec:
+  template:
+    metadata:
+      name: {{ .Values.mysql.name }}-{{ .Values.mysql.postDelete.cleanHostPath.name }}
+      labels:
+        app: {{ .Values.mysql.label }}
+    spec:
+      containers:
+      - name: {{ .Values.mysql.name }}-{{ .Values.mysql.postDelete.cleanHostPath.name }}
+        imagePullPolicy: {{ .Values.mysql.postDelete.cleanHostPath.image.pullPolicy }}    
+        image: {{ .Values.mysql.postDelete.cleanHostPath.image.name }}:{{ .Values.mysql.postDelete.cleanHostPath.image.tag }}
+        volumeMounts:
+        - mountPath: /tmp/db
+          name: data
+        - mountPath: /tmp/backup
+          name: backup
+        command: ["/bin/sh"]
+        args: ["-c", "rm -rf /tmp/db/* && rm -rf /tmp/backup/*"]  
+      restartPolicy: Never
+      volumes:
+      - name: data
+        hostPath:
+          path: {{ .Values.mysql.hostPath.db.path }}
+      - name: backup
+        hostPath:
+          path: {{ .Values.mysql.hostPath.backup.path }}  
