@@ -1,0 +1,60 @@
+# Default values for mysql.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+mysql:
+  label: mysql
+  name: mysql
+  namespace: mysql
+  replicaCount: 1
+  postInstall:
+    name: post-install-db-init
+    image:
+      name: <DockerHub Username>/post-install-db-init
+      tag: 1.0.0
+      pullPolicy: IfNotPresent
+  postDelete:
+    cleanHostPath:
+      namespace: default
+      name: post-delete-clean-host-path
+      image:
+        name: alpine
+        tag: 3.13.6
+        pullPolicy: IfNotPresent  
+  preUpgrade:
+    name: pre-upgrade-take-backup
+    image:
+      name: databack/mysql-backup
+      tag: 8b7f6338d7af6a008d20c986b862a99310eb237d
+      pullPolicy: IfNotPresent
+    dbDumpPath: /db
+  postUpgrade:
+    name: post-upgrade-add-data
+    image:
+      name: <DockerHub Username>/post-upgrade-add-data
+      tag: 1.0.0
+      pullPolicy: IfNotPresent
+  postRollback:
+    name: post-rollback-restore-data
+    image:
+      name: databack/mysql-backup
+      tag: 8b7f6338d7af6a008d20c986b862a99310eb237d
+      pullPolicy: IfNotPresent
+    dbDumpPath: /db
+    backupFile: mysql-backup.gz         
+  image:
+    name: mysql
+    tag: 8.0.26
+    pullPolicy: IfNotPresent
+  password: admin
+  user: root
+  ports:
+    source: 3306
+    target: 3306
+  hostPath:
+    db:
+      path: /root/db-data
+    backup:
+      path: /root/share
+    scripts:
+      path: /root/scripts   

@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.mysql.name }}-{{ .Values.mysql.preUpgrade.name }}
+  namespace: {{ .Values.mysql.namespace }}
+  labels:
+    jobgroup: {{ .Values.mysql.label }}
+  annotations:
+    "helm.sh/hook": pre-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded 
+spec:
+  template:
+    metadata:
+      name: {{ .Values.mysql.name }}-{{ .Values.mysql.preUpgrade.name }}
+      labels:
+        jobgroup: {{ .Values.mysql.label }}
+    spec:
+      containers:
+      - name: {{ .Values.mysql.name }}-{{ .Values.mysql.preUpgrade.name }}
+        imagePullPolicy: {{ .Values.mysql.preUpgrade.image.pullPolicy }}
+        env:
+        - name: DB_SERVER
+          value: {{ .Values.mysql.name }}
+        - name: DB_USER
+          value: {{ .Values.mysql.user }} 
+        - name: DB_PASS
+          value: {{ .Values.mysql.password }}
+        - name: RUN_ONCE
+          value: "true"
+        - name: DB_DUMP_TARGET
+          value: {{ .Values.mysql.preUpgrade.dbDumpPath }}       
+        image: {{ .Values.mysql.preUpgrade.image.name }}:{{ .Values.mysql.preUpgrade.image.tag }}
+        volumeMounts:
+        - mountPath: {{ .Values.mysql.preUpgrade.dbDumpPath }}  
+          name: data
+        - mountPath: /scripts.d 
+          name: scripts   
+        securityContext:
+          runAsUser: 0 # Prerequisite for backup image
+      restartPolicy: Never
+      volumes:
+      - name: data
+        hostPath:
+          path: {{ .Values.mysql.hostPath.backup.path }}
+      - name: scripts
+        hostPath:
+          path: {{ .Values.mysql.hostPath.scripts.path }}  

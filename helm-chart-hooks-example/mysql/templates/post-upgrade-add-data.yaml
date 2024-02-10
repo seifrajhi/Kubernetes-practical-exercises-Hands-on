@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.mysql.name }}-{{ .Values.mysql.postUpgrade.name }}
+  namespace: {{ .Values.mysql.namespace }}
+  labels:
+    app: {{ .Values.mysql.label }}
+  annotations:
+    "helm.sh/hook": post-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded  
+spec:
+  template:
+    metadata:
+      name: {{ .Values.mysql.name }}-{{ .Values.mysql.postUpgrade.name }}
+      labels:
+        app: {{ .Values.mysql.label }}
+    spec:
+      containers:
+      - name: {{ .Values.mysql.name }}-{{ .Values.mysql.postUpgrade.name }}
+        imagePullPolicy: {{ .Values.mysql.postUpgrade.image.pullPolicy }}
+        env:
+        - name: MYSQL_HOST
+          value: {{ .Values.mysql.name }}
+        - name: MYSQL_USER
+          value: {{ .Values.mysql.user }} 
+        - name: MYSQL_PASSWORD
+          value: {{ .Values.mysql.password }}    
+        image: {{ .Values.mysql.postUpgrade.image.name }}:{{ .Values.mysql.postUpgrade.image.tag }}
+      restartPolicy: Never
