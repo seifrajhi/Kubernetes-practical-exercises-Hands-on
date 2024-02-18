@@ -1,0 +1,17 @@
+# mattermost postgres worker
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mattermost-database
+  labels:
+    app: mattermost
+    role: mattermost-database
+spec:
+  containers:
+  - name: mattermost-postgres
+    image: postgres:12.2
+    ports:
+      - containerPort: 5432
+    env:
+      - name: POSTGRES_HOST_AUTH_METHOD
+        value: "trust"
