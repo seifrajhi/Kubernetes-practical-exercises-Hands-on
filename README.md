@@ -909,7 +909,6 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 - [Elastic Cloud on Kubernetes](https://github.com/elastic/cloud-on-k8s): Elastic Cloud on Kubernetes automates the deployment, provisioning, management, and orchestration of Elasticsearch, Kibana, APM Server, Enterprise Search, Beats, Elastic Agent, Elastic Maps Server, and Logstash on Kubernetes based on the operator pattern.
 
 
-=======
 ## CNCF certifications:
 
 - [Kubernetes CKS Full Course](https://www.youtube.com/watch?v=d9xfB5qaOfg) Theory + Practice + Browser Scenarios by Kim Wuestkamp
