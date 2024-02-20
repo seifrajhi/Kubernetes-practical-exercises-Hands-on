@@ -1,0 +1,43 @@
+kind: Deployment
+apiVersion: apps/v1
+
+metadata:
+  name: frontend
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend-container
+
+          image: frontend
+          imagePullPolicy: Always
+
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 0
+            periodSeconds: 5
+
+          ports:
+            - containerPort: 3000
+
+          env:
+            - name: API_ENDPOINT
+              value: /api

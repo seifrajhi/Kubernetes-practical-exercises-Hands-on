@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base/mongodb
+
+images:
+  - name: notarealimage
+    newName: mongo:5.0
+
+patches:
+  - overrides.yaml

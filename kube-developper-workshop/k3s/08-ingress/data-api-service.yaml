@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+
+metadata:
+  name: data-api
+
+spec:
+  type: ClusterIP
+  selector:
+    app: data-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 4000

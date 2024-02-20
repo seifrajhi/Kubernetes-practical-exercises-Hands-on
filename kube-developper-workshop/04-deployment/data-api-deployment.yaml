@@ -1,0 +1,28 @@
+kind: Deployment
+apiVersion: apps/v1
+
+metadata:
+  name: data-api
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: data-api
+  template:
+    metadata:
+      labels:
+        app: data-api
+    spec:
+      containers:
+        - name: data-api-container
+
+          image: {ACR_NAME}.azurecr.io/smilr/data-api:stable
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 4000
+
+          env:
+            - name: MONGO_CONNSTR
+              value: mongodb://admin:supersecret@{MONGODB_POD_IP}

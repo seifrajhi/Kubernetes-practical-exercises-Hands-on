@@ -1,0 +1,76 @@
+name: CI Build & Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+
+env:
+  ACR_NAME: __YOUR_ACR_NAME__
+  IMAGE_TAG: ${{ github.run_id }}
+
+jobs:
+  buildJob:
+    name: "Build & push images"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout app code repo"
+        uses: actions/checkout@v2
+        with:
+          repository: benc-uk/smilr
+
+      - name: "Authenticate to access ACR"
+        uses: docker/login-action@master
+        with:
+          registry: ${{ env.ACR_NAME }}.azurecr.io
+          username: ${{ env.ACR_NAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - name: "Build & Push: data API"
+        run: |
+          docker buildx build . -f node/data-api/Dockerfile \
+            -t $ACR_NAME.azurecr.io/smilr/data-api:$IMAGE_TAG \
+            -t $ACR_NAME.azurecr.io/smilr/data-api:latest
+          docker push $ACR_NAME.azurecr.io/smilr/data-api:$IMAGE_TAG
+
+      - name: "Build & Push: frontend"
+        run: |
+          docker buildx build . -f node/frontend/Dockerfile \
+            -t $ACR_NAME.azurecr.io/smilr/frontend:$IMAGE_TAG \
+            -t $ACR_NAME.azurecr.io/smilr/frontend:latest
+          docker push $ACR_NAME.azurecr.io/smilr/frontend:$IMAGE_TAG
+
+  releaseJob:
+    name: "Release to Kubernetes"
+    runs-on: ubuntu-latest
+    # Only release from main
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: buildJob
+    environment:
+      name: workshop-environment
+      url: http://__PUBLIC_IP_OF_CLUSTER__/
+    steps:
+      - name: "Configure kubeconfig"
+        uses: azure/k8s-set-context@v2
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.CLUSTER_KUBECONFIG }}
+
+      - name: "Sanity check Kubernetes"
+        run: kubectl get nodes
+        
+      - name: "Checkout app code repo" # Needed for the Helm chart
+        uses: actions/checkout@v2
+        with:
+          repository: benc-uk/smilr
+
+      - name: "Update chart dependencies"
+        run: helm dependency update ./kubernetes/helm/smilr
+
+      - name: "Release app with Helm"
+        run: |
+          helm upgrade myapp ./kubernetes/helm/smilr --install --wait --timeout 120s \
+          --set registryPrefix=$ACR_NAME.azurecr.io/ \
+          --set frontend.imageTag=$IMAGE_TAG \
+          --set dataApi.imageTag=$IMAGE_TAG \
+          --set mongodb.enabled=true

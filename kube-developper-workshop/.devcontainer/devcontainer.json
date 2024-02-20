@@ -1,0 +1,29 @@
+{
+  "image": "ubuntu:latest",
+  "features": {
+    "kubectl-helm-minikube": {
+      "version": "latest",
+      "helm": "latest",
+      "minikube": "none"
+    },
+    "common": {
+      "username": "vscode",
+      "uid": "1000",
+      "gid": "1000",
+      "installZsh": true,
+      "installOhMyZsh": true
+    },
+    "azure-cli": "latest",
+    "ghcr.io/eliises/devcontainer-features/bash-profile": {
+      "command": "source <(kubectl completion bash); alias k=kubectl; complete -o default -F __start_kubectl k; alias kubens='kubectl config set-context --current --namespace ';",
+      "file": "/etc/bash.bashrc"
+    }
+  },
+  "remoteUser": "vscode",
+  "extensions": [
+    "yzhang.markdown-all-in-one",
+    "DavidAnson.vscode-markdownlint",
+    "streetsidesoftware.code-spell-checker",
+    "ms-kubernetes-tools.vscode-kubernetes-tools"
+  ]
+}

@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+
+metadata:
+  name: frontend
+
+spec:
+  type: NodePort
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+      nodePort: 30037

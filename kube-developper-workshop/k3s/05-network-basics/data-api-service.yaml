@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+
+metadata:
+  name: data-api
+
+spec:
+  type: NodePort
+  selector:
+    app: data-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 4000
+      nodePort: 30036

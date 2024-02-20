@@ -1,0 +1,19 @@
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: mongodb
+  namespace: default
+
+spec:
+  template:
+    spec:
+      containers:
+        - name: mongodb-container
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: admin
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-creds
+                  key: admin-password
