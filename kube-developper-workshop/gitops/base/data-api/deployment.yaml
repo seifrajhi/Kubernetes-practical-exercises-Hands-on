@@ -1,0 +1,46 @@
+kind: Deployment
+apiVersion: apps/v1
+
+metadata:
+  name: data-api
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: data-api
+  template:
+    metadata:
+      labels:
+        app: data-api
+    spec:
+      containers:
+        - name: data-api-container
+
+          image: data-api
+          imagePullPolicy: Always
+
+          ports:
+            - containerPort: 4000
+
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
+
+          readinessProbe:
+            httpGet:
+              port: 4000
+              path: /api/health
+            initialDelaySeconds: 0
+            periodSeconds: 5
+
+          env:
+            - name: MONGO_CONNSTR
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-creds
+                  key: connection-string

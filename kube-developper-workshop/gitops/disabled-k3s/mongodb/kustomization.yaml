@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../../base/mongodb
+
+images:
+  - name: notarealimage
+    newName: mongo:5.0
+
+patches:
+  # patchesStrategicMerge
+  - path: overrides.yaml
+
+  # patchesJson6902
+  - target:
+      kind: StatefulSet
+      name: mongodb
+    patch: |-
+      - op: replace
+        path: /spec/volumeClaimTemplates/0/spec/storageClassName
+        value: local-path

@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Reference to a base kustomization directory
+resources:
+  - ../base
+
+# You can add suffixes and prefixes
+nameSuffix: -dev
+
+# Modify the image name or tags
+images:
+  - name: nginx
+    newTag: 1.21-alpine
+
+# Apply patches to override and set other values
+patches:
+  - ./override.yaml

@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: my-app
+  labels:
+    name: my-app
+
+spec:
+  # Important we leave this blank, as we don't have DNS configured
+  # Blank means these rules will match ALL HTTP requests hitting the controller IP
+  # This is important and required since Kubernetes 1.22
+  ingressClassName: nginx
+  rules:
+    - http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 80
+
+          - pathType: Prefix
+            path: "/api"
+            backend:
+              service:
+                name: data-api
+                port:
+                  number: 80

@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webserver
+
+spec:
+  template:
+    spec:
+      containers:
+        - name: webserver
+          resources:
+            limits:
+              cpu: 330m
+          env:
+            - name: SOME_ENV_VAR
+              value: Hello!

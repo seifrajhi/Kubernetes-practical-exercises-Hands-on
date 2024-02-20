@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base/data-api
+  - ../../base/frontend
+images:
+  - name: data-api
+    newName: {EDIT_THIS_ACR_NAME}.azurecr.io/smilr/data-api
+    newTag: stable
+  - name: frontend
+    newName: {EDIT_THIS_ACR_NAME}.azurecr.io/smilr/frontend
+    newTag: stable

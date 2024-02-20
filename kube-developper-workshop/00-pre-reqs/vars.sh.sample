@@ -1,0 +1,5 @@
+RES_GROUP="kube-workshop"
+REGION="westeurope"
+AKS_NAME="__change_me__"
+ACR_NAME="__change_me__"
+KUBE_VERSION="1.25.5"
