@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: app1-ingress
+spec:
+  rules:
+  - host: app1.dockersec.me
+    http:
+      paths:
+      - backend:
+          serviceName: my-nginx-clusterip
+          servicePort: 80
