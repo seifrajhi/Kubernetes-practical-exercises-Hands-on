@@ -72,7 +72,14 @@ The Security checklist aims at providing a basic list of guidance with links to 
 
 5- https://medium.com/@seifeddinerajhi/owasp-kubernetes-top-10-a-comprehensive-guide-f03af6fd66ed
 
-5- https://eksclustergames.com:  Kubernetes CTF (Capture The Flag) challenges for EKS 
+6- https://eksclustergames.com:  Kubernetes CTF (Capture The Flag) challenges for EKS.
+
+
+7- [A curated list for Awesome Kubernetes Security resources](https://github.com/magnologan/awesome-k8s-security) - A curated list for Kubernetes (K8s) Security resources such as articles, books, tools, talks and videos.
+
+
+8- [Kubernetes Security Checklist and Requirements](https://github.com/Vinum-Security/kubernetes-security-checklist) - Kubernetes Security Checklist and Requirements - All in One (authentication, authorization, logging, secrets, configuration, network, workloads, dockerfile).
+
 
 ### Storage
 
