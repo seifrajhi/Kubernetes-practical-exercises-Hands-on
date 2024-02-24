@@ -80,6 +80,8 @@ The Security checklist aims at providing a basic list of guidance with links to 
 
 8- [Kubernetes Security Checklist and Requirements](https://github.com/Vinum-Security/kubernetes-security-checklist) - Kubernetes Security Checklist and Requirements - All in One (authentication, authorization, logging, secrets, configuration, network, workloads, dockerfile).
 
+9- [Kubernetes Hardening Manual](https://github.com/seifrajhi/kubernetes-hardening-checklist-guidance) -  Kubernetes Hardening Guidance.
+
 
 ### Storage
 
