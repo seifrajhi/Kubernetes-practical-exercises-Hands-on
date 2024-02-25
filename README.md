@@ -105,6 +105,8 @@ The Security checklist aims at providing a basic list of guidance with links to 
 
 - [Kubernetes mind map](https://betterprogramming.pub/6-important-things-you-need-to-run-kubernetes-in-production-d573d61258c5): 6 Important Things You Need to Run Kubernetes in Production.
 
+- [Awesome Kubernetes Resources](https://github.com/tomhuang12/awesome-k8s-resources) - A curated list of awesome Kubernetes tools and resources.
+
 ### Useful aliases
 
 <details><summary>Expand here to see the solution</summary>
@@ -915,6 +917,16 @@ GitOps is an operating model for Kubernetes and other cloud native technologies.
 
 - [Elastic Cloud on Kubernetes](https://github.com/elastic/cloud-on-k8s): Elastic Cloud on Kubernetes automates the deployment, provisioning, management, and orchestration of Elasticsearch, Kibana, APM Server, Enterprise Search, Beats, Elastic Agent, Elastic Maps Server, and Logstash on Kubernetes based on the operator pattern.
 
+
+## playgrounds 
+
+- [Kubernetes Playground](https://github.com/netgroup/kubernetes-playground) - Let's play with Kubernetes in a safe sandbox.
+
+- [Gluster file system with Kubernetes](https://github.com/bwolf/gluster-k8s-playground) - Playground to experiment with Gluster and Kubernetes.
+
+- [A standalone Kubernetes cluster](https://github.com/nextbreakpoint/kubernetes-playground)  - Scripts for creating a standalone Kubernetes cluster for development.
+
+- [Playground](https://labs.play-with-k8s.com/) -  Play with Kubernetes is a playground which allows users to run K8s clusters in a matter of seconds.
 
 ## CNCF certifications:
 
