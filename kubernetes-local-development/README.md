@@ -129,7 +129,6 @@ kubereport () {
 ## Learning
 
 - [Tutorials](https://kubernetes.io/docs/tutorials/)
-- [Playground](https://labs.play-with-k8s.com/)
 - [Katacoda](https://www.katacoda.com/courses/kubernetes)
 - [Official doc](https://kubernetes.io/docs/home/)
 - Comics
