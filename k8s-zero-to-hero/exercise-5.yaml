@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: banana
+spec: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: lemon
+  name: lemon
+  namespace: banana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lemon
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: lemon
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: {}

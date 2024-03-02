@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: kiwi-deploy
+  name: kiwi-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kiwi-deploy
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: kiwi-deploy
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        volumeMounts:
+        - name: myconfigmap
+          mountPath: "/etc/foo"
+      volumes:
+      - name: myconfigmap
+        configMap:
+          name: configmap-kiwi
