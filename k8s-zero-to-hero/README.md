@@ -1,0 +1,294 @@
+```
+     ___      .______     ______    __    __  .___________.
+    /   \     |   _  \   /  __  \  |  |  |  | |           |
+   /  ^  \    |  |_)  | |  |  |  | |  |  |  | `---|  |----`
+  /  /_\  \   |   _  <  |  |  |  | |  |  |  |     |  |     
+ /  _____  \  |  |_)  | |  `--'  | |  `--'  |     |  |     
+/__/     \__\ |______/   \______/   \______/      |__|     
+                                                           
+```
+
+
+I took those exercises from a youtube video of Alta3 Research, Inc that you can see [here](https://www.youtube.com/watch?v=5cgpFWVD8ds&t=405s)
+The video contains some good tips aobut kubernetes. I think that these exercises cover multiple topics and are good to improve your Kuberntes knowledge.
+
+## 🚀 How to use this repo
+
+
+```
+1. Before each exercise there is a ***prepare environment*** section with a kubernetes yaml that is ready to create the components required for the exercise (namespaces, deployments, pods...).
+
+2. Once you have run the script then you are ready to go ahead with the exercise. 
+
+3. Solution for each exercise can be find under the solutions folder.
+
+
+⚠️ **Disclaimer**
+All the exercises are provided "as is", with no guarantee of completeness or accuracy, and without warranty of any kind, express or implied, including, but not limited to warranties of performance, merchantability and fitness for a particular purpose. 
+
+## 🎓 Contributing
+Contributions are what make this project such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated.
+
+1. Fork the Project
+2. Create your Feature Branch (git checkout -b feature/AmazingFeature)
+3. Commit your Changes (git commit -m 'Add some AmazingFeature')
+4. Push to the Branch (git push origin feature/AmazingFeature)
+5. Open a Pull Request
+
+
+```
+ __________   ___  _______ .______        ______  __       _______. _______     _______.
+|   ____\  \ /  / |   ____||   _  \      /      ||  |     /       ||   ____|   /       |
+|  |__   \  V  /  |  |__   |  |_)  |    |  ,----'|  |    |   (----`|  |__     |   (----`
+|   __|   >   <   |   __|  |      /     |  |     |  |     \   \    |   __|     \   \    
+|  |____ /  .  \  |  |____ |  |\  \----.|  `----.|  | .----)   |   |  |____.----)   |   
+|_______/__/ \__\ |_______|| _| `._____| \______||__| |_______/    |_______|_______/    
+```                                                                                    
+---
+
+## Example exercise 1
+
+Team banana is taking over a webserver from Team Pineapple. No one from Pineapple is around anymore, so who knows where this webserver is. The only thing you know is that the container is named banana-boat.
+Search for the correct pod in namespace pineapple and move it to namespace banana.
+
+**⒈ Prepare the environment:**
+``` 
+kubectl create -f exercise-1.yaml 
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-1.md)
+
+---
+## Example exercise 2
+
+Create a single pod in namespace default with the image nginx:1.7.9. The pod should be named alphapod and the container should be named alphapod container.
+
+**⒈ Prepare the environment:**
+``` 
+N/A 
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-2.md)
+
+---
+## Example exercise 3
+
+Missing data has long been a thorn in your company's side. A Tech Lead has whipped up a container named *snooper-con* in deployment *snooper* in namespace *starfruit*. This container mounts a volume and write logs into a file called snooper.log.
+
+Inside this deployment, create a sidecar container named *kennylogger-con*, image *busybox:1.31.0*.  Save your changes as *snooper-new.yaml* but also make sure the deployment is running.
+
+**⒈ Prepare the environment:**
+```
+kubectl create -f exercise-3.yaml 
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-3.md)
+
+---
+## Example exercise 4
+
+In namespace coconut there is a single pod named *watermelon*. Convert the pod into a deployment with 5 replicas and deployment name *watermelonslice*.
+
+Create the deployment and save its YAML under *watermelon-deployment.yaml*.
+
+**⒈ Prepare the environment:**
+```
+kubectl create -f exercise-4.yaml 
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-4.md)
+
+---
+## Example exercise 5
+
+There is an existing deployment named *lemon* in namespace *banana*. Apparently the current version is broken. Check the deployment history and rollback to a version that actually works.
+
+**⒈ Prepare the environment:**
+```
+kubectl create -f exercise-5.yaml
+kubectl set image deployment/lemon nginx=nginx:error24 -n banana
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-5.md)
+
+---
+## Example exercise 6
+
+Team banana needs a job template located at *bananajob.yaml*. This job should execute the commands *sleep 2 && echo done* on image *busybox:1.31.0* in namespace *banana*. Make it execute 3 pods in parallel for 5 total completions.
+
+Every pod generated by *bananajob* should have the label *eatyour: bananas*. The job should be named *bananajob* and the container named *banana-bin*.
+
+**⒈ Prepare the environment:**
+```
+N/A
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-6.md)
+
+---
+## Example exercise 7
+
+Team melon needs to identify some of their pods in namespace *basket*. They ask you to add a new labbel *safe:sound* to all pods with an existing label *type:citrus* or *type:seedless*. All pods with the label *safe:sound* will then be given the annotation *fruit:good for what ails ya*
+
+**⒈ Prepare the environment:**
+```
+kubectl create -f exercise-7.yaml 
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-7.md)
+
+---
+## Example exercise 8
+
+Create a new PersistenVolume named *strawberry-pv*. It should have a capacity og 2Gi, accessMode *ReadWriteOnce*, hostPath /Data/Berry and the storageClass *exam*.
+
+Next create a new PersistentVolumeClaim named *strawberry-pvc* in namespace *straw*. It should request 1Gi storage, accessMode *ReadWriteOnce*, with storageClass *exam*. The PVC and PV should bind.
+
+FInally create a new deployment named *strawberry-deploy* in namespace *straw*. Mount *strawberry-pvc* as a volume /tmp/berry-data. The pods of that deployment should be of image *nginx:1.7.9*.
+
+**⒈ Prepare the environment:**
+```
+N/A
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-8.md)
+
+---
+## Example exercise 9
+
+Create a ConfigMap called *configmap-kiwi* containing the file *web-kiwi.html*.
+
+The deployment *kiwi-deploy* is already set up to work with this ConfigMap. Confirm that the containers are now running.
+
+**⒈ Prepare the environment:**
+```
+kubectl create -f exercise-9.yaml 
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-9.md)
+
+---
+## Example exercise 10
+
+Create a pod called *nginx* with the image *nginx:1.7.9* which forces all processes to run with user ID 1000 and with group ID 2000. Set privilege scalation to false.
+
+**⒈ Prepare the environment:**
+```
+N/A
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-10.md)
+
+---
+## Example exercise 11
+
+
+Create a deployment named *apple-deploy* with 4 replicas and the image *nginx:1.7.9*. The containers should be named *apple-bin*. Each container should have a memory request of 15Mi and memory limit of 30Mi.
+
+**⒈ Prepare the environment:**
+```
+N/A
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-11.md)
+
+---
+## Example exercise 12
+
+You will adjust an existing pod named *kiwi-secret-pod* in namespace kiwi. Make a new secret named *juicysecret*. It must contain the key/values *user=kiwis* and *pass=aredelicious*. Make this content available in the pod *kiwi-secret-pod* as environment variables USERKIWI and PASSKIWI*.
+
+**⒈ Prepare the environment:**
+```
+kubectl create -f exercise-12.yaml 
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-12.md)
+
+---
+## Example exercise 13
+
+Create a deployment named *banana-peel* with 2 pods of image *nginx:1.9.1.*
+
+Team banana has its own ServiceAccount *mega-banana-v5*. Make the banana-peel deployment's pods run under this ServiceAccount. The deployment should be in namespace *banana*.
+
+**⒈ Prepare the environment:**
+```
+kubectl create -f exercise-13.yaml 
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-13.md)
+
+---
+## Example exercise 14
+
+Create a single pod named *plumpod* in namespace *plum* of image *busybox:1.31.0*. Add a readiness probe to this container executing *cat /tmp/plumpplum*. The probe should initially wait 3 seconds and thereafter wait 6 seconds.
+
+**⒈ Prepare the environment:**
+```
+kubectl create -f exercise-14.yaml 
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-14.md)
+
+---
+## Example exercise 15
+
+Create a pod named *grapes* and image *busybox:1.31.0* with the command: "echo I am ape for grapes; sleep 3600".
+Copy the logs of the above pod to the pre-made file grape-logs.txt.
+
+**⒈ Prepare the environment:**
+```
+N/A
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-15.md)
+
+---
+## Example exercise 16
+
+Get the CPU usage of all pods in the *default* namespace. Find which pod has the highest CPU usage and write that pod name to the pre-made file cpu-consume.txt file.
+
+**⒈ Prepare the environment:**
+```
+N/A
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-16.md)
+
+---
+## Example exercise 17
+
+You have used misguided judgement and created a Deployment that is expecting to have three Pods available inside of a namespace called *fail01*. Look at your deployment that is currently running in that namespace. Fix the deployment so that all three expected replicas are running.
+
+
+**⒈ Prepare the environment:**
+```
+kubectl create -f exercise-17.yaml 
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-17.md)
+
+---
+## Example exercise 18
+
+Team Coconut needs a service named *project-paradise-svc* in namespace *coconut*. The service should use TCP port redirection of 3423:80. This service should expose a single pod named *lone-coconut* of image *nginx:1.9.1* with the label *coconuts=migrate* (you'll need to create this pod yourself).
+
+**⒈ Prepare the environment:**
+```
+N/A
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-18.md)
+
+---
+## Example exercise 19
+
+In namespace *cherry* you'll find two deployments named *pit* and *stem*. Both deployments are exposed via a service. Make a NetworkPolicy named *cherry-control* that prevents outgoing traffic from deployment *pit* except to that of deployment *stem*.
+
+**⒈ Prepare the environment:**
+```
+kubectl create -f exercise-19.yaml 
+```
+
+**2. Link to solution:** [Link](./solutions/exercise-19.md)
+

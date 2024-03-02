@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: starfruit
+spec: {}
+status: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: snooper
+  name: snooper
+  namespace: starfruit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: snooper
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: snooper
+    spec:
+      containers:
+      - image: nginx
+        name: snooper-con
+        volumeMounts:
+        - mountPath: /tmp/snooper.log
+          name: logsfile
+      volumes:
+      - name: logsfile
+        hostPath:
+          path: /tmp/snooper.log
+          type: FileOrCreate

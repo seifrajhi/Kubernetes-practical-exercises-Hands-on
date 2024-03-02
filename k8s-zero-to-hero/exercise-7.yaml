@@ -1,0 +1,92 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: basket
+spec: {}
+status: {}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    type: citrus
+  name: lemon
+  namespace: basket
+spec:
+  containers:
+  - image: nginx
+    name: lemon
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    type: citrus
+  name: lime
+  namespace: basket
+spec:
+  containers:
+  - image: nginx
+    name: lime
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    type: seedless
+  name: pear
+  namespace: basket
+spec:
+  containers:
+  - image: nginx
+    name: pear
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    type: seedless
+  name: strawberry
+  namespace: basket
+spec:
+  containers:
+  - image: nginx
+    name: strawberry
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    type: seeds
+  name: watermelon
+  namespace: basket
+spec:
+  containers:
+  - image: nginx
+    name: watermelon
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+status: {}

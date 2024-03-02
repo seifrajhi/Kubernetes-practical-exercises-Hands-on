@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: fail01
+spec: {}
+status: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: mydeployment
+  name: mydeployment
+  namespace: fail01
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mydeployment
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mydeployment
+    spec:
+      containers:
+      - image: nginx:5.99.1
+        name: nginx
+        resources: {}
+status: {}
