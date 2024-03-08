@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: my-first-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.org/ssl-services: "my-service"
+spec:
+  tls:
+    - hosts:
+      - myapp.local
+      secretName: tls-certificate
+  rules:
+  - host: myapp.local
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: <my-service>
+          servicePort: <correct port>
