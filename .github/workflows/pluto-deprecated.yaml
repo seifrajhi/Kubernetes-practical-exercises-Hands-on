@@ -1,0 +1,43 @@
+name: Lint
+
+on: [push, pull_request]
+
+jobs:
+  outdated-kubernetes:
+    name: Outdated K8s Resources
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        kubernetes-version: [ '1.24.0', '1.25.0' ]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Extract K8s YAML from Markdown files
+      run: sh kubernetes-exercises/.test/extract_all_k8s_from_md.sh
+
+    - name: Detect Outdated Kubernetes Resources
+      run: |
+        docker run -v $(pwd):/files/ quay.io/fairwinds/pluto:v4.1.2 \
+        detect-files \
+        --directory /files/ \
+        --target-versions k8s=v${{ matrix.kubernetes-version }} \
+        --ignore-deprecations `# Do not error when merely deprecated resources are found` \
+        --output custom \
+        --columns "NAME,KIND,VERSION,REPLACEMENT,DEPRECATED,DEPRECATED,DEPRECATED IN,REMOVED,REMOVED IN,FILEPATH"
+
+  valid-kubernetes-resources:
+    name: Valid K8s Resources
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Extract K8s YAML from Markdown files
+      run: bash kubernetes-exercises/.test/extract_all_k8s_from_md.sh
+
+    - name: Lint Kubernetes Resources
+      run: bash kubernetes-exercises/.test/lint_kube.sh
