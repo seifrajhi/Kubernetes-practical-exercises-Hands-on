@@ -1,0 +1,23 @@
+MaxIdleConnsPerHost = 200
+defaultEntryPoints = ["http", "https"]
+[entryPoints]
+  [entryPoints.http]
+    address = ":80"
+  [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+    address = ":443"
+  [entryPoints.https.tls]
+    [[entryPoints.https.tls.certificates]]
+      CertFile = "/certs/tls.crt"
+      KeyFile = "/certs/tls.key"
+
+[respondingTimeouts]
+  readTimeout = "0s"
+  writeTimeout = "0s"
+  idleTimeout = "0s"
+  logLevel = "ERROR"
+
+[kubernetes]
+  namespaces = ["default", "production", "staging"]
+
