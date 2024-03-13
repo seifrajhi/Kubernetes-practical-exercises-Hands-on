@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: customnginx
+  name: customnginx
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: customnginx
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: customnginx
+    spec:
+      containers:
+      - image: ghcr.io/eficode-academy/network-multitool
+        name: network-multitool
+        resources: {}
+status: {}
