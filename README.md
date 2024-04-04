@@ -104,6 +104,8 @@ The Security checklist aims at providing a basic list of guidance with links to 
 
 - [Step by step guide to learning Kubernetes](https://roadmap.sh/kubernetes)
 
+- [Kubernetes the Harder Way](https://github.com/ghik/kubernetes-the-harder-way) A guide to setting up a production-like Kubernetes cluster on a local machine
+
 
 - [Kubernetes mind map](https://betterprogramming.pub/6-important-things-you-need-to-run-kubernetes-in-production-d573d61258c5): 6 Important Things You Need to Run Kubernetes in Production.
 
