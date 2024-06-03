@@ -1,0 +1,6 @@
+bases:
+- ../../tenant-envs/two/prod
+- ../../tenant-envs/two/test
+
+commonLabels:
+  example.com/region: us

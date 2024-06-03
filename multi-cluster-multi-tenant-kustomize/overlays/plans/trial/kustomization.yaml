@@ -1,0 +1,8 @@
+bases:
+- ../../../bases/app
+
+commonLabels:
+  example.com/plan: trial
+
+patches:
+- patch-deployment-replicas.yaml

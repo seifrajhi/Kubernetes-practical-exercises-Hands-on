@@ -1,0 +1,11 @@
+namespace: two-test
+
+bases:
+- ../../../plans/trial
+
+commonLabels:
+  app.kubernetes.io/instance: tenant-two
+  example.com/stage: test
+
+resources:
+- namespace.yaml

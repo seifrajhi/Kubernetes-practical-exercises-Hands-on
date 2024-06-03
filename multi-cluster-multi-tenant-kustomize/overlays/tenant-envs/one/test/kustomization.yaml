@@ -1,0 +1,11 @@
+namespace: one-test
+
+bases:
+- ../../../plans/paid
+
+commonLabels:
+  app.kubernetes.io/instance: tenant-one
+  example.com/stage: test
+
+resources:
+- namespace.yaml
