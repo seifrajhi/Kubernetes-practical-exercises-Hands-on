@@ -1,0 +1,5 @@
+bases:
+- ../../../bases/app
+
+commonLabels:
+  example.com/plan: paid

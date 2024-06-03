@@ -1,0 +1,9 @@
+commonLabels:
+  app.kubernetes.io/name: app
+  app.kubernetes.io/component: frontend
+  app.kubernetes.io/part-of: app
+  app.kubernetes.io/managed-by: kustomize
+
+resources:
+- deployment.yaml
+- service.yaml

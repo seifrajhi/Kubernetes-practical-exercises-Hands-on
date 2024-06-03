@@ -1,0 +1,11 @@
+namespace: two-prod
+
+bases:
+- ../../../plans/trial
+
+commonLabels:
+  app.kubernetes.io/instance: tenant-two
+  example.com/stage: prod
+
+resources:
+- namespace.yaml

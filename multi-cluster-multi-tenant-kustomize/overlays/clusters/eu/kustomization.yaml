@@ -1,0 +1,6 @@
+bases:
+- ../../tenant-envs/one/prod
+- ../../tenant-envs/one/test
+
+commonLabels:
+  example.com/region: eu
