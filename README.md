@@ -74,6 +74,8 @@ The Security checklist aims at providing a basic list of guidance with links to 
 
 6- https://eksclustergames.com:  Kubernetes CTF (Capture The Flag) challenges for EKS.
 
+7- https://github.com/andifalk/secure-development-on-kubernetes: Slides and Demos for "Secure Development on Kubernetes" talk
+
 
 7- [A curated list for Awesome Kubernetes Security resources](https://github.com/magnologan/awesome-k8s-security) - A curated list for Kubernetes (K8s) Security resources such as articles, books, tools, talks and videos.
 
