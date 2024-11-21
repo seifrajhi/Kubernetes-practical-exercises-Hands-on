@@ -61,7 +61,7 @@ six==1.16.0
     # via geventhttpclient
 urllib3==2.1.0
     # via requests
-werkzeug==3.0.1
+werkzeug==3.0.3
     # via
     #   flask
     #   locust
