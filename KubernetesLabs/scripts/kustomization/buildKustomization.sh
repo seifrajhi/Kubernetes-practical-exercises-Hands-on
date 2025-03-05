@@ -5,7 +5,7 @@ set -x
 
 # Check to see if we have the latest version of kustomize
 if [ ! -f ./kustomize ]; then
-  # Install latest verison of Kustomize
+  # Install latest version of Kustomize
   curl -sv "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
 fi
 

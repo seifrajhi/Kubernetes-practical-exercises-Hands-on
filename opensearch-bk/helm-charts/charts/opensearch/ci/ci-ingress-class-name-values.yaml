@@ -344,7 +344,7 @@ imagePullSecrets: []
 nodeSelector: {}
 tolerations: []
 
-# Enabling this will publically expose your OpenSearch instance.
+# Enabling this will publicly expose your OpenSearch instance.
 # Only enable this if you have security enabled on your cluster
 ingress:
   enabled: true

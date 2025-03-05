@@ -72,7 +72,7 @@ kubectl get po -o wide
 
 > The second command uses the short name `po` and adds extra columns, including the Pod IP address
 
-What extra information do you see in the second output, and how would you print all the Pod information in a readble format?
+What extra information do you see in the second output, and how would you print all the Pod information in a readable format?
 
 
 ## Working with Pods

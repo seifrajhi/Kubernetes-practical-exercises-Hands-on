@@ -11,7 +11,7 @@ CERT_MANAGER_RELEASE=v1.8.0
 API_PORT=6555
 SSL_PORT=6443
 
-### Clear prevoius content
+### Clear previous content
 # docker  stop    $(docker ps -aq)
 # docker  rm      $(docker ps -aq)
 
@@ -84,10 +84,10 @@ kubectl rollout status  \
         -n cattle-system
         
 ### Check that the cert-manager API is ready
-### We expect to see the foloowing message: 'The cert-manager API is ready'
+### We expect to see the following message: 'The cert-manager API is ready'
 cmctl check api
 
-### Open broswer in: https://rancher.k3d.localhost
+### Open browser in: https://rancher.k3d.localhost
 ######
 ###### Important, once on this page type; thisisunsafe
 ######

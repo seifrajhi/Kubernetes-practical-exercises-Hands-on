@@ -88,7 +88,7 @@ gh secret set ACR_PASSWORD --body "$(az acr credential show --name $ACR_NAME --q
 
 ## 📦 Add CI Steps For Image Building
 
-The workflow, doesn't really do much, the applicaiton gets built and images created but they go nowhere.
+The workflow, doesn't really do much, the application gets built and images created but they go nowhere.
 So let's update the workflow YAML to carry out a build and push of the application container images.
 We can do this using the code we've checked out in the previous workflow step.
 

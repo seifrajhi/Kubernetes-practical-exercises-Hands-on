@@ -185,7 +185,7 @@ kubectl delete deploy nginx
 # deployment.apps "nginx" deleted
 ```
 
-#### Enable the addmission controller. 
+#### Enable the admission controller. 
 
 Edit the `/etc/kubernetes/manifests/kube-apiserver.yaml` file as below.
 

@@ -86,7 +86,7 @@ spec:
     CUSTOM_SCHEDULER_NAME=$(kubectl get pod ${POD} \
                                     --output jsonpath='{.spec.schedulerName}')
 
-    # Check if the desired schedulerName is our custome one
+    # Check if the desired schedulerName is our custom one
     # If its a match this is where our custom scheduler will "jump in"
     if [ "${CUSTOM_SCHEDULER_NAME}" == "${CUSTOM_SCHEDULER}" ]; 
       then

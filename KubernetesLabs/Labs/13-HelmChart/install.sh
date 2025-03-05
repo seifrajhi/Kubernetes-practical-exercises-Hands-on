@@ -1,4 +1,4 @@
-# Remove old chart if its already esists
+# Remove old chart if its already exists
 helm uninstall charts-demo
 
 # Pack the Helm in the desired folder

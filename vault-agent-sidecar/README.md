@@ -49,7 +49,7 @@ $ choco install kubernetes-cli
 $ choco install kubernetes-hel
 ```
 
-If you want to use the newest version of the files from Github.
+If you want to use the newest version of the files from GitHub.
 Cloning the [hashicorp/vault-guides](https://github.com/hashicorp/vault-guides) repository from GitHub.
 But we take no responsibility that there this course is broken. We suggest to go with files of these repo.
 
@@ -312,7 +312,7 @@ $
 ## Define a Kubernetes service account
 
 The Vault Kubernetes authentication role defined a Kubernetes service account
-named `internal-app`. This service acount does not yet exist.
+named `internal-app`. This service account does not yet exist.
 
 Verify that the Kubernetes service account named `internal-app` does not exist:
 
@@ -570,7 +570,7 @@ The PostgreSQL connection string is present on the container.
 
 ## Pod with annotations
 
-The annotations may patch these secrets into any deployment. Pods require that the annotations be included in their intitial definition.
+The annotations may patch these secrets into any deployment. Pods require that the annotations be included in their initial definition.
 
 View the deployment for the `payrole` application:
 

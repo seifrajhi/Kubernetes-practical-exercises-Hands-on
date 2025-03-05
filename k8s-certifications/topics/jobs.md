@@ -199,7 +199,7 @@ kubectl get jobs -w
 
 <br />
 
-### Create a job `busybox-parallelism-job` with `busybox` image that would be run parallely 5 times.
+### Create a job `busybox-parallelism-job` with `busybox` image that would be run parallelly 5 times.
 
 <br />
 

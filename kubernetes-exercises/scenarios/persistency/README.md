@@ -27,7 +27,7 @@ A service describes it's endpoints under the `Endpoints` section. Is there any t
 
 <summary> Hint </summary>
 
-The service is not assosiated with any pods, because the selector does not match any labels. 
+The service is not associated with any pods, because the selector does not match any labels. 
 Make sure that the labels on both service and deployment/pod are the same.
 
 </details>

@@ -2,7 +2,7 @@
 
 Kubernetes supports fine-grained access control, so you can decide who has permission to work with resources in your cluster, and what they can do with them.
 
-There are two parts to [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/), decoupling permissions and who has the permissions - that lets you model security with a managable number of objects:
+There are two parts to [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/), decoupling permissions and who has the permissions - that lets you model security with a manageable number of objects:
 
 - Roles define access permissions for resources (like Pods and Secrets), allowing specific actions (like create and delete)
 - RoleBindings grant the permissions in a Role to a subject, which could be a Kubectl user or an app running in a Pod.
@@ -139,7 +139,7 @@ kubectl exec deploy/kube-explorer -- cat /var/run/secrets/kubernetes.io/servicea
 
 > That's the authentication token for the Service Account, so Kubernetes knows the identity of the API user
 
-So the app is **authenticated** and it's allowed to use the API, but the account is not **authorized** to list Pods. Security principals - ServiceAccounts, Groups and Users - start off with no permissions and need to be granted acces to resources.
+So the app is **authenticated** and it's allowed to use the API, but the account is not **authorized** to list Pods. Security principals - ServiceAccounts, Groups and Users - start off with no permissions and need to be granted access to resources.
 
 You can check the permissions of a user with the `auth can-i` command:
 

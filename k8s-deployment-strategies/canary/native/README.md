@@ -1,4 +1,4 @@
-Canary deployment using Kubernetes native functionnalities
+Canary deployment using Kubernetes native functionalities
 ==========================================================
 
 > In the following example we apply the poor man's canary using Kubernetes
@@ -11,7 +11,7 @@ example which shift traffic using [Istio](https://istio.io).
 
 1. 10 replicas of version 1 is serving traffic
 1. deploy 1 replicas version 2 (meaning ~10% of traffic)
-1. wait enought time to confirm that version 2 is stable and not throwing
+1. wait enough time to confirm that version 2 is stable and not throwing
    unexpected errors
 1. scale up version 2 replicas to 10
 1. wait until all instances are ready

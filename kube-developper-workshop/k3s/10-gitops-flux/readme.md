@@ -209,7 +209,7 @@ Now to install and set up Flux in your cluster, run the following command, repla
 part with your GitHub username you used for the fork:
 
 ```bash
-# Install flux in the cluster, create flux pods, ect.
+# Install flux in the cluster, create flux pods, etc.
 flux install
 
 flux create source git kubeworkshop \

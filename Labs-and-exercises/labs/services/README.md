@@ -54,7 +54,7 @@ spec:
   # ...
 ```
 
-> Labels are abitrary key-value pairs. `app`, `component` and `version` are typically used for application Pods.
+> Labels are arbitrary key-value pairs. `app`, `component` and `version` are typically used for application Pods.
 
 </details><br/>
 
@@ -127,7 +127,7 @@ Kubernetes runs a DNS server inside the cluster and every Service gets an entry,
 kubectl exec sleep -- nslookup whoami
 ```
 
-> This gets the IP address of the Service from its DNS name. The first line is the IP address of the Kuberentes DNS server itself.
+> This gets the IP address of the Service from its DNS name. The first line is the IP address of the Kubernetes DNS server itself.
 
 Now the Pods can communicate using DNS names:
 

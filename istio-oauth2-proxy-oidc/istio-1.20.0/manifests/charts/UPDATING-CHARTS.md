@@ -1,4 +1,4 @@
-# Upating charts and values.yaml
+# Updating charts and values.yaml
 
 The charts in the `manifests` directory are used in istioctl to generate an installation manifest. The configuration
 settings contained in values.yaml files and passed through the CLI are validated against a

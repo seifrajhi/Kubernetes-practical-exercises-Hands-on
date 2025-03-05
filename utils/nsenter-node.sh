@@ -6,7 +6,7 @@ nodeName=$(kubectl get node ${node} -o template --template='{{index .metadata.la
 nodeSelector='"nodeSelector": { "kubernetes.io/hostname": "'${nodeName:?}'" },'
 podName=${USER}-nsenter-${node}
 
-kubectl run ${podName:?} --restart=Never -it --rm --image overriden --overrides '
+kubectl run ${podName:?} --restart=Never -it --rm --image overridden --overrides '
 {
   "spec": {
     "hostPID": true,

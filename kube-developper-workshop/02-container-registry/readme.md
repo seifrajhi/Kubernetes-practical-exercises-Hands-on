@@ -48,7 +48,7 @@ If you wish to check and see imported images, you can go over to the ACR resourc
 
 ## 🔌 Connect AKS to ACR - as Azure Subscription Owner
 
-Kuberenetes requires a way to authenticate and access images stored in private registries.
+Kubernetes requires a way to authenticate and access images stored in private registries.
 There are a number of ways to enable Kubernetes to pull images from a private registry, however AKS provides a simple way to configure this through the Azure CLI.
 The downside is this requires you to have 'Owner' permission within the subscription, in order to assign the role.
 

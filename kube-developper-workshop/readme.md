@@ -51,10 +51,10 @@ Sections / modules:
 These can be considered bonus sections, and are entirely optional. It is not expected that all these sections would be attempted, and they do not run in order.
 
 - [🤯 Scaling, Stateful Workloads & Helm](09-extra-advanced/readme.md) - Scaling (manual & auto),
-  stateful workloads and persitent volumes, plus more Helm.
+  stateful workloads and persistent volumes, plus more Helm.
 - [🧩 Kustomize & GitOps](10-gitops-flux/readme.md) - Introduction to Kustomize and deploying apps
   through GitOps with Flux.
-- [👷 CI/CD with Kubernetes](11-cicd-actions/readme.md) - How to manage CI/CD pipelines using Github
+- [👷 CI/CD with Kubernetes](11-cicd-actions/readme.md) - How to manage CI/CD pipelines using GitHub
   Actions.
 
 ## Path 2: Single node K3S cluster on a VM
@@ -88,10 +88,10 @@ All of the Kubernetes concepts & APIs explored and used are not specific to AKS,
 These can be considered bonus sections, and are entirely optional. It is not expected that all these sections would be attempted, and they do not run in order.
 
 - [🤯 Scaling, Stateful Workloads & Helm](k3s/09-extra-advanced/readme.md) - Scaling (manual & auto),
-  stateful workloads and persitent volumes, plus more Helm.
+  stateful workloads and persistent volumes, plus more Helm.
 - [🧩 Kustomize & GitOps](k3s/10-gitops-flux/readme.md) - Introduction to Kustomize and deploying apps
   through GitOps with Flux.
-- [👷 CI/CD with Kubernetes](/k3s/11-cicd-actions/readme.md) - How to manage CI/CD pipelines using Github
+- [👷 CI/CD with Kubernetes](/k3s/11-cicd-actions/readme.md) - How to manage CI/CD pipelines using GitHub
   Actions.
 
 ### 📖 Extra Reading & Teach Yourself Exercises

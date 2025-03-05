@@ -12,7 +12,7 @@
 
 #### `Stateless` application
 
-- A stateless application is one that does not care which network it is using, and it does not need permanent storage and can be scaled up and down without the need to re-use the same Network or persistance.
+- A stateless application is one that does not care which network it is using, and it does not need permanent storage and can be scaled up and down without the need to re-use the same Network or persistence.
 - Deployment is the suitable Kind for Stateless applications
 - The most trivial example of stateless app is a Web Server
 
@@ -75,7 +75,7 @@
    - [04.01. Scale down the `Statefulset` to 0](#0401-Scale-down-the-Statefulset-to-0)
    - [04.02. Verify that the pods Terminated](#0402-Verify-that-the-pods-Terminated)
    - [04.03. Verify that the DB is not reachable](#0403-Verify-that-the-DB-is-not-reachable)
- - [05. Scale up again and verify that we still have the prevoius data](#05-Scale-up-again-and-verify-that-we-still-have-the-prevoius-data)
+ - [05. Scale up again and verify that we still have the previous data](#05-Scale-up-again-and-verify-that-we-still-have-the-previous-data)
    - [05.01. scale up the `Statefulset` to 1 or more](#0501-scale-up-the-Statefulset-to-1-or-more)
    - [05.02. Verify that the pods is in Running status](#0502-Verify-that-the-pods-is-in-Running-status)
    - [05.03. Verify that the pods is using the previous data](#0503-Verify-that-the-pods-is-using-the-previous-data)
@@ -122,7 +122,7 @@ namespace/codewizard created
     labels:
       app: postgres
   data:
-    # The following names are the one defined in the officail postgres docs
+    # The following names are the one defined in the official postgres docs
 
     # The name of the database we will use in this demo
     POSTGRES_DB: codewizard
@@ -145,7 +145,7 @@ namespace/codewizard created
       app: postgres
     # Service of type nodeport
     type: NodePort
-    # The deafult port for postgres
+    # The default port for postgres
     ports:
       - port: 5432
   ```
@@ -210,7 +210,7 @@ namespace/codewizard created
               - mountPath: /var/lib/postgresql/data
                 name: postgredb
         # We can use PersistentVolume or PersistentVolumeClaim.
-        # In this sample we are useing PersistentVolumeClaim
+        # In this sample we are using PersistentVolumeClaim
         volumes:
           - name: postgredb
             persistentVolumeClaim:
@@ -265,7 +265,7 @@ printenv | grep POST*
 
 # Connect to postgres and create table if required.
 # Once the table exists - add row into the table
-# you can run this command as amny times as you like
+# you can run this command as many times as you like
 psql \
     -U ${POSTGRES_USER} \
     -h ${CLUSTER_IP} \
@@ -314,7 +314,7 @@ psql: error: could not connect to server: Connection refused
         TCP/IP connections on port 32570?
 ```
 
-### 05. Scale up again and verify that we still have the prevoius data
+### 05. Scale up again and verify that we still have the previous data
 
 #### 05.01. scale up the `Statefulset` to 1 or more
 

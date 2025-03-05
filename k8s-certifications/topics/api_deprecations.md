@@ -2,7 +2,7 @@
 
 <br />
 
-### Given deployment defination `nginx-deployment` for an older version of kubernetes. Fix any API depcreation issues in the manifest so that the application can be deployed on a recent version cluster k8s.
+### Given deployment definition `nginx-deployment` for an older version of kubernetes. Fix any API depcreation issues in the manifest so that the application can be deployed on a recent version cluster k8s.
 
 ```yaml
 apiVersion: apps/v1beta1

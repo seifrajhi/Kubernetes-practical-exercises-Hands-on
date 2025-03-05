@@ -29,7 +29,7 @@
     - `ReplicaSet`
     - `StatefulSet`
 
-- For this tutorial you should get familier with Kubernetes Eviction Policies since it demonstrates how Pod Disruption Budgets handle evictions.
+- For this tutorial you should get familiar with Kubernetes Eviction Policies since it demonstrates how Pod Disruption Budgets handle evictions.
 
 - As in the Kubernetes Eviction Policies tutorial we start with eviction-hard="memory.available<480M
 
@@ -83,7 +83,7 @@ minikube start \
 ```
 
 ### 02. Check Node Pressure(s)
-- Check to see the Node conditions, if we have any kind of "Presure"
+- Check to see the Node conditions, if we have any kind of "Pressure"
 ```sh
 kubectl describe node minikube | grep MemoryPressure
 

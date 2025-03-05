@@ -1,6 +1,6 @@
 # CLoud Code for VSCode
 
-## Intall
+## Install
 
 Install it as a VSCode extension : https://github.com/GoogleCloudPlatform/cloud-code-vscode/releases
 

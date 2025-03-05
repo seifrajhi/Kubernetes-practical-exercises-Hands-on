@@ -65,7 +65,7 @@ kubectl get po -l app=products-db --watch
 >  You'll see products-db-1 terminate and be replaced first, then products-db-0 when the new products-db-1 is running.
 
 ```
-# Ctrl-C to extit the watch
+# Ctrl-C to exit the watch
 
 kubectl get pvc -l app=products-db
 ```

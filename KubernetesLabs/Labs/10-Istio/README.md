@@ -43,7 +43,7 @@ export ISTIO_VERSION=1.10.3
 # Set the Istio home, we will use this home for the installation
 export ISTIO_HOME=${PWD}/istio-${ISTIO_VERSION}
 
-# Download Istio with the specific verison
+# Download Istio with the specific version
 curl -L https://istio.io/downloadIstio | \
       ISTIO_VERSION=$ISTIO_VERSION \
       TARGET_ARCH=arm64 \

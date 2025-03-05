@@ -26,9 +26,9 @@
 - `Service` allow us to gain access any given pod / container (e.g. web service).
 - A service is (normally) created on top of an existing and exposing the deployment to the world using ip(s) & port(s).
 - K8S define 3 main ways (+FQDN internally) to define a service, which means that we have 4 different ways to access Pods.
-- There are several proxy mode which inplements diffrent behaviour, for example in `user proxy mode` for each `Service` `kube-proxy` opens a port (randomly chosen) on the local node. Any connections to this "proxy port" are proxied to one of the Service's backend Pods (as reported via Endpoints)
+- There are several proxy mode which inplements different behaviour, for example in `user proxy mode` for each `Service` `kube-proxy` opens a port (randomly chosen) on the local node. Any connections to this "proxy port" are proxied to one of the Service's backend Pods (as reported via Endpoints)
 - All the service types are assigned with a Cluster-IP
-- Every service also creates `Endoint(s)`, which point to the actual pods. Endpoint are usually referred to as back-ends of a particular service.
+- Every service also creates `Endpoint(s)`, which point to the actual pods. Endpoint are usually referred to as back-ends of a particular service.
 
 <!-- inPage TOC start -->
 

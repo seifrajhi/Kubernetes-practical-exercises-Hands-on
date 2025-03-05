@@ -21,7 +21,7 @@
 #define xstr(s) str(s)
 #define str(s) #s
 
-// Boilderplate code to register the extension implementation.
+// Boilerplate code to register the extension implementation.
 static RegisterContextFactory register_HeaderInjector(CONTEXT_FACTORY(HeaderInjectorContext),
                                                ROOT_FACTORY(HeaderInjectorRootContext));
 

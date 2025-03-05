@@ -127,7 +127,7 @@ If you delete the Pod then the Deployment will create a replacement - with a new
 
 ## External storage with PersistentVolumeClaims
 
-Persistent storage is about using volumes which have a separate lifecyle from the app - so the data persists when containers and Pods get replaced.
+Persistent storage is about using volumes which have a separate lifecycle from the app - so the data persists when containers and Pods get replaced.
 
 Storage in Kubernetes is pluggable, and production clusters will usually have multiple types on offer, defined as [Storage Classes](https://kubernetes.io/docs/concepts/storage/storage-classes/):
 

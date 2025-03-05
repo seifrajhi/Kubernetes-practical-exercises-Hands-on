@@ -1,7 +1,7 @@
 # Desired State
 
 Desired state is one of the core concepts of Kubernetes. It is the state that you want your cluster to be in. It is the state that you define in your Kubernetes manifests.
-It means that the cluster continously will try to fulfill your desired state, even if it will never be posible to reach it.
+It means that the cluster continuously will try to fulfill your desired state, even if it will never be possible to reach it.
 
 In this exercise you will apply Kubernetes manifests to your cluster, and learn how Kubernetes fulfills your desired state.
 

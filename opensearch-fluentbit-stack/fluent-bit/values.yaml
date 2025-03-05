@@ -361,7 +361,7 @@ config:
         Time_Key time
         Time_Format %Y-%m-%dT%H:%M:%S.%L
 
-  # This allows adding more files with arbitary filenames to /fluent-bit/etc by providing key/value pairs.
+  # This allows adding more files with arbitrary filenames to /fluent-bit/etc by providing key/value pairs.
   # The key becomes the filename, the value becomes the file content.
   extraFiles: {}
 #     upstream.conf: |

@@ -191,7 +191,7 @@ cartDatabase:
     publicRepository: true
   externalRedisTlsOrigination:
     enable: false
-    name: exernal-redis-tls-origination
+    name: external-redis-tls-origination
     endpointAddress: ""
     endpointPort: ""
     certificate: ""

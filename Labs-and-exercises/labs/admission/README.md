@@ -162,11 +162,11 @@ kubectl get po -l app=whoami --watch
 
 > Now the Pods get created.
 
-Validating webhooks are a powerful way of ensuring your apps meet your policies - any objects can be targetted and the whole spec is sent to the webhook, so you can use it for security, performance or reliability rules.
+Validating webhooks are a powerful way of ensuring your apps meet your policies - any objects can be targeted and the whole spec is sent to the webhook, so you can use it for security, performance or reliability rules.
 
 ## Mutating Webhooks
 
-Validating webhooks either allow an oject to be created or they block it. The other type of admission control is to silently edit the incoming object spec using a mutating webhook.
+Validating webhooks either allow an object to be created or they block it. The other type of admission control is to silently edit the incoming object spec using a mutating webhook.
 
 The webhook server we're running has mutation logic too:
 

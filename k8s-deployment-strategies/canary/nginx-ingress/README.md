@@ -10,7 +10,7 @@ controller](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configur
 1. version 1 is serving traffic
 1. deploy version 2
 1. create a new "canary" ingress with traffic splitting enabled
-1. wait enought time to confirm that version 2 is stable and not throwing
+1. wait enough time to confirm that version 2 is stable and not throwing
    unexpected errors
 1. delete the canary ingress
 1. point the main application ingress to send traffic to version 2
@@ -46,7 +46,7 @@ $ while sleep 0.1; do curl "$nginx_service" -H "Host: my-app.com"; done
 # Create a canary ingress in order to split traffic: 90% to v1, 10% to v2
 $ kubectl apply -f ./ingress-v2-canary.yaml
 
-# Now you should see that the traffic is being splitted
+# Now you should see that the traffic is being split
 
 # When you are happy, delete the canary ingress
 $ kubectl delete -f ./ingress-v2-canary.yaml

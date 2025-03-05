@@ -22,7 +22,7 @@ This page walks you through the steps required to deploy the [Online Boutique](h
 
 ## Deploy the sample application
 
-1. Clone the Github repository.
+1. Clone the GitHub repository.
 
     ```bash
     git clone https://github.com/GoogleCloudPlatform/microservices-demo.git

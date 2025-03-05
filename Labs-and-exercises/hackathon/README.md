@@ -54,7 +54,7 @@ kubectl apply -f hackathon/solution-part-1/products-db -f hackathon/solution-par
 
 ## Part 2 - Configuration
 
-Well done! Seems pretty straightforward when you look at the YAML, but now we need to go to the next stage and stop using the default configuraion in the Docker images.
+Well done! Seems pretty straightforward when you look at the YAML, but now we need to go to the next stage and stop using the default configuration in the Docker images.
 
 Why? If you run `docker image inspect widgetario/products-db:21.03` you'll see the database password is in the default environment variables, so if someone manages to get the image they'll know our production password.
 
@@ -152,7 +152,7 @@ kubectl rollout restart deploy/products-api deploy/stock-api
 We're nearly there, but all these non-standard ports are no good. We'd like to get some proper DNS names set up, so we can publish the web app and the products API on standard HTTP ports:
 
 * the web app should publish to `widgetario.local` 
-* the products API shoud publish to `api.widgetario.local`
+* the products API should publish to `api.widgetario.local`
 
 <details>
   <summary>Hints</summary>

@@ -8,7 +8,7 @@
 ### Create the following
  - Deployment `web` with image `gcr.io/google-samples/hello-app:1.0` with 3 replicas. 
  - Service `web` to expose the deployment as Node Port
- - Ingress `web-ingress` to point to the `web` service using host `hellow-world.info`.
+ - Ingress `web-ingress` to point to the `web` service using host `hello-world.info`.
 
 <br /> 
   

@@ -3912,7 +3912,7 @@ spec:
                         type: object
                         x-kubernetes-map-type: atomic
                       securityConfigSecret:
-                        description: Secret that contains the differnt yml files of
+                        description: Secret that contains the different yml files of
                           the opensearch-security config (config.yml, internal_users.yml,
                           ...)
                         properties:

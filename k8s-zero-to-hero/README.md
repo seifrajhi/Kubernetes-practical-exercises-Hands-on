@@ -10,7 +10,7 @@
 
 
 I took those exercises from a youtube video of Alta3 Research, Inc that you can see [here](https://www.youtube.com/watch?v=5cgpFWVD8ds&t=405s)
-The video contains some good tips aobut kubernetes. I think that these exercises cover multiple topics and are good to improve your Kuberntes knowledge.
+The video contains some good tips about kubernetes. I think that these exercises cover multiple topics and are good to improve your Kubernetes knowledge.
 
 ## 🚀 How to use this repo
 
@@ -128,7 +128,7 @@ N/A
 ---
 ## Example exercise 7
 
-Team melon needs to identify some of their pods in namespace *basket*. They ask you to add a new labbel *safe:sound* to all pods with an existing label *type:citrus* or *type:seedless*. All pods with the label *safe:sound* will then be given the annotation *fruit:good for what ails ya*
+Team melon needs to identify some of their pods in namespace *basket*. They ask you to add a new label *safe:sound* to all pods with an existing label *type:citrus* or *type:seedless*. All pods with the label *safe:sound* will then be given the annotation *fruit:good for what ails ya*
 
 **⒈ Prepare the environment:**
 ```
@@ -140,7 +140,7 @@ kubectl create -f exercise-7.yaml
 ---
 ## Example exercise 8
 
-Create a new PersistenVolume named *strawberry-pv*. It should have a capacity og 2Gi, accessMode *ReadWriteOnce*, hostPath /Data/Berry and the storageClass *exam*.
+Create a new PersistentVolume named *strawberry-pv*. It should have a capacity og 2Gi, accessMode *ReadWriteOnce*, hostPath /Data/Berry and the storageClass *exam*.
 
 Next create a new PersistentVolumeClaim named *strawberry-pvc* in namespace *straw*. It should request 1Gi storage, accessMode *ReadWriteOnce*, with storageClass *exam*. The PVC and PV should bind.
 

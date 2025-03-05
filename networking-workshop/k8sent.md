@@ -143,7 +143,7 @@ All arguments passed through environment variables. Plugin must return
 JSON-serialized result which describes status of operation (like allocated IP,
 created routes, etc). Also there is special type of plugin called IPAM
 (IP address management) plugin, which function is to allocate IP addresses and
-pass it to network cofiguration plugin.
+pass it to network configuration plugin.
 
 CNI specification details described [here][3].
 

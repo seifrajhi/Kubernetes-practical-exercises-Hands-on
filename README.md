@@ -1,4 +1,4 @@
-# Practical Kubernetes Exercices
+# Practical Kubernetes Exercises
 
 This repo provides some resources to learn Kubernetes through practical exercises for self study to learn how easy it is to understand and master Kubernetes complexity and problems.
 
@@ -11,7 +11,7 @@ Kubernetes is easy to understand, even if it looks hard at the first look on the
 
 ## Prerequisites
 
-It would be nice if you know what `kubectl` is and have a basic understanding of running conatiners with docker / containerd or cri-o.
+It would be nice if you know what `kubectl` is and have a basic understanding of running containers with docker / containerd or cri-o.
 
 ## Preparation
 
@@ -476,7 +476,7 @@ curl <HOSTS value from ingress>
 
 We'll use a slightly extended node.js app (which is a simple web server) from the [Kubernetes in Action book by Marko Lukša](https://www.amazon.com/-/en/Marko-Luksa/dp/1617293725) in 2 different namespaces ns1 and ns2 to demonstrate the DNS based services discovery. 
 
-A service provides a Virtual IP (VIP) address, which means the Service IP is not bound to a physical network interface. A service acts like an internal loadbalancer in K8s! The magic of of routing trafic through the VIP is implemented by IPtable rules managed by kube-proxy!
+A service provides a Virtual IP (VIP) address, which means the Service IP is not bound to a physical network interface. A service acts like an internal loadbalancer in K8s! The magic of of routing traffic through the VIP is implemented by IPtable rules managed by kube-proxy!
 
 A service can be called through its FQDN in the form of:
 
@@ -517,7 +517,7 @@ sudo iptables-save | grep kubia
 
 As we learned services are exposed by default through the type ClusterIP, they work as an internal layer 4 load-balancer and provide a VIP with a stable DNS address, where the clients can connect to. The service forwards the connections to one of the pods which are backing the service via round robin.
 
-This works fine and is desired for stateless apps which need to connect to one of the pods randomly and gain more performance through trafic routing via load balancing.
+This works fine and is desired for stateless apps which need to connect to one of the pods randomly and gain more performance through traffic routing via load balancing.
 
 But in some cases where stickiness is needed and the clients need to connect to a particular pod for session or data stickiness, then we need to define our service without ClusterIP, which is by default the head of the service (that's the VIP).
 
@@ -569,7 +569,7 @@ Often we need to use an ingress object to provide path based or (sub-) domain ba
 
 By creating an ingress for a service, the ingress controller will create a single entry-point to the defined service in the ingress resource on every node in the cluster.
 
-In the follwoing we're using the traefik ingress controller and an ingress object to provide path based or (sub-) domain based routing with TLS termination with a valid mkcert made TLS certificate on our lab environment.
+In the following we're using the traefik ingress controller and an ingress object to provide path based or (sub-) domain based routing with TLS termination with a valid mkcert made TLS certificate on our lab environment.
 
 
 <details><summary>Expand here to see the solution</summary>
@@ -596,7 +596,7 @@ open https://my.ghost.svc
 open https://admin.ghost.svc/ghost
 # change the service type to LoadBalancer and access ghost with the loadbalancer IP on port 2368 or on any other node (works on k3s with trafik only), e.g.:
 open http://node2:2368
-# scale the deployment to have 2 replicas and see how the backend ghost backened https://admin.ghost.svc/ghost doesn't work.
+# scale the deployment to have 2 replicas and see how the backend ghost backend https://admin.ghost.svc/ghost doesn't work.
 ```
 
 </p>
@@ -687,7 +687,7 @@ https://github.com/k8s-sec/k8s-sec.github.io
 
 ### Service Accounts
 
-In K8s each namespace has a default ServiceAccount, named `default`. A ServiceAccount is a namespaced resource used by containers running in a Pod, to communicate with the API server of the Kubernetes cluster. ServiceAccounts with limited permissions are often used to apply the principle of least priviledge.
+In K8s each namespace has a default ServiceAccount, named `default`. A ServiceAccount is a namespaced resource used by containers running in a Pod, to communicate with the API server of the Kubernetes cluster. ServiceAccounts with limited permissions are often used to apply the principle of least privilege.
 
 ```bash
 k get sa --all-namespaces | grep default
@@ -757,7 +757,7 @@ Similar to Role, ClusterRole can grant permissions on the Cluster Level such as 
 
 #### RoleBinding and ClusterRoleBinding
 
-RoleBinding and ClusterRoleBinding are used to grant permissions and priviledges to Subjects or Entities on the namespace (project RoleBinding) level or on the cluster level (ClusterRoleBinding).
+RoleBinding and ClusterRoleBinding are used to grant permissions and privileges to Subjects or Entities on the namespace (project RoleBinding) level or on the cluster level (ClusterRoleBinding).
 
 ![RBAC](images/rbac.png "rbac")
 
@@ -828,7 +828,7 @@ Please read the README and the related blog post in the [subfolder](3-tier-app/R
 
 # Day 2 Operation
 
-Day 2 operation is mainly about implementing some principles like selfhealing and autoscaling for our apps AND the infrastructure components like nodes and K8s components itself and define resources limits, liveness and readiness probes for our apps, run continious security auditing, apply GitOps principles and style, etc.
+Day 2 operation is mainly about implementing some principles like selfhealing and autoscaling for our apps AND the infrastructure components like nodes and K8s components itself and define resources limits, liveness and readiness probes for our apps, run continuous security auditing, apply GitOps principles and style, etc.
 
 In this first section we'll go through app auto scaling with Horizontal Pod Autoscaler.
 
@@ -996,7 +996,7 @@ This is not an exhaustive list, and the choice of tools depends on your specific
 
 ### Coming next
 
-* Cluster Operation and maintanance
+* Cluster Operation and maintenance
 
 * Nodes AutoScaling and AutoSpotting (on AWS)
 

@@ -11,7 +11,7 @@ In this exercise you will learn how to persist the filesystem state of your cont
 ## Introduction
 
 Kubernetes, a persistent volume claim (PVC) is a request for storage by a user.
-It is a way for a pod to request a specific amount of storage from the cluster. When a PVC is created, it is automatically bound to a persistant volume (PV) that satisfies the PVC's requirements.
+It is a way for a pod to request a specific amount of storage from the cluster. When a PVC is created, it is automatically bound to a persistent volume (PV) that satisfies the PVC's requirements.
 
 A storage class (SC) is a way to define the properties of a PV. It is a blueprint for creating PVs, and it specifies things like the type of storage, the amount of storage, and the access modes for the PV.
 The cluster then uses the storage class to find or create a PV that matches the PVC's requirements.
@@ -139,7 +139,7 @@ spec:
 
 </details>
 
-Apply your new `PersistenVolumeClaim` with `kubectl apply`:
+Apply your new `PersistentVolumeClaim` with `kubectl apply`:
 
 ```
 kubectl apply -f persistent-storage/start/postgres-pvc.yaml
@@ -151,7 +151,7 @@ Expected output:
 persistentvolumeclaim/postgres-pvc created
 ```
 
-Check that the `PersistenVolumeClaim` was created using `kubectl get`:
+Check that the `PersistentVolumeClaim` was created using `kubectl get`:
 
 ```
 kubectl get persistentvolumeclaim
@@ -180,7 +180,7 @@ No resources found
 
 We expect that a PersistentVolume has not been created _yet._
 
-As we can see in the `kubectl get persistentvolumeclaim` output above, our `PersistenVolumeClaim` is in the `Pending` status.
+As we can see in the `kubectl get persistentvolumeclaim` output above, our `PersistentVolumeClaim` is in the `Pending` status.
 
 This is because the `VOLUMEBINDINGMODE` of the StorageClass is set to `WaitForFirstConsumer`, as we saw in the previous section.
 
@@ -188,7 +188,7 @@ This is because the `VOLUMEBINDINGMODE` of the StorageClass is set to `WaitForFi
 
 > :bulb: The reason you might not want to not always create volumes as soon as `pvc` objects are created is to reduce costs, by not creating resources that are not used before they are attached to a pod.
 
-Let's attach the PersistenVolumeClaim to our postgres pod!
+Let's attach the PersistentVolumeClaim to our postgres pod!
 
 ### Consume the PersistentVolume using a PersistentVolumeClaim (pvc) and mounting the volume to a pod
 
@@ -210,7 +210,7 @@ Add the values to the snippet:
 
 - `spec.template.spec.volumes[0].name` is the name we will reference when we mount the volume to a container in a moment.
   set it to `postgres-pvc`
-- `spec.template.spec.volumes[0].persistentVolumeClaim.claimName` is the `name` of the `PersistenVolumeClaim` we have created above, set it to the name you used, e.g. `postgres-pvc`
+- `spec.template.spec.volumes[0].persistentVolumeClaim.claimName` is the `name` of the `PersistentVolumeClaim` we have created above, set it to the name you used, e.g. `postgres-pvc`
 
 > :bulb: In this case the volume name and reference to the `pvc` name are the same, this is coincidental, and they can be different.
 
@@ -325,7 +325,7 @@ Now that the state of our postgres database is persisted to the volume, let's ve
 - Retrieve quotes from the database, and observe that your quotes are among them
 - Delete the database pod with `kubectl delete pod <postgres-pod-name>`
 - Wait for the postgres pod to be recreated (you can watch for pod changes with `kubectl get pods --watch`)
-- In the frontend webpage, retrieve quotes and obeserve that your quotes are among them
+- In the frontend webpage, retrieve quotes and observe that your quotes are among them
 
 </details>
 

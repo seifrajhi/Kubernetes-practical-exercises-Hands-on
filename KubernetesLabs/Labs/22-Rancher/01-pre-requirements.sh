@@ -12,7 +12,7 @@ curl -sfL https://get.k3s.io | sh -
 OS=$(go env GOOS); 
 ARCH=$(go env GOARCH); 
 
-## create forlder for the installation
+## create folder for the installation
 mkdir -p cmctl
 cd cmctl
 ## Download cmctl 
@@ -23,7 +23,7 @@ tar xzf cmctl.tar.gz
 # Add it to the path 
 sudo mv cmctl /usr/local/bin
 
-# Delete the installtion fodler
+# Delete the installation folder
 cd ..
 rm -rf cmctl
 

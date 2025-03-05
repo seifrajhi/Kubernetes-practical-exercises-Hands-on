@@ -44,7 +44,7 @@ This command yamlould yamlow a list of all the Pods in the cluster, along with t
 
 In this example, the DaemonSet ensures that two copies of the nginx Pod are running on each node in the cluster. This is useful i we want to ensure that there are always two instances of the nginx web server available for handling incoming requests we can adjust the number of replicas as needed to meet the specific requirements of our application.
 
-we can also run a storage daemon on every node in the cluster, so tha we can provide network-attached storage to our containers. we need a container image because it allow we to package the storage daemon and all of its dependencies into a single, easily deployable unit. This makes it much easier to manage and run the storage daemon, sinc we can deploy it to any node in our cluster simply by pulling the container image and running it as a container.
+we can also run a storage daemon on every node in the cluster, so the we can provide network-attached storage to our containers. we need a container image because it allow we to package the storage daemon and all of its dependencies into a single, easily deployable unit. This makes it much easier to manage and run the storage daemon, sinc we can deploy it to any node in our cluster simply by pulling the container image and running it as a container.
 
 To run a storage daemon using a DaemonSet in Kubernetes we need to do the following:
 
@@ -52,7 +52,7 @@ To run a storage daemon using a DaemonSet in Kubernetes we need to do the follow
 
 - Create a Kubernetes deployment file that describes our storage daemon, including the container image, resource requirements, and any necessary configuration settings.
 
-- Use the kubectl command-line tool to create a DaemonSet from our deployment file, specifying tha we want one instance of the storage daemon to run on each node in the cluster.
+- Use the kubectl command-line tool to create a DaemonSet from our deployment file, specifying the we want one instance of the storage daemon to run on each node in the cluster.
 
 - Use the kubectl tool to check the status of the DaemonSet, and verify that an instance of the storage daemon is running on each node in the cluster.
 

@@ -12,7 +12,7 @@ sudo chmod +x /usr/local/bin/argocd
 # Deploy ArgoCD - create namespace
 kubectl create namespace $NAMESPACE
 
-# Set the default namesapce
+# Set the default namespace
 kubectl config set-context --current --namespace=$NAMESPACE
 
 # Change the argocd-server service type to LoadBalancer:

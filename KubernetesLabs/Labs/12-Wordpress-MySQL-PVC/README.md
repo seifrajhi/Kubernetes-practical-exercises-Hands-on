@@ -14,7 +14,7 @@
 ## Walkthrough 
 - Patch `minikube` so we can use `Service: LoadBalancer`
     ```sh
-    # Sourse:
+    # Source:
     #   https://github.com/knative/serving/blob/b31d96e03bfa1752031d0bc4ae2a3a00744d6cd5/docs/creating-a-kubernetes-cluster.md#loadbalancer-support-in-minikube
     sudo ip route add \
         $(cat ~/.minikube/profiles/minikube/config.json | \

@@ -232,7 +232,7 @@ kubectl get replicaset
 
 > The name is the Deployment name plus the template hash
 
-Deployments manage updates by creating ReplicaSets and managing the number of desired Pods for the ReplicaSet. Replaced specs are scaled down to 0, but if a new upate matches an old spec, the original ReplicaSet gets re-used.
+Deployments manage updates by creating ReplicaSets and managing the number of desired Pods for the ReplicaSet. Replaced specs are scaled down to 0, but if a new update matches an old spec, the original ReplicaSet gets re-used.
 
 ```
 # in a new terminal:

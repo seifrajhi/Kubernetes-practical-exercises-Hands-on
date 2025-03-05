@@ -15,7 +15,7 @@ foreach ($tag in $images) {
 
 # This copies the images used in the labs to an ACR registry
 # Use for students who can't access Docker Hub
-# All `image:` references in specs need to be prefixe with `courselabs.azurecr.io/`
+# All `image:` references in specs need to be prefix with `courselabs.azurecr.io/`
 
 # FOR ADMIN: to make the repo accessible
 # `az acr update --name courselabs --anonymous-pull-enabled`

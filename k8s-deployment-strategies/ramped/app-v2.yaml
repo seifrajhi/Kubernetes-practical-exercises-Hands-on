@@ -60,7 +60,7 @@ spec:
             path: /ready
             port: probe
 
-          # Intial delay is set to a high value to have a better
+          # Initial delay is set to a high value to have a better
           # visibility of the ramped deployment
           initialDelaySeconds: 15
           periodSeconds: 5

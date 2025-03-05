@@ -9,6 +9,6 @@ spec:
     app: postgres
   # Service of type nodeport
   type: NodePort
-  # The deafult port for postgres
+  # The default port for postgres
   ports:
     - port: 5432

@@ -82,7 +82,7 @@ Edit the the `data-api-deployment.yaml` file you created previously and change t
 Replace the IP address with name of the service, e.g. the connection string should look like `mongodb://admin:supersecret@database`.
 
 You can update the active deployment with these changes by re-running `kubectl apply -f data-api-deployment.yaml`.
-Kuberenetes will perform a rolling update, if you are quick and run `kubectl get pods` you might see it taking place, i.e. a new pod starting & the old one terminating.
+Kubernetes will perform a rolling update, if you are quick and run `kubectl get pods` you might see it taking place, i.e. a new pod starting & the old one terminating.
 Again you can check the status and the logs using `kubectl`.
 
 ## 🌍 Expose the Data API externally

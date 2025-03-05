@@ -6,7 +6,7 @@ DaemonSets let you specify the update strategy, and Kubectl supports deletes for
 
 - [daemonset-update-on-delete.yaml](solution/daemonset-update-on-delete.yaml) - specifies an update strategy type of OnDelete
 
-The DaemonSet wil only create a replacement Pod when the existing one gets deleted by another process:
+The DaemonSet will only create a replacement Pod when the existing one gets deleted by another process:
 
 ```
 kubectl apply -f labs/daemonsets/solution

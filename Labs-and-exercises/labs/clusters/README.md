@@ -41,7 +41,7 @@ Test you have the CLI working:
 k3d version
 ```
 
-> The exercises use k3d **v5**. Options have changed a lot since older versions, so if youre on v4 or earlier you'll need to upgrade.
+> The exercises use k3d **v5**. Options have changed a lot since older versions, so if you're on v4 or earlier you'll need to upgrade.
 
 Create two clusters, one using a recent Kubernetes version and one using an old release:
 
@@ -272,7 +272,7 @@ Check the nodes and you'll see the status update:
 ```
 kubectl get nodes --watch
 ```
-> The node stops straigt away, but it takes 30+ sec for Kubernetes to notice. There's a heartbeat sent from nodes to the control plane so Kubernetes waits to make sure the node is really offline. The status of agent-1 changes to _NotReady_
+> The node stops straight away, but it takes 30+ sec for Kubernetes to notice. There's a heartbeat sent from nodes to the control plane so Kubernetes waits to make sure the node is really offline. The status of agent-1 changes to _NotReady_
 
 Check the Pods and you'll find all the Pods which were running on agent-1 get terminated and replaced on other nodes:
 

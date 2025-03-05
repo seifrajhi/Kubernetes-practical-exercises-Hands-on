@@ -52,7 +52,7 @@ kubectl apply -f labs/tools/specs/rng
 > Check the app is working at http://localhost:30080 - click Go and you should see a random number
 
 
-Now deploy the dasboard:
+Now deploy the dashboard:
 
 ```
 kubectl apply -f labs/tools/specs/dashboard
@@ -66,7 +66,7 @@ kubectl describe sa rng-admin-user -n kubernetes-dashboard
 kubectl get secret -n kubernetes-dashboard rng-admin-user-token
 ```
 
-> SA auth tokens are stored in Secrets of the special type `kubernetes.io/service-account-token`. Wnen you create those Secrets, Kubernetes generates the token
+> SA auth tokens are stored in Secrets of the special type `kubernetes.io/service-account-token`. When you create those Secrets, Kubernetes generates the token
 
 Print the auth token:
 
@@ -215,7 +215,7 @@ Add the bot app to get an API token, call it kubewatch:
 
 - in the channel - `/invite @kubewatch`
 
-Install the server componentes with Helm:
+Install the server components with Helm:
 
 ```
 helm repo add bitnami https://charts.bitnami.com/bitnami

@@ -1,4 +1,4 @@
-# The apiVerison is taken from the crd defintion
+# The apiVersion is taken from the crd definition
 # <spec.names.plural>.<spec.group>/<spec.versions>
 apiVersion: "codewizard.co.il/v1"
 kind: "CodeWizardCRD"

@@ -17,7 +17,7 @@ If you've never used Dev Containers, check out [developing inside a Container us
 
 ### Install dependencies manually
 
-Alteratively you can can install the dependencies yourself by following the steps below.
+Alternatively you can can install the dependencies yourself by following the steps below.
 
 #### 🌩️ Install Azure CLI
 

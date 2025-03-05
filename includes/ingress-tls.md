@@ -61,4 +61,4 @@ open https://admin.ghost.svc/ghost
 open http://node2:2368
 ```
 
-## scale the deployment to have 2 replicas and see how the backend ghost backened https://admin.ghost.svc/ghost doesn't work.
+## scale the deployment to have 2 replicas and see how the backend ghost backend https://admin.ghost.svc/ghost doesn't work.

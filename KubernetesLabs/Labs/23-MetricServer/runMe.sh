@@ -39,7 +39,7 @@ serverTLSBootstrap: true
 
 # We also need to fix the metric server and add the following line under the metric-server Deploymet 
 
-# Edit the deploymnet and add the required lines under the spec
+# Edit the deployment and add the required lines under the spec
 ###
 ### vi components.yaml (~line 140)
 ###

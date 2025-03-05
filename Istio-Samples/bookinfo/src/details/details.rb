@@ -120,11 +120,11 @@ def fetch_details_from_external_service(isbn, id, headers)
 end
 
 def get_isbn(book, isbn_type)
-  isbn_dentifiers = book['industryIdentifiers'].select do |identifier|
+  isbn_identifiers = book['industryIdentifiers'].select do |identifier|
     identifier['type'] === isbn_type
   end
 
-  return isbn_dentifiers[0]['identifier']
+  return isbn_identifiers[0]['identifier']
 end
 
 def get_forward_headers(request)

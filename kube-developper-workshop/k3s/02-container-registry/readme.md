@@ -50,7 +50,7 @@ and into the 'Repositories' section.
 
 ## 🔌 Connect K3s to ACR
 
-Kuberenetes requires a way to authenticate and access images stored in private registries. There are
+Kubernetes requires a way to authenticate and access images stored in private registries. There are
 a number of ways to enable Kubernetes to pull images from a private registry, however K3S provides a
 simple way to configure this through the `registries.yaml`. The downside is this requires you to
 manually add the file to your device/VM.

@@ -159,7 +159,7 @@ argocd app get whoami
 
 Check the new application in the UI at https://localhost:30018/applications. You'll see the status is _OutOfSync_ which means the application in the cluster is not in sync with the definition in source.
 
-Select the whoami app and you can see the resources it defines, even though it's not running yet. Click _App Details_ then _Paramaters_ - these are all read from the Helm chart, and can be edited here (which defies the point of GitOps really...)
+Select the whoami app and you can see the resources it defines, even though it's not running yet. Click _App Details_ then _Parameters_ - these are all read from the Helm chart, and can be edited here (which defies the point of GitOps really...)
  
 ## Deploy the app
 

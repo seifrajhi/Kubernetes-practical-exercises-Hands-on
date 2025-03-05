@@ -14,7 +14,7 @@
 
 # This file configures a GitHub Bot called "License Header Lint GCF": https://github.com/apps/license-header-lint-gcf
 # The bot runs a GitHub check called "header-check" (inside pull-requests) that warns us about invalid/missing license headers.
-# The schema for this configutation file is documented at https://github.com/googleapis/repo-automation-bots/tree/main/packages/header-checker-lint#header-checker-lint.
+# The schema for this configuration file is documented at https://github.com/googleapis/repo-automation-bots/tree/main/packages/header-checker-lint#header-checker-lint.
 
 allowedCopyrightHolders:
   - 'Google LLC'

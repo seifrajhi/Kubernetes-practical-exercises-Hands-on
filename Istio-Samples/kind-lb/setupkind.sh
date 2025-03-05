@@ -218,7 +218,7 @@ function waitForPods() {
   ns=$1
   lb=$2
   waittime=$3
-  # Wait for the pods to be ready in the given namespace with lable
+  # Wait for the pods to be ready in the given namespace with label
   while : ; do
     res=$(kubectl wait --context "kind-${CLUSTERNAME}" -n "${ns}" pod \
       -l "${lb}" --for=condition=Ready --timeout="${waittime}s" 2>/dev/null ||true)

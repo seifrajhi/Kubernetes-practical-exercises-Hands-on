@@ -35,7 +35,7 @@ spec:
                   description: BackupSecretName the name of secrets that contains the credentials to access the bucket. Default is used the secret specified in cluster.
                   type: string
                 backupURL:
-                  description: BackupURL represents the URL to the backup location, this can be partially specifyied. Default is used the one specified in the cluster.
+                  description: BackupURL represents the URL to the backup location, this can be partially specified. Default is used the one specified in the cluster.
                   type: string
                 clusterName:
                   description: ClustterName represents the cluster for which to take backup

@@ -2,7 +2,7 @@
 
 ConfigMaps are flexible for pretty much any application config system, but they're not suitable for sensitive data. ConfigMap contents are visible in plain text to anyone who has access to your cluster.
 
-For sensitive information Kubernetes has [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/). The API is very similar - you can surface the contents as environment variables or files in the Pod contianer - but there are additional safeguards around Secrets.
+For sensitive information Kubernetes has [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/). The API is very similar - you can surface the contents as environment variables or files in the Pod container - but there are additional safeguards around Secrets.
 
 ## API specs
 
@@ -180,7 +180,7 @@ ___
 ## **EXTRA** Environment variable overrides
 
 <details>
-  <summary>Understanding the env and envFrom hierachy</summary>
+  <summary>Understanding the env and envFrom hierarchy</summary>
 
 You'll often have multiple configuration sources in your Pod spec. Config quickly sprawls and it makes sense to centralize it as much as possible - if all your apps use the same logging config, then store that in one ConfigMap and use it in all the Deployments.
 
@@ -241,7 +241,7 @@ Check if the file contents are updated in the Pod:
 kubectl exec deploy/configurable -- cat /app/secrets/secret.json
 ```
 
-If the file contents are updated but the app doesn't change, it may not support hot reloads, or it's caching too agressively. You can force an update to all the Pods in a Deployment with the `rollout restart` command:
+If the file contents are updated but the app doesn't change, it may not support hot reloads, or it's caching too aggressively. You can force an update to all the Pods in a Deployment with the `rollout restart` command:
 
 ```
 kubectl rollout restart deploy/configurable 

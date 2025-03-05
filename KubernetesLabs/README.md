@@ -144,7 +144,7 @@
   - [04.01. Scale down the `Statefulset` to 0](Labs/09-StatefulSet/README.md#0401-Scale-down-the-Statefulset-to-0)
   - [04.02. Verify that the pods Terminated](Labs/09-StatefulSet/README.md#0402-Verify-that-the-pods-Terminated)
   - [04.03. Verify that the DB is not reachable](Labs/09-StatefulSet/README.md#0403-Verify-that-the-DB-is-not-reachable)
-- [05. Scale up again and verify that we still have the prevoius data](Labs/09-StatefulSet/README.md#05-Scale-up-again-and-verify-that-we-still-have-the-prevoius-data)
+- [05. Scale up again and verify that we still have the previous data](Labs/09-StatefulSet/README.md#05-Scale-up-again-and-verify-that-we-still-have-the-prevoius-data)
   - [05.01. scale up the `Statefulset` to 1 or more](Labs/09-StatefulSet/README.md#0501-scale-up-the-Statefulset-to-1-or-more)
   - [05.02. Verify that the pods is in Running status](Labs/09-StatefulSet/README.md#0502-Verify-that-the-pods-is-in-Running-status)
   - [05.03. Verify that the pods is using the previous data](Labs/09-StatefulSet/README.md#0503-Verify-that-the-pods-is-using-the-previous-data)

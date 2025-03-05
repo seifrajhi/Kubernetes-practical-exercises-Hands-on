@@ -14,7 +14,7 @@ Sometimes pods in Kubernetes fail to start due to various reasons such as image 
 
 <details>
 <summary> Hint </summary>
-Try to see the avaliable tags for [Nginx](https://hub.docker.com/_/nginx). 
+Try to see the available tags for [Nginx](https://hub.docker.com/_/nginx). 
 Correct the image in your pod definition.
 </details>
 

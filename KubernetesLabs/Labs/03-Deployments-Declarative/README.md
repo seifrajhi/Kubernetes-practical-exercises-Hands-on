@@ -62,7 +62,7 @@ spec:
     metadata:
       labels:
         app: nginx # Labels for the replica selector
-        version: "1.17" # Specify specific verion if required
+        version: "1.17" # Specify specific version if required
     spec:
       containers:
         - name: nginx # The name of the pod

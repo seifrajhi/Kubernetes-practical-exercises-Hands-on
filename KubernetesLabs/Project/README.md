@@ -22,7 +22,7 @@
 
 ## The project should have the following features:
 
-- Git porject with Pipeline as code inside
+- Git project with Pipeline as code inside
 - Jenkins pipelines for building and deploying the artifcates
 - K8S cluster for the deployment
 
@@ -31,8 +31,8 @@
 ### Project breakdown:
 
 - Build a Jenkins pipeline (Pipeline as code) which does the following:
-  - Checkout the lates git source code
-    - The code should be any application you wish as long as it can be scalled
+  - Checkout the latest git source code
+    - The code should be any application you wish as long as it can be scaled
   - Build the project (compile source code) if required
   - Execute test (or just print echo if there arent any test for the given project)
   - Build the Docker image with all the requirements

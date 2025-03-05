@@ -187,7 +187,7 @@ kubectl delete pod nginx-labels --force --grace-period=0
 
 <br />
 
-### Create a pod with name `nginx-file` and image nginx using pod defination file
+### Create a pod with name `nginx-file` and image nginx using pod definition file
 
 <details><summary>show</summary><p>
 

@@ -186,7 +186,7 @@ spec:
     
 2.  Verify that the pod is running on your chosen node:
     
-    ```shll
+    ```shell
     kubectl get pods --output=wide
     ```
     

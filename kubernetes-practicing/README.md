@@ -190,7 +190,7 @@ Kubectl is the Kubernetes command line tool that allows you to run commands agai
 <details>
 <summary>Why there is no such command in Kubernetes? <code>kubectl get containers</code></summary><br><b>
 
-Becaused container is not a Kubernetes object. The smallest object unit in Kubernetes is a Pod. In a single Pod you can find one or more containers.
+Because container is not a Kubernetes object. The smallest object unit in Kubernetes is a Pod. In a single Pod you can find one or more containers.
 
 </b></details>
 
@@ -595,7 +595,7 @@ kube-proxy - it's a DaemonSet (since it has to be presented on every node in the
 <details>
 <summary>Where static Pods manifests are located?</summary><br><b>
 
-Most of the time it's in /etc/kubernetes/manifests but you can verify with `grep -i static /var/lib/kubelet/config.yaml` to locate the value of `statisPodsPath`.
+Most of the time it's in /etc/kubernetes/manifests but you can verify with `grep -i static /var/lib/kubelet/config.yaml` to locate the value of `staticPodsPath`.
 
 It might be that your config is in different path. To verify run `ps -ef | grep kubelet` and see what is the value of --config argument of the process `/usr/bin/kubelet`
 
@@ -608,7 +608,7 @@ The key itself for defining the path of static Pods is `staticPodPath`. So if yo
 
 Locate the static Pods directory (look at `staticPodPath` in kubelet configuration file).
 
-Go to that directory and remove the manifest/definition of the staic Pod (`rm <STATIC_POD_PATH>/<POD_DEFINITION_FILE>`)
+Go to that directory and remove the manifest/definition of the static Pod (`rm <STATIC_POD_PATH>/<POD_DEFINITION_FILE>`)
 </b></details>
 
 #### Pods Commands
@@ -1319,7 +1319,7 @@ Network Policies
 </b></details>
 
 <details>
-<summary>How to scale an application (deplyoment) so it runs more than one instance of the application?</summary><br><b>
+<summary>How to scale an application (deployment) so it runs more than one instance of the application?</summary><br><b>
 
 To run two instances of the applicaation?
 
@@ -2739,7 +2739,7 @@ Istio is an open source service mesh that helps organizations run distributed, m
 <details>
 <summary>Name two controllers you are familiar with</summary><br><b>
 
-1. Node Contorller: manages the nodes of a cluster. Among other things, the controller is responsible for monitoring nodes' health - if the node is suddenly unreachable it will evacuate all the pods running on it and will mark the node status accordingly.
+1. Node Controllers: manages the nodes of a cluster. Among other things, the controller is responsible for monitoring nodes' health - if the node is suddenly unreachable it will evacuate all the pods running on it and will mark the node status accordingly.
 2. Replication Controller - monitors the status of pod replicas based on what should be running. It makes sure the number of pods that should be running is actually running
 </b></details>
 
@@ -2920,7 +2920,7 @@ Exit and save. The pod should be in Running state now.
 <summary>What taint effects are there? Explain each one of them</summary><br><b>
 
 `NoSchedule`: prevents from resources to be scheduled on a certain node
-`PreferNoSchedule`: will prefer to shcedule resources on other nodes before resorting to scheduling the resource on the chosen node (on which the taint was applied)
+`PreferNoSchedule`: will prefer to schedule resources on other nodes before resorting to scheduling the resource on the chosen node (on which the taint was applied)
 `NoExecute`: Applying "NoSchedule" will not evict already running Pods (or other resources) from the node as opposed to "NoExecute" which will evict any already running resource from the Node
 </b></details>
 
@@ -3003,7 +3003,7 @@ There are many types of monitoring solutions for Kubernetes. Some open-source, s
 
 * metrics-server: in-memory open source monitoring
 * datadog: $$$
-* promethues: open source monitoring solution
+* prometheus: open source monitoring solution
 
 </b></details>
 

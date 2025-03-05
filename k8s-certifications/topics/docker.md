@@ -45,7 +45,7 @@ FROM alpine:3.12
 RUN adduser -D myuser && chown -R myuser /myapp-data
 USER myuser # Avoid unnecessary privileges - run as a custom user.
 ENTRYPOINT ["/myapp"]
-EXPOSE 80 # Exposed ports - Expose only neccesary port 
+EXPOSE 80 # Exposed ports - Expose only necessary port 
 ```
 
 </p></details>

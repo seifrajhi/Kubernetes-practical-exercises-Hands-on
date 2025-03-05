@@ -84,7 +84,7 @@ http://host:port
 -   The certificate is for the host name: `ingress.local`
     ```sh
     # If you wish to create the certificate use this script
-    ### ---> The common Name fiels is your host for later on
+    ### ---> The common Name fields is your host for later on
     ###      Common Name (e.g. server FQDN or YOUR name) []:
     $ openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout certificate.key -out certificate.crt
     

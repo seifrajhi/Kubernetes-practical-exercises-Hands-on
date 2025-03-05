@@ -374,7 +374,7 @@ For small files it may be beneficial to set `emptyDir.medium` field to `Memory` 
 
 ### Anti-Pattern: Using `latest` Tag
 
-It is not recommended to use use `latest` tag in production as it creates ambiguity. For example, looking at tha "latest" tag, it is not possible to tell which version of the application is actually running.
+It is not recommended to use use `latest` tag in production as it creates ambiguity. For example, looking at the "latest" tag, it is not possible to tell which version of the application is actually running.
 
 It is ok to use `latest` for development purposes, although make sure you set `imagePullPolicy` to `Always`, to make sure Kubernetes always pulls the latest version when creating a pod:
 
@@ -968,7 +968,7 @@ $ cat weather-cbreaker.yaml
 
 Note that we have reconfigured our service so requests are handled by the circuit breaker first which forwards requests to the weather service running in the same pod, and trips if the request fails.
 
-The circuit breaker will detect the service outage and the auxilliary weather service will not bring our mail service down anymore:
+The circuit breaker will detect the service outage and the auxiliary weather service will not bring our mail service down anymore:
 
 ```bash
 $ kubectl run -ti --rm cli --image=appropriate/curl --restart=Never --command /bin/sh

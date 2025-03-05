@@ -2,7 +2,7 @@
 
 <br />
 
-### Given deployment defination `nginx-deployment` does not work. Identify and fix the problems by updating the associated resources so that the Deployment works.
+### Given deployment definition `nginx-deployment` does not work. Identify and fix the problems by updating the associated resources so that the Deployment works.
 
 ```yaml
 apiVersion: apps/v1
@@ -56,7 +56,7 @@ spec:
 
 <br />
 
-### Given deployment defination `nginx-deployment` exposed using the Service `frontend-svc`. Identify and fix the problems by updating the associated resources so that the Service works.
+### Given deployment definition `nginx-deployment` exposed using the Service `frontend-svc`. Identify and fix the problems by updating the associated resources so that the Service works.
 
 ```yaml
 apiVersion: apps/v1

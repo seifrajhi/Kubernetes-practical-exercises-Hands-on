@@ -35,7 +35,7 @@ The following table contains the configuration parameters for mysql-operator and
 | `podAnnotations`                | Extra pod annotations                                                                         | `{}`                                                    |
 | `podSecurityContext`            | The pod security context. `65532` is the UID/GID for the nonroot user in the official images  | `{runAsNonRoot: true, runAsUser: 65532, runAsGroup: 65532, fsGroup: 65532}` |
 | `securityContext`               | Security context for the MySQL Operator container                                             | `{}`                                                    |
-| `podDisruptionBudget.enabled`   | Specifies whether a PodDisruptionBudget for the MySQL operator StatefulSet should be created. <br /> _NOTE_ it only takes effect if `replicaCount` is greated than 1. | `true` |
+| `podDisruptionBudget.enabled`   | Specifies whether a PodDisruptionBudget for the MySQL operator StatefulSet should be created. <br /> _NOTE_ it only takes effect if `replicaCount` is greater than 1. | `true` |
 | `podDisruptionBudget.minAvailable`   | ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget | `empty` |
 | `podDisruptionBudget.maxUnavailable` | ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/#specifying-a-poddisruptionbudget | `1`     |
 | `podSecurityPolicy.enabled`     | Specified whether a PodSecurityPolicy should be created. PSP are deprecated and this will be removed in the future | `false` |

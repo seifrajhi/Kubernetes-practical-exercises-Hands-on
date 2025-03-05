@@ -4,7 +4,7 @@
 #### Overview
 Services in Kubernetes provide a way for pods to communicate with each other. Misconfigurations or network policies can lead to connectivity issues.
 
-In this scenario, we have an `nginx` deployment that has a service assosiated with it. The goal is to get connectivity between the `probe` pod and the `nginx` pod through the service.
+In this scenario, we have an `nginx` deployment that has a service associated with it. The goal is to get connectivity between the `probe` pod and the `nginx` pod through the service.
 
 #### Tasks
 - **Creating the Problem**:
@@ -28,7 +28,7 @@ A service describes it's endpoints under the `Endpoints` section. Is there any t
 
 <summary> Hint </summary>
 
-The service is not assosiated with any pods, because the selector does not match any labels. 
+The service is not associated with any pods, because the selector does not match any labels. 
 Make sure that the labels on both service and deployment/pod are the same.
 
 </details>

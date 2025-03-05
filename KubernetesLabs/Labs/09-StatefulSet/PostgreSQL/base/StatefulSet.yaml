@@ -30,7 +30,7 @@ spec:
             - mountPath: /var/lib/postgresql/data
               name: postgredb
       # We can use PersistentVolume or PersistentVolumeClaim.
-      # In this sample we are useing PersistentVolumeClaim
+      # In this sample we are using PersistentVolumeClaim
       volumes:
         - name: postgredb
           persistentVolumeClaim:

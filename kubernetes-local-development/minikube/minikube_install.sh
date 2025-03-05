@@ -6,6 +6,6 @@ function minikube_update() {
 }
 
 currentVersion=$(minikube update-check | grep Current | cut -d ' ' -f2)
-lastestVersion=$(minikube update-check | grep Latest | cut -d ' ' -f2)
-[[ "$currentVersion" != ${lastestVersion} ]] && minikube_update || echo "Already in latest version !"
+latestVersion=$(minikube update-check | grep Latest | cut -d ' ' -f2)
+[[ "$currentVersion" != ${latestVersion} ]] && minikube_update || echo "Already in latest version !"
 minikube version

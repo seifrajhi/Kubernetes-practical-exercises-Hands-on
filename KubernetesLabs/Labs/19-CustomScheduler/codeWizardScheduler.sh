@@ -31,7 +31,7 @@ kubectl proxy --port=8081 &
 #    Otherwise, 
 #       the value of parameter is substituted.
 
-# You can set those paramters out side of this script 
+# You can set those parameters out side of this script 
 #  export CLUSTER_URL=<url>
 CLUSTER_URL="${CLUSTER_URL:-127.0.0.1:8081}"
 CUSTOM_SCHEDULER="${CUSTOM_SCHEDULER:-codeWizardScheduler}"
@@ -49,7 +49,7 @@ while true; do
       CUSTOM_SCHEDULER_NAME=$(kubectl get pod ${POD} \
                                       --output jsonpath='{.spec.schedulerName}')
       
-      # Check if the desired schedulerName is our custome one
+      # Check if the desired schedulerName is our custom one
       # If its a match this is where our custom scheduler will "jump in"
       if [ "${CUSTOM_SCHEDULER_NAME}" == "${CUSTOM_SCHEDULER}" ]; 
         then

@@ -231,7 +231,7 @@ kubectl exec deploy/configurable -- cat /app/config/override.json
 kubectl exec deploy/configurable -- printenv | grep __
 ```
 
-> The config hierarchy in this app puts environment variables ahead of settings in files, so they get overidden. You'll need to understand the hierarchy for your apps to model config correctly.
+> The config hierarchy in this app puts environment variables ahead of settings in files, so they get overridden. You'll need to understand the hierarchy for your apps to model config correctly.
 
 ## Lab
 

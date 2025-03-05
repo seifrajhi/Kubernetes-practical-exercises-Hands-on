@@ -6,7 +6,7 @@ traffic distribution for a canary deployment using an example application
 This is very similar to the Istio A/B testing example, however instead of
 serving a specific subset of clients based on headers, we are simply dividing
 the traffic in the desired ratios. As stateful connections could be a problem
-in this scenario, it is reccomended to serve clients based on some identifying
+in this scenario, it is recommended to serve clients based on some identifying
 data (ie. cookies or headers) like the A/B example if needed.
 
 ## Steps to follow
@@ -31,7 +31,7 @@ pod autoscaling and load balancing:
 $ minikube addons enable heapster
 $ minikube addons enable metrics-server
 
-# Start minikube tunnel in a seperate terminal to route traffic from outside
+# Start minikube tunnel in a separate terminal to route traffic from outside
 # the cluster to the istio-ingressgateway clusterIP
 $ minikube tunnel
 ```
@@ -55,7 +55,7 @@ $ watch kubectl get po --namespace=istio-system
 
 Deploy all of the yaml files in this directory
 
-TODO: Split files and apply/verify seperately
+TODO: Split files and apply/verify separately
 
 ```bash
 $ kubectl apply -f .

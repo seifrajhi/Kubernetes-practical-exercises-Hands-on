@@ -233,7 +233,7 @@ Print the Pod details and you'll see multiple containers:
 kubectl describe po db-mysql-0
 ```
 
-The container setup is pretty complext:
+The container setup is pretty complex:
 
 - two init containers which look like they set up the database environment and the MySql configuration
 - the main database container which runs MySql

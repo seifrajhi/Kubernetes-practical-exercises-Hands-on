@@ -97,7 +97,7 @@ Test you have the CLI working:
 k3d version
 ```
 
-> The exercises use k3d **v5**. Options have changed a lot since older versions, so if youre on v4 or earlier you'll need to upgrade.
+> The exercises use k3d **v5**. Options have changed a lot since older versions, so if you're on v4 or earlier you'll need to upgrade.
 
 _k3d requires Docker - Docker Engine on Linux or Docker Desktop on Mac/Windows, so you can't use it with any other container runtime._
 

@@ -45,7 +45,7 @@ As DevOps engineers, gaining a thorough understanding of each component and clus
 
 Additionally, mastering the configuration of multi-node clusters can be beneficial for interviews and building confidence in your abilities. The following are recommended ways to establish a Kubernetes cluster.
 
-- [Kubernetes the Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way)<sup>Github</sup>
+- [Kubernetes the Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way)<sup>GitHub</sup>
 - [Kubeadm Cluster Setup](https://devopscube.com/setup-kubernetes-cluster-kubeadm/)<sup>Blog</sup>
 - [Minikube Development Cluster ](https://devopscube.com/kubernetes-minikube-tutorial/)<sup>Blog</sup>
 - [Kind Development Cluster](https://kind.sigs.k8s.io/)<sup>Official Documentation</sup>
@@ -127,7 +127,7 @@ All the essential concepts in Kubernetes center around the Pod. Understanding Po
 - [Pod Priority, PriorityClass, and Preemption](https://devopscube.com/pod-priorityclass-preemption/)<sup>Blog</sup>
 - [Pod Quality or Service - QoS](https://techiescamp.com/kubernetes-pod-qos/)<sup>Blog</sup>
 - [Troubleshoot Pod](https://devopscube.com/troubleshoot-kubernetes-pods/)<sup>Blog</sup>
-- [Container Lifecyle Hooks](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/)<sup>Official Doc</sup>
+- [Container Lifecycle Hooks](https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/)<sup>Official Doc</sup>
 - [Pod Disruption Budget](https://cast.ai/blog/pod-disruption-budgets-in-your-deployment/)<sup>Blog</sup>
 - [Pod Affinity/Anti-Affinity](https://www.densify.com/kubernetes-autoscaling/kubernetes-affinity/)<sup>Blog</sup>
 - [Pod Labels & Selectors](https://www.split.io/blog/kubernetes-labels-best-practices/)<sup>Blog</sup>

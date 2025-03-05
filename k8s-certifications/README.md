@@ -8,10 +8,10 @@ As the exam pattern and topics keep on changing, however, the topics remain more
 
 ## Kubernetes Playground
 
-Try out the Killercoda Kubernetes playgroud which provides 2 node Kubernetes cluster, which is good enough to complete almost all of the exercises.
+Try out the Killercoda Kubernetes playground which provides 2 node Kubernetes cluster, which is good enough to complete almost all of the exercises.
 
 [Killercoda](https://killercoda.com/playgrounds/scenario/kubernetes)  
-~~[Katacode Kubernetes Playgroud](https://www.katacoda.com/courses/kubernetes/playground)~~  
+~~[Katacode Kubernetes Playground](https://www.katacoda.com/courses/kubernetes/playground)~~  
 
 
 <a target="_blank" href="https://shareasale.com/r.cfm?b=2530382&amp;u=2367365&amp;m=59485&amp;urllink=&amp;afftrack="><img src="https://static.shareasale.com/image/59485/lft_iwd24_901x501a1.png" border="0" /></a>

@@ -8,7 +8,7 @@ Topics cover test exercises for each topics
  - [AppArmor](./apparmor.md)
  - [Auditing](./auditing.md)
  - [Authentication](../authentication.md)
- - [Platform Binary Verfication](./binary_verification.md)
+ - [Platform Binary Verification](./binary_verification.md)
  - [Cluster Upgrade](./cluster_upgrade.md)
  - [ConfigMaps](./configmaps.md)  
  - [DaemonSets](./daemonsets.md)

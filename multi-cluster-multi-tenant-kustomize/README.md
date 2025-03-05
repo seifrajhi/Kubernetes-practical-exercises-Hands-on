@@ -16,7 +16,7 @@ In overlays, we have `clusters`, `plans` and `tenant-envs`.
 
 Adopting a repository structure like this to manage multiple tenants makes it intuitive to understand where certain changes should be made while at the same time reducing the amount of duplicate manifests to a minimum.
 
-Applying a configuration to a cluster ist just one `kustomize build overlays/clusters/eu | kubectl apply -f -` command.
+Applying a configuration to a cluster is just one `kustomize build overlays/clusters/eu | kubectl apply -f -` command.
 
 Kustomize has recently been included into kubectl. Once that's released a simple `kubectl apply -f overlays/clusters/eu` is good enough.
 

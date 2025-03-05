@@ -209,7 +209,7 @@ This version requires Helm >= 3.1.0.
 | `serviceAccount.name`                     | Service account name to use, when empty will be set to created account if `serviceAccount.create` is set else to `default` | `` |
 | `serviceAccount.nameTest`                 | Service account name to use for test, when empty will be set to created account if `serviceAccount.create` is set else to `default` | `nil` |
 | `rbac.create`                             | Create and use RBAC resources                 | `true`                                                  |
-| `rbac.namespaced`                         | Creates Role and Rolebinding instead of the default ClusterRole and ClusteRoleBindings for the grafana instance  | `false` |
+| `rbac.namespaced`                         | Creates Role and Rolebinding instead of the default ClusterRole and ClusterRoleBindings for the grafana instance  | `false` |
 | `rbac.useExistingRole`                    | Set to a rolename to use existing role - skipping role creating - but still doing serviceaccount and rolebinding to the rolename set here. | `nil` |
 | `rbac.pspEnabled`                         | Create PodSecurityPolicy (with `rbac.create`, grant roles permissions as well) | `true`                 |
 | `rbac.pspUseAppArmor`                     | Enforce AppArmor in created PodSecurityPolicy (requires `rbac.pspEnabled`)  | `true`                    |
@@ -269,7 +269,7 @@ This version requires Helm >= 3.1.0.
 | `networkPolicy.ingress`                    | Enable the creation of an ingress network policy             | `true`    |
 | `networkPolicy.egress.enabled`             | Enable the creation of an egress network policy              | `false`   |
 | `networkPolicy.egress.ports`               | An array of ports to allow for the egress                    | `[]`    |
-| `enableKubeBackwardCompatibility`          | Enable backward compatibility of kubernetes where pod's defintion version below 1.13 doesn't have the enableServiceLinks option  | `false`     |
+| `enableKubeBackwardCompatibility`          | Enable backward compatibility of kubernetes where pod's definition version below 1.13 doesn't have the enableServiceLinks option  | `false`     |
 
 
 

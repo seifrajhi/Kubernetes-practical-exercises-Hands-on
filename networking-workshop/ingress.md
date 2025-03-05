@@ -35,7 +35,7 @@ Now we have two different deployments and services, assume we need to route user
 requests from `/cola` to `cola-nginx` service (backed by `cola-nginx` deployment)
 and `/pepsi` to `pepsi-nginx` service.
 
-This can be acheived using following ingress resource:
+This can be achieved using following ingress resource:
 
 ```yaml
 apiVersion: extensions/v1beta1

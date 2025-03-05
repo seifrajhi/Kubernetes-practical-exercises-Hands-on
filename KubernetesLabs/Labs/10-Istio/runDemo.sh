@@ -16,7 +16,7 @@ export ISTIO_VERSION=1.15.0
 # Set the Istio home, we will use this home for the installation
 export ISTIO_HOME=${PWD}/istio-${ISTIO_VERSION}
 
-# Download Istio with the specific verison
+# Download Istio with the specific version
 curl -L https://istio.io/downloadIstio | \
       ISTIO_VERSION=$ISTIO_VERSION \
       TARGET_ARCH=arm64 \
@@ -60,11 +60,11 @@ kubectl config set-context --current --namespace codewizard
 kubectl label ns codewizard istio-injection=enabled
 
 # Verify that we have the label attached
-# alterantive verification: 
+# alternative verification: 
 #       kubectl get ns --show-labels
 kubectl get namespace -L istio-injection
 
-# We need to wait until the Kiali pod is up and runnig 
+# We need to wait until the Kiali pod is up and running 
 kubectl wait --for=condition=ready pod -l app=kiali -n istio-system
 
 # Wait for our pods to be up and running

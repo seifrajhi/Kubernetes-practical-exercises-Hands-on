@@ -53,7 +53,7 @@ It's not a good name, because an ingress controller isn't a specific type of Kub
 
 An ingress controller is a logical thing, composed of a Service, a Pod controller and a set of RBAC rules:
 
-- [01_namespace.yaml](specs/ingress-controller/01_namespace.yaml) - ingress controllers are shared for all apps, so they usuall have their own namespace
+- [01_namespace.yaml](specs/ingress-controller/01_namespace.yaml) - ingress controllers are shared for all apps, so they usually have their own namespace
 - [02_rbac.yaml](specs/ingress-controller/02_rbac.yaml) - RBAC rules so the ingress controller can query the Kubernetes API for Service endpoints, Ingress objects and more
 - [configmap.yaml](specs/ingress-controller/configmap.yaml) - additional config for Nginx, to enable proxy caching
 - [daemonset.yaml](specs/ingress-controller/daemonset.yaml) - DaemonSet to run the ingress controller Pods; contains a few fields you haven't seen yet

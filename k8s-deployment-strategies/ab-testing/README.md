@@ -29,8 +29,8 @@ versions:
 1. version 1 is serving HTTP traffic using Istio
 1. deploy version 2
 1. wait until all instances are ready
-1. update Istio VirtualService with 90% traffic targetting version 1 and 10%
-   traffic targetting version 2
+1. update Istio VirtualService with 90% traffic targeting version 1 and 10%
+   traffic targeting version 2
 
 ## In practice
 
@@ -83,7 +83,7 @@ Apply the Istio VirtualService rule based on weight:
 $ kubectl apply -f ./virtualservice-weight.yaml
 ```
 
-You can now test if the traffic is correctly splitted amongst both versions:
+You can now test if the traffic is correctly split amongst both versions:
 
 ```
 $ service=$(minikube service istio-ingressgateway -n istio-system --url | head -n1)

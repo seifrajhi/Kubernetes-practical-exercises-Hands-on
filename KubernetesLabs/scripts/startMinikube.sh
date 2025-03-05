@@ -1,17 +1,17 @@
 #!/bin/bash
 
-# This script will cehck to see if minikube is started
+# This script will check to see if minikube is started
 # and if not it will start it
 
 set -x
 
-# Extrat the current stauts of minikube
+# Extract the current status of minikube
 MINIKUBE_STATUS=$(minikube status)
 
 # The pattern which we look in order to start minikube
 MINIKUBE_STOPPED_PATTERN="Stopped|not found"
 
-# Get latest minkube verison
+# Get latest minkube version
 MINIKUBE_VERSION=$(curl -sL https://api.github.com/repos/kubernetes/minikube/releases/latest | jq -r ".tag_name")
 
 # Check to see if minikube is already installed or not
@@ -29,7 +29,7 @@ then
     
 fi
 
-# Check to see if minikube is runnig or not
+# Check to see if minikube is running or not
 if [[ $MINIKUBE_STATUS =~ $MINIKUBE_STOPPED_PATTERN ]]; 
 then
 

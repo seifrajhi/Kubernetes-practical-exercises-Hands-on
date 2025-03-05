@@ -175,7 +175,7 @@ Token   : Hard-To-Guess
 - Stop the container
 ```sh
 # Stop the running contatiner
-# We are using the name which we passed in the `docker run` command --name <containr name>
+# We are using the name which we passed in the `docker run` command --name <container name>
 docker stop server
 ```
 - Push the container to your docker hub account if you wish
@@ -255,7 +255,7 @@ $ kubectl get pods -n codewizard
 NAME                                  READY   STATUS    RESTARTS   AGE
 codewizard-secrets-56f556c758-2mknc   1/1     Running   0          6m27s
 
-# Login to the container and test the reponse
+# Login to the container and test the response
 # kubectl exec -it -n codewizard <pod name> -- sh
 # For the above output we will use
 kubectl exec -it -n codewizard codewizard-secrets-56f556c758-2mknc -- sh

@@ -48,7 +48,7 @@ spec:
 
 - `apiVersion` - Kubernetes uses beta versions to indicate the API isn't final; [CronJobs will graduate to stable in Kubernetes 1.21](https://kubernetes.io/blog/2021/04/08/kubernetes-1-21-release-announcement/#cronjobs-graduate-to-stable)
 - `schedule` - cron expression for when Jobs are to be created
-- `concurrencyPolicy` - whether to `Allow` new Job(s) to be created when the previous scheduled Job is still runing, `Forbid` that or `Replace` the old Job with a new one
+- `concurrencyPolicy` - whether to `Allow` new Job(s) to be created when the previous scheduled Job is still running, `Forbid` that or `Replace` the old Job with a new one
 
 </details><br/>
 

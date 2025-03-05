@@ -3,7 +3,7 @@
 # Debug mode
 set -x
 
-# Stop minikube if its running and delet prevoiud data
+# Stop minikube if its running and delete prevoiud data
 minikube stop
 
 # Set the minikube home directory

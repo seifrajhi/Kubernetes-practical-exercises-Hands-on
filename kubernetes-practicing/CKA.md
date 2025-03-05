@@ -171,7 +171,7 @@ Now create the definition/manifest in that directory
 
 Locate the static Pods directory (look at `staticPodPath` in kubelet configuration file).
 
-Go to that directory and remove the manifest/definition of the staic Pod (`rm <STATIC_POD_PATH>/<POD_DEFINITION_FILE>`)
+Go to that directory and remove the manifest/definition of the static Pod (`rm <STATIC_POD_PATH>/<POD_DEFINITION_FILE>`)
 </b></details>
 
 ### Troubleshooting Pods

@@ -3,7 +3,7 @@
 
 Most Pod controllers let the Kubernetes scheduler work out which node should run a Pod. DaemonSets are different - they run exactly one Pod on every node.
 
-They're for workloads where you want high-availabilty across multiple nodes, but you don't need high levels of scale. Or where the app needs to work with each node, e.g. collecting logs.
+They're for workloads where you want high-availability across multiple nodes, but you don't need high levels of scale. Or where the app needs to work with each node, e.g. collecting logs.
 
 Deployments are better suited to most apps and DaemonSets are less common, but you will see them used and they're not complex to work with.
 

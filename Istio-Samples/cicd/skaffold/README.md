@@ -36,7 +36,7 @@ skaffold is built around modules and profiles
 
 ## References
 
-- Github: [github.com/GoogleContainerTools/skaffold](https://github.com/GoogleContainerTools/skaffold)
+- GitHub: [github.com/GoogleContainerTools/skaffold](https://github.com/GoogleContainerTools/skaffold)
 - Site: [skaffold.dev](https://skaffold.dev/)
 
 ### TODO

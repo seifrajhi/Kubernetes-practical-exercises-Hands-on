@@ -26,7 +26,7 @@ the secondary deployment.
 1. version 1 is serving HTTP traffic using Istio
 1. deploy version 2
 1. mirror version 1 incoming traffic to version 2
-1. wait enought time to confirm that version 2 is stable and not throwing
+1. wait enough time to confirm that version 2 is stable and not throwing
    unexpected errors
 1. switch incoming traffic from version 1 to version 2
 

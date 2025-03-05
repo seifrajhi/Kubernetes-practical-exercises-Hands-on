@@ -27,10 +27,10 @@ As of now, this helm-charts repository maintains 3 branches:
 * _gh-pages_ (Reserved branch for publishing helm-charts through github pages)
 <br>
 
-Contributors should choose the corresponding branch(es) when commiting their change(s):
+Contributors should choose the corresponding branch(es) when committing their change(s):
 * If you have a change for a specific version, only open PR to specific branch
 * If you have a change for all available versions, first open a PR on `main`, then open a backport PR with `[backport 1.x]` in the title, with label `backport 1.x`, etc.
-* No changes should be commited to `gh-pages` by any contributor, as this branch should be only changed by github actions `chart-releaser`
+* No changes should be committed to `gh-pages` by any contributor, as this branch should be only changed by github actions `chart-releaser`
 
 ## Installation
 
@@ -57,7 +57,7 @@ Please see the `README.md` in the [OpenSearch](charts/opensearch) and [OpenSearc
 
 ### Notes About Default Installation
 
-By default, on startup, the `install_demo_configuration.sh` is runned via the `opensearch-docker-entrypoint.sh` script if `DISABLE_INSTALL_DEMO_CONFIG` is not `true`.
+By default, on startup, the `install_demo_configuration.sh` is ran via the `opensearch-docker-entrypoint.sh` script if `DISABLE_INSTALL_DEMO_CONFIG` is not `true`.
 
 In case custom certificates are used and `allow_unsafe_democertificates` is set to `false` in the configuration, this can prevent pods to start with the following error: `Demo certificates found but plugins.security.allow_unsafe_democertificates is set to false.`
 

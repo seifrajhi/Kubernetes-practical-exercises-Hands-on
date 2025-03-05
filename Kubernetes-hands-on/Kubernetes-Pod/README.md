@@ -16,7 +16,7 @@
 		
 # what is pod deployment?
 
-- when we intially setup a pod, we give this specifications from a file called (manifest(a set of desired
+- when we initially setup a pod, we give this specifications from a file called (manifest(a set of desired
  state which is wanted by the user))   
 	
 - step1: file handed from kubectl API to the Masternode(control plane) API server
@@ -33,7 +33,7 @@
 	
 - step7: image is pulled from the registry(OCI image spec) only if OCI req fulfilled
 	
-- step8: this transportaion of image will from the registry has also a OCI called (Open Container Intiative
+- step8: this transportation of image will from the registry has also a OCI called (Open Container Initiative
  distribution spec) 
 	
 - step9: the pod is hosted inside worker node which holds (runtime+pod+container)
@@ -55,7 +55,7 @@ what's happening inside
 	
 ## Multi container
 
-- A pod consists can consists of many contianers, if we do that then we're violating one process(container) 
+- A pod consists can consists of many containers, if we do that then we're violating one process(container) 
 for one pod, but we want to use in some cases like (what if we want to store logs, the second (helper)container is 
 responsible to perform file synchronization, logging, and watcher capabilities and it also called as sidecar), we 
 can deploy two containers from the manifest file
@@ -73,7 +73,7 @@ takes place
 	
 ## intra-pod networking  
 	
-- intially when pod was created the first container in the pod is called as pause container(which holds the 
+- initially when pod was created the first container in the pod is called as pause container(which holds the 
 cluster IP) for expose traffic to outside world 
 	
 - When helper container and main container want to talk to each other they use IPC(inter process communication
@@ -84,12 +84,12 @@ with different ports
 	
 ## pod-lifecycle
 
-- as all objects on this earth has lifecycle, pod also has a lifecyle, If we see this from high level POV 
+- as all objects on this earth has lifecycle, pod also has a lifecycle, If we see this from high level POV 
 it has 3 stages
 	
 - pending, running, succeesful
 	
-- there also we have a stage called falied, when pod was at (pending, running) it has a chance it may also 
+- there also we have a stage called failed, when pod was at (pending, running) it has a chance it may also 
 fails to create pod because of the invalid format, invalid image, maybe it doesn't full filling CRI runtime spec, and other reasons...
 	
 	

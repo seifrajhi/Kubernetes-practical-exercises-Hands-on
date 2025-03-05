@@ -42,7 +42,7 @@ pilot:
   jwksResolverExtraRootCA: ""
 
   # This is used to set the source of configuration for
-  # the associated address in configSource, if nothing is specificed
+  # the associated address in configSource, if nothing is specified
   # the default MCP is assumed.
   configSource:
     subscribedResources: []
@@ -61,7 +61,7 @@ pilot:
   ## Mesh config settings
 
   # Install the mesh config map, generated from values.yaml.
-  # If false, pilot wil use default values (by default) or user-supplied values.
+  # If false, pilot will use default values (by default) or user-supplied values.
   configMap: true
 
   # Additional labels to apply on the pod level for monitoring and logging configuration.

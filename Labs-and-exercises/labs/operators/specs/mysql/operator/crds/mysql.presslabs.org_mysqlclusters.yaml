@@ -3969,7 +3969,7 @@ spec:
                     type: object
                   type: array
                 nodes:
-                  description: Nodes contains informations from orchestrator
+                  description: Nodes contains information from orchestrator
                   items:
                     description: NodeStatus defines type for status of a node into cluster.
                     properties:

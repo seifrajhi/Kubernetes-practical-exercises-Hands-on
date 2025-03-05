@@ -37,7 +37,7 @@ Test you have the CLI working:
 k3d version
 ```
 
-> The exercises use k3d **v5**. Options have changed a lot since older versions, so if youre on v4 or earlier you'll need to upgrade.
+> The exercises use k3d **v5**. Options have changed a lot since older versions, so if you're on v4 or earlier you'll need to upgrade.
 
 _Create a 3-node cluster where each worker node is restricted to running a maximum of 5 Pods, and the extra stuff k3d installs is turned off:_
 

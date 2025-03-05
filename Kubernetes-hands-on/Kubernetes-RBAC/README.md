@@ -65,7 +65,7 @@ We have the CA, let's make a certificate.
 
 Easy way to create a cert is use openssl and the easiest way to get openssl is to simply run a container:
 
-> Usig kind
+> Using kind
 
 ```
 docker run -it -v ${PWD}:/work -w /work -v ${HOME}:/root/ --net host alpine sh

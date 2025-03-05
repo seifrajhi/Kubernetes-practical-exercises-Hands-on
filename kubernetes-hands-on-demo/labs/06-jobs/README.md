@@ -185,7 +185,7 @@ status:
 ## Parallelism with Jobs
 
 ```
-> kubectl apply -f 06-job-with-paralell-execusions.yml
+> kubectl apply -f 06-job-with-parallel-executions.yml
 job.batch/parallelism created
 ```
 

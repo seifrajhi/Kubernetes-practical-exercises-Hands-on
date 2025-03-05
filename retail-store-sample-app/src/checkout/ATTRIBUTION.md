@@ -8713,7 +8713,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ----
 
-### iterare @1.2.1 - https://github.com/felixfbecker/iterare#readme
+### iterate @1.2.1 - https://github.com/felixfbecker/iterare#readme
 
 ISC License
 

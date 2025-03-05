@@ -26,7 +26,7 @@ kubectl rollout undo deployment lemon -n banana
 deployment.apps/lemon rolled back
 ```
 
-Check that the deployment is now running succesfully:
+Check that the deployment is now running successfully:
 ```
 kubectl rollout status deployment lemon -n banana
 

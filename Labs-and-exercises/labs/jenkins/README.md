@@ -156,7 +156,7 @@ Now browse to project at http://localhost:30008/job/kiamol/ (the project is crea
 
 Click _Enable_ and then click _Build Now_.
 
-The build should complete sucessfully:
+The build should complete successfully:
 
 - Jenkins pulls the source code from Gogs
 - it prints the version of the tools it's using
@@ -204,7 +204,7 @@ kubectl label ns integration-test kubernetes.courselabs.co=jenkins
 
 </details><br/>
 
-We want to use the images Jenkins pushes to run the app in the test namespace - so that namespace will also need a registry authenticaion Secret to pull images.
+We want to use the images Jenkins pushes to run the app in the test namespace - so that namespace will also need a registry authentication Secret to pull images.
 
 Create a Secret using the same registry credentials:
 

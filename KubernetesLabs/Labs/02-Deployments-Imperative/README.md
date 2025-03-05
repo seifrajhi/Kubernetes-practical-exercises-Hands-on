@@ -123,7 +123,7 @@ NODE_PORT=$(kubectl get -o \
 ### 03.03. Test the deployment
 
 - Test to see if the deployment worked using the `ip & port` you got above
-- Execute `curl` with the following prameters: `http://${CLUSTER_IP}:${NODE_PORT}`
+- Execute `curl` with the following parameters: `http://${CLUSTER_IP}:${NODE_PORT}`
 
 ```sh
 curl http://${CLUSTER_IP}:${NODE_PORT}
